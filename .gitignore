@@ -3,3 +3,16 @@
 ################################################################################
 
 /.vs
+/AOM.FIFA.ManagerPlayer/.vs/AOM.FIFA.ManagerPlayer/v17
+/AOM.FIFA.ManagerPlayer.Gateway/obj/Debug/net5.0
+/AOM.FIFA.ManagerPlayer.Gateway/obj/Debug/net5.0
+/AOM.FIFA.ManagerPlayer.Service/obj/Debug/net5.0
+/src/AOM.FIFA.ManagerPlayer.Api/bin/Debug/net5.0
+/src/AOM.FIFA.ManagerPlayer.Api/obj
+/src/AOM.FIFA.ManagerPlayer.Application/obj/Debug/net5.0
+/src/AOM.FIFA.ManagerPlayer.Application/bin/Debug/net5.0
+/src/AOM.FIFA.ManagerPlayer.Application/obj
+/src/AOM.FIFA.ManagerPlayer.Gateway/bin/Debug/net5.0
+/src/AOM.FIFA.ManagerPlayer.Gateway/obj
+/src/AOM.FIFA.ManagerPlayer.Service/bin/Debug/net5.0
+/src/AOM.FIFA.ManagerPlayer.Service/obj
