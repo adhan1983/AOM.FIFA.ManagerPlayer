@@ -4,6 +4,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using AOM.FIFA.ManagerPlayer.Gateway.Extensions;
+using AOM.FIFA.ManagerPlayer.Application.Extensions;
 
 namespace AOM.FIFA.ManagerPlayer.Api
 {
@@ -21,6 +23,10 @@ namespace AOM.FIFA.ManagerPlayer.Api
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "AOM.FIFA.ManagerPlayer.Api", Version = "v1" });
             });
+            
+            services.AddingGatewayDependencies();
+            services.AddingApplicationDependencies();
+
         }
         
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
