@@ -16,14 +16,14 @@ namespace AOM.FIFA.ManagerPlayer.Persistence.SyncLeague.Repository
         
         public async Task<bool> InsertAsync(League league)
         {
-            _dbContext.Leagues.Add(league);
+            await _dbContext.Leagues.AddAsync(league);
             
             return Convert.ToBoolean(await  _dbContext.SaveChangesAsync());
         }
 
         public async Task<bool> InsertManyAsync(List<League> leagues)
         {
-            _dbContext.Leagues.AddRange(leagues);
+            await _dbContext.Leagues.AddRangeAsync(leagues);
 
             return Convert.ToBoolean(await _dbContext.SaveChangesAsync());
         }

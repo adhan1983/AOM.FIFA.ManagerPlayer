@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace AOM.FIFA.ManagerPlayer.Application.League.Entities
+﻿namespace AOM.FIFA.ManagerPlayer.Application.League.Entities
 {
     public class League
     {
