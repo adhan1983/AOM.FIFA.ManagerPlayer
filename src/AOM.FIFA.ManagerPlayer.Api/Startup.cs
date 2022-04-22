@@ -8,11 +8,11 @@ namespace AOM.FIFA.ManagerPlayer.Api
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration) => Configuration = configuration;        
+        public Startup(IConfiguration configuration) => Configuration = configuration;
 
         public IConfiguration Configuration { get; }
-        
-        public void ConfigureServices(IServiceCollection services) => services.Build();        
+
+        public void ConfigureServices(IServiceCollection services) => services.Build(Configuration);        
         
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env) => app.Build(env);
         

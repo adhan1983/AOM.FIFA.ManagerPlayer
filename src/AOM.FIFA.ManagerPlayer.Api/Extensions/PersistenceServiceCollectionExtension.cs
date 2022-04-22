@@ -8,7 +8,7 @@ namespace AOM.FIFA.ManagerPlayer.Api.Extensions
     {
         public static IServiceCollection AddingPersistenceDependencies(this IServiceCollection services)
         {
-            services.AddScoped<ISyncLeagueRepository, SyncLeagueRepository>();
+            services.AddScoped<ILeagueRepository, LeagueRepository>();
 
             return services;
         }

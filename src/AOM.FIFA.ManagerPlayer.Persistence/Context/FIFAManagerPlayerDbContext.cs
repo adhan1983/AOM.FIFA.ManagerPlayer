@@ -1,12 +1,8 @@
-﻿using AOM.FIFA.ManagerPlayer.Application.League.Entities;
-using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Microsoft.EntityFrameworkCore;
+using AOM.FIFA.ManagerPlayer.Persistence.Configuration;
+using AOM.FIFA.ManagerPlayer.Application.League.Entities;
 
-namespace AOM.FIFA.ManagerPlayer.Persistence.Data.Context
+namespace AOM.FIFA.ManagerPlayer.Persistence.Context
 {
     public class FIFAManagerPlayerDbContext : DbContext
     {
@@ -19,7 +15,9 @@ namespace AOM.FIFA.ManagerPlayer.Persistence.Data.Context
 
         protected override void OnModelCreating(ModelBuilder modelBuilder) 
         {
-
+            modelBuilder.ApplyConfiguration(new LeagueConfiguration());
         }
+
     }
+
 }
