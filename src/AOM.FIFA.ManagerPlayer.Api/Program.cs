@@ -1,4 +1,3 @@
-using AOM.FIFA.ManagerPlayer.Api.Extensions;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
 
@@ -9,8 +8,7 @@ namespace AOM.FIFA.ManagerPlayer.Api
         public static void Main(string[] args)
         {
             CreateHostBuilder(args).
-                Build().
-                MigrateDatabase().
+                Build().                
                 Run();
         }
 

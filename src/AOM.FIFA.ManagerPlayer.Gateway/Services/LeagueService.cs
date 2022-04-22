@@ -1,30 +1,32 @@
-﻿using AOM.FIFA.ManagerPlayer.Gateway.Utils;
-using AOM.FIFA.ManagerPlayer.Gateway.Responses.Leagues;
-using AOM.FIFA.ManagerPlayer.Gateway.Services.Interfaces;
-using System;
+﻿using System;
 using System.Net.Http;
 using System.Threading.Tasks;
 using AOM.FIFA.ManagerPlayer.Gateway.Extensions;
+using AOM.FIFA.ManagerPlayer.Gateway.Utils.Interfaces;
+using AOM.FIFA.ManagerPlayer.Gateway.Responses.Leagues;
+using AOM.FIFA.ManagerPlayer.Gateway.Services.Interfaces;
 
 namespace AOM.FIFA.ManagerPlayer.Gateway.Services
 {
     public class LeagueService : ILeagueService
     {
+        private readonly IFIFAGatewayConfig _fifaGatewayConfig;
+
+        public LeagueService(IFIFAGatewayConfig fifaGatewayConfig) => this._fifaGatewayConfig = fifaGatewayConfig;
+        
         public async Task<LeagueListResponse> GetLeaguesAsync(LeagueRequest request)
         {
             var client = new HttpClient();
 
             string url = string.Concat("https://futdb.app/api/leagues?page=", request.Page, "&limit=", request.MaxItemPerPage);
-
-            string token = "e989438f-931f-482b-b5fa-25dd62f2ca98";
-
+            
             var requestMessage = new HttpRequestMessage
             {
                 Method = HttpMethod.Get,
                 RequestUri = new Uri(url),
                 Headers =
                 {
-                    { GatewayConstants.FIFAApiKey , token },
+                    { _fifaGatewayConfig.FIFAApiKey , _fifaGatewayConfig.FIFAApiToken },
                 },
             };
 

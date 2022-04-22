@@ -25,6 +25,8 @@ namespace AOM.FIFA.ManagerPlayer.Api.Extensions
             {
                 endpoints.MapControllers();
             });
+
+            app.MigrateDatabase();
         }
     }
 }

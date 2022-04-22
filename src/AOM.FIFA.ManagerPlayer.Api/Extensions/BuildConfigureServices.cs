@@ -1,11 +1,9 @@
-﻿using AOM.FIFA.ManagerPlayer.Persistence.Context;
+﻿using AOM.FIFA.ManagerPlayer.Api.Constants;
+using AOM.FIFA.ManagerPlayer.Persistence.Context;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;
-using Microsoft.Extensions.Configuration;
-
-
-
 
 namespace AOM.FIFA.ManagerPlayer.Api.Extensions
 {
@@ -16,8 +14,10 @@ namespace AOM.FIFA.ManagerPlayer.Api.Extensions
             services.AddControllers();
 
             services.AddDbContext<FIFAManagerPlayerDbContext>(options =>
-                options.UseSqlServer(configuration.GetConnectionString("SqlConnectionString")));
-            
+                     options.
+                     UseSqlServer(configuration.GetConnectionString(ApiConstants.SqlConnectionString)));
+
+            services.AddingGatewayConfigProperties(configuration);
 
             services.AddSwaggerGen(c =>
             {
