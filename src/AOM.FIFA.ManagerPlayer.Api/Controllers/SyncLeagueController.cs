@@ -1,15 +1,14 @@
-﻿using AOM.FIFA.ManagerPlayer.Application.League.Responses;
-using AOM.FIFA.ManagerPlayer.Application.League.Services.Interfaces;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using NSwag.Annotations;
+﻿using NSwag.Annotations;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
+using AOM.FIFA.ManagerPlayer.Application.League.Responses;
+using AOM.FIFA.ManagerPlayer.Application.SyncLeague.Services.Interfaces;
 
 namespace AOM.FIFA.ManagerPlayer.Api.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/syncleagues")]
     [ApiController]
-    [OpenApiTag("Sync League", Description = "Sync League")]
+    [OpenApiTag("Sync League", Description = "End point responsable for Sync Leagues")]
     public class SyncLeagueController : ControllerBase
     {
         private readonly ISyncLeagueService _syncLeagueService;
@@ -19,8 +18,8 @@ namespace AOM.FIFA.ManagerPlayer.Api.Controllers
             this._syncLeagueService = syncLeagueService;
         }
 
-        [HttpGet]
-        public async Task<IActionResult> Get()
+        [HttpPost]        
+        public async Task<IActionResult> Post()
         {
             var response = new SyncResponseLeague();
 

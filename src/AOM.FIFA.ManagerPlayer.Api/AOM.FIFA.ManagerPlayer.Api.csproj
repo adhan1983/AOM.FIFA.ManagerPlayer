@@ -2,16 +2,19 @@
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
+    <UserSecretsId>0a49cd41-fe82-435f-9632-7408c6082e52</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="NSwag.Annotations" Version="13.15.10" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="5.6.3" />
+	<PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="5.0.0" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\AOM.FIFA.ManagerPlayer.Application\AOM.FIFA.ManagerPlayer.Application.csproj" />
     <ProjectReference Include="..\AOM.FIFA.ManagerPlayer.Gateway\AOM.FIFA.ManagerPlayer.Gateway.csproj" />
+    <ProjectReference Include="..\AOM.FIFA.ManagerPlayer.Persistence\AOM.FIFA.ManagerPlayer.Persistence.csproj" />
   </ItemGroup>
 
 </Project>

@@ -1,18 +1,21 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
+    <UserSecretsId>9dc1ee94-9607-4f89-ac72-06a879f6dfbb</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
     <Folder Include="Base\" />
     <Folder Include="League\Mappers\" />
-    <Folder Include="League\Entities\" />
+    <Folder Include="SyncLeague\Dto\" />
+    <Folder Include="SyncLeague\Entities\" />
+    <Folder Include="SyncLeague\Mappers\" />
     <Folder Include="Utils\" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="5.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" Version="5.0.0" />
   </ItemGroup>
 
   <ItemGroup>

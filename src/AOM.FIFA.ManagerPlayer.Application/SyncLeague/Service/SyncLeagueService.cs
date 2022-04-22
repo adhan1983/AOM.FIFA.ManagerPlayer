@@ -1,25 +1,40 @@
 ﻿using AOM.FIFA.ManagerPlayer.Application.League.Responses;
-using AOM.FIFA.ManagerPlayer.Application.League.Services.Interfaces;
-using AOM.FIFA.ManagerPlayer.Gateway.Responses.Leagues;
 using System.Threading.Tasks;
+using AOM.FIFA.ManagerPlayer.Gateway.Responses.Leagues;
+using AOM.FIFA.ManagerPlayer.Application.SyncLeague.Services.Interfaces;
 using gateway = AOM.FIFA.ManagerPlayer.Gateway.Services.Interfaces;
+using entity = AOM.FIFA.ManagerPlayer.Application.League.Entities;
+using AOM.FIFA.ManagerPlayer.Application.SyncLeague.Repositoies.Interfaces;
+using System.Linq;
 
-
-namespace AOM.FIFA.ManagerPlayer.Application.League.Services
+namespace AOM.FIFA.ManagerPlayer.Application.SyncLeague.Services
 {
     public class SyncLeagueService : ISyncLeagueService
     {
         private readonly gateway.ILeagueService _leagueService;
-        public SyncLeagueService(gateway.ILeagueService leagueService) => _leagueService = leagueService;
+        private readonly ILeagueRepository _leagueRepository;
+
+        public SyncLeagueService(gateway.ILeagueService leagueService, ILeagueRepository leagueRepository) 
+        { 
+            _leagueService = leagueService;
+            _leagueRepository = leagueRepository;
+        }
+
         public async Task<SyncResponseLeague> SyncLeaguesAsync()
         {            
             var response = new SyncResponseLeague();
 
             var result = await GetLeagueListResponseAsync();
 
-            //TO DO: Store in database
+            var leagues = result.
+                            items.
+                            Select(x => new entity.League { Name = x.name }).
+                            ToList();
 
+            var resulInsertManyAsync = await _leagueRepository.InsertManyAsync(leagues);
 
+            response.AllLeaguesSyncronized = resulInsertManyAsync;
+            
             return response;
         }
 

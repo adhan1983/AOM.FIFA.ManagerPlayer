@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace AOM.FIFA.ManagerPlayer.Gateway.Utils
+﻿namespace AOM.FIFA.ManagerPlayer.Gateway.Utils
 {
     public static class GatewayConstants
     {
