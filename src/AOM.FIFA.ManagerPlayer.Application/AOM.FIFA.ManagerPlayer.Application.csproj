@@ -6,7 +6,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Base\" />
     <Folder Include="League\Mappers\" />
     <Folder Include="SyncLeague\Dto\" />
     <Folder Include="SyncLeague\Entities\" />

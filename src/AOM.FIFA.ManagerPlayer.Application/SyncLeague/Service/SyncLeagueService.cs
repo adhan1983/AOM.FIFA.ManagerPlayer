@@ -4,7 +4,7 @@ using AOM.FIFA.ManagerPlayer.Gateway.Responses.Leagues;
 using AOM.FIFA.ManagerPlayer.Application.SyncLeague.Services.Interfaces;
 using gateway = AOM.FIFA.ManagerPlayer.Gateway.Services.Interfaces;
 using entity = AOM.FIFA.ManagerPlayer.Application.League.Entities;
-using AOM.FIFA.ManagerPlayer.Application.SyncLeague.Repositoies.Interfaces;
+using AOM.FIFA.ManagerPlayer.Application.SyncLeague.Repositories.Interfaces;
 using System.Linq;
 
 namespace AOM.FIFA.ManagerPlayer.Application.SyncLeague.Services
