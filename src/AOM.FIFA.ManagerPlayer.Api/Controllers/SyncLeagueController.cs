@@ -1,7 +1,7 @@
 ﻿using NSwag.Annotations;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using AOM.FIFA.ManagerPlayer.Application.League.Responses;
+using AOM.FIFA.ManagerPlayer.Application.SyncLeague.Responses;
 using AOM.FIFA.ManagerPlayer.Application.SyncLeague.Services.Interfaces;
 
 namespace AOM.FIFA.ManagerPlayer.Api.Controllers
@@ -21,7 +21,7 @@ namespace AOM.FIFA.ManagerPlayer.Api.Controllers
         [HttpPost]        
         public async Task<IActionResult> Post()
         {
-            var response = new SyncResponseLeague();
+            var response = new SyncLeagueResponse();
 
             response = await _syncLeagueService.SyncLeaguesAsync();
 

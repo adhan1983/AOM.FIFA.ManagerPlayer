@@ -1,4 +1,4 @@
-﻿using AOM.FIFA.ManagerPlayer.Application.League.Responses;
+﻿using AOM.FIFA.ManagerPlayer.Application.SyncLeague.Responses;
 using System.Threading.Tasks;
 using AOM.FIFA.ManagerPlayer.Gateway.Responses.Leagues;
 using AOM.FIFA.ManagerPlayer.Application.SyncLeague.Services.Interfaces;
@@ -20,9 +20,9 @@ namespace AOM.FIFA.ManagerPlayer.Application.SyncLeague.Services
             _leagueRepository = leagueRepository;
         }
 
-        public async Task<SyncResponseLeague> SyncLeaguesAsync()
+        public async Task<SyncLeagueResponse> SyncLeaguesAsync()
         {            
-            var response = new SyncResponseLeague();
+            var response = new SyncLeagueResponse();
 
             var result = await GetLeagueListResponseAsync();
 
