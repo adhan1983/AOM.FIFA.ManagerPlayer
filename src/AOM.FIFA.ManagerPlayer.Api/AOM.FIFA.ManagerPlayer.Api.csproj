@@ -2,6 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
+    <UserSecretsId>0a49cd41-fe82-435f-9632-7408c6082e52</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
@@ -12,6 +13,7 @@
   <ItemGroup>
     <ProjectReference Include="..\AOM.FIFA.ManagerPlayer.Application\AOM.FIFA.ManagerPlayer.Application.csproj" />
     <ProjectReference Include="..\AOM.FIFA.ManagerPlayer.Gateway\AOM.FIFA.ManagerPlayer.Gateway.csproj" />
+    <ProjectReference Include="..\AOM.FIFA.ManagerPlayer.Persistence\AOM.FIFA.ManagerPlayer.Persistence.csproj" />
   </ItemGroup>
 
 </Project>

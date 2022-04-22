@@ -1,6 +1,5 @@
 ﻿using AOM.FIFA.ManagerPlayer.Application.League.Responses;
-using AOM.FIFA.ManagerPlayer.Application.League.Services.Interfaces;
-using Microsoft.AspNetCore.Http;
+using AOM.FIFA.ManagerPlayer.Application.SyncLeague.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using NSwag.Annotations;
 using System.Threading.Tasks;

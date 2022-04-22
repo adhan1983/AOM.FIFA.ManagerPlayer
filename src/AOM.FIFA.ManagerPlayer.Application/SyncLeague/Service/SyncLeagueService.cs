@@ -1,11 +1,11 @@
 ﻿using AOM.FIFA.ManagerPlayer.Application.League.Responses;
-using AOM.FIFA.ManagerPlayer.Application.League.Services.Interfaces;
+using AOM.FIFA.ManagerPlayer.Application.SyncLeague.Services.Interfaces;
 using AOM.FIFA.ManagerPlayer.Gateway.Responses.Leagues;
 using System.Threading.Tasks;
 using gateway = AOM.FIFA.ManagerPlayer.Gateway.Services.Interfaces;
 
 
-namespace AOM.FIFA.ManagerPlayer.Application.League.Services
+namespace AOM.FIFA.ManagerPlayer.Application.SyncLeague.Services
 {
     public class SyncLeagueService : ISyncLeagueService
     {
