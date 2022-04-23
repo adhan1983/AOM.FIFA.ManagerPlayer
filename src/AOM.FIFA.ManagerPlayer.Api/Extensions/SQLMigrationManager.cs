@@ -1,16 +1,16 @@
-﻿using AOM.FIFA.ManagerPlayer.Api.Constants;
-using AOM.FIFA.ManagerPlayer.Persistence.Context;
+﻿using System;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using AOM.FIFA.ManagerPlayer.Api.Constants;
 using Microsoft.Extensions.DependencyInjection;
-using System;
+using AOM.FIFA.ManagerPlayer.Persistence.Context;
 
 namespace AOM.FIFA.ManagerPlayer.Api.Extensions
 {
-    public static class MigrationManager
+    public static class SQLMigrationManager
     {   
-        public static void MigrateDatabase(this IApplicationBuilder app)
+        public static void ApplyMigration(this IApplicationBuilder app)
         {            
             using (var scope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())
             {

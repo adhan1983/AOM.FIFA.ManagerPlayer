@@ -1,10 +1,11 @@
-﻿using AOM.FIFA.ManagerPlayer.Application.League.Services;
-using AOM.FIFA.ManagerPlayer.Application.League.Services.Interfaces;
+﻿using Microsoft.Extensions.DependencyInjection;
+using AOM.FIFA.ManagerPlayer.Application.League.Services;
 using AOM.FIFA.ManagerPlayer.Application.SyncLeague.Services;
+using AOM.FIFA.ManagerPlayer.Application.League.Services.Interfaces;
 using AOM.FIFA.ManagerPlayer.Application.SyncLeague.Services.Interfaces;
-using Microsoft.Extensions.DependencyInjection;
 
-namespace AOM.FIFA.ManagerPlayer.Api.Extensions
+
+namespace AOM.FIFA.ManagerPlayer.Api.Extensions.ServicesCollectionDependencies
 {
     public static class ApplicationServiceCollectionExtension
     {

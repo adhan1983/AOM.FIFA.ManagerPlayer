@@ -2,7 +2,7 @@
 using AOM.FIFA.ManagerPlayer.Gateway.Services.Interfaces;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace AOM.FIFA.ManagerPlayer.Api.Extensions
+namespace AOM.FIFA.ManagerPlayer.Api.Extensions.ServicesCollectionDependencies
 {
     public static class GatewayServiceCollectionExtension
     {

@@ -1,8 +1,8 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
-using AOM.FIFA.ManagerPlayer.Api.Extensions;
 using Microsoft.Extensions.DependencyInjection;
+using AOM.FIFA.ManagerPlayer.Api.Extensions.Build;
 
 namespace AOM.FIFA.ManagerPlayer.Api
 {

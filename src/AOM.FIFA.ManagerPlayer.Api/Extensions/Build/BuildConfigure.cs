@@ -2,9 +2,9 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
 
-namespace AOM.FIFA.ManagerPlayer.Api.Extensions
+namespace AOM.FIFA.ManagerPlayer.Api.Extensions.Build
 {
-    public static class BuildApplicationByHost
+    public static class BuildConfigure
     {
         public static void Build(this IApplicationBuilder app, IWebHostEnvironment env) 
         {
@@ -26,7 +26,7 @@ namespace AOM.FIFA.ManagerPlayer.Api.Extensions
                 endpoints.MapControllers();
             });
 
-            app.MigrateDatabase();
+            app.ApplyMigration();
         }
     }
 }

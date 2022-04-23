@@ -1,21 +1,18 @@
-﻿using AOM.FIFA.ManagerPlayer.Api.Constants;
-using AOM.FIFA.ManagerPlayer.Persistence.Context;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.OpenApi.Models;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.OpenApi.Models;
+using AOM.FIFA.ManagerPlayer.Api.Extensions.AppSettingConfig;
+using AOM.FIFA.ManagerPlayer.Api.Extensions.ServicesCollectionDependencies;
 
-namespace AOM.FIFA.ManagerPlayer.Api.Extensions
+namespace AOM.FIFA.ManagerPlayer.Api.Extensions.Build
 {
     public static class BuildConfigureServices
     {
-        public static void Build(this IServiceCollection services, IConfiguration configuration) 
+        public static void Build(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddControllers();
 
-            services.AddDbContext<FIFAManagerPlayerDbContext>(options =>
-                     options.
-                     UseSqlServer(configuration.GetConnectionString(ApiConstants.SqlConnectionString)));
+            services.AddingDataBasesDependencies(configuration);
 
             services.AddingGatewayConfigProperties(configuration);
 
@@ -29,5 +26,7 @@ namespace AOM.FIFA.ManagerPlayer.Api.Extensions
                 AddingGatewayDependencies().
                 AddingPersistenceDependencies();
         }
+
+        
     }
 }

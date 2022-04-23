@@ -4,9 +4,9 @@ using AOM.FIFA.ManagerPlayer.Gateway.Utils;
 using Microsoft.Extensions.DependencyInjection;
 using AOM.FIFA.ManagerPlayer.Gateway.Utils.Interfaces;
 
-namespace AOM.FIFA.ManagerPlayer.Api.Extensions
+namespace AOM.FIFA.ManagerPlayer.Api.Extensions.AppSettingConfig
 {
-    public static class BuildGatewayConfig
+    public static class GatewayConfig
     {
         public static IServiceCollection AddingGatewayConfigProperties(this IServiceCollection services, IConfiguration configuration)
         {

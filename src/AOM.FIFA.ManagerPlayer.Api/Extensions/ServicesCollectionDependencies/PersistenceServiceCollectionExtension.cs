@@ -4,7 +4,7 @@ using AOM.FIFA.ManagerPlayer.Persistence.Base;
 using AOM.FIFA.ManagerPlayer.Persistence.SyncLeague.Repository;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace AOM.FIFA.ManagerPlayer.Api.Extensions
+namespace AOM.FIFA.ManagerPlayer.Api.Extensions.ServicesCollectionDependencies
 {
     public static class PersistenceServiceCollectionExtension
     {
