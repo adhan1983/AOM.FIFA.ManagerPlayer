@@ -1,10 +1,10 @@
-﻿using AOM.FIFA.ManagerPlayer.Application.League.Dtos;
-using AOM.FIFA.ManagerPlayer.Application.League.Services.Interfaces;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using NSwag.Annotations;
-using System.Collections.Generic;
+﻿using NSwag.Annotations;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Http;
+using System.Collections.Generic;
+using AOM.FIFA.ManagerPlayer.Application.League.Dtos;
+using AOM.FIFA.ManagerPlayer.Application.League.Services.Interfaces.Services;
 
 namespace AOM.FIFA.ManagerPlayer.Api.Controllers
 {

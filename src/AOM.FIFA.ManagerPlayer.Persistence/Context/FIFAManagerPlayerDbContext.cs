@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using AOM.FIFA.ManagerPlayer.Persistence.Configuration;
-using AOM.FIFA.ManagerPlayer.Application.League.Entities;
+using domain = AOM.FIFA.ManagerPlayer.Application.League.Entities;
 
 namespace AOM.FIFA.ManagerPlayer.Persistence.Context
 {
@@ -11,7 +11,7 @@ namespace AOM.FIFA.ManagerPlayer.Persistence.Context
 
         }
 
-        public DbSet<League> Leagues { get; set; }
+        public DbSet<domain.League> Leagues { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder) 
         {

@@ -10,6 +10,7 @@
     <Folder Include="SyncLeague\Dto\" />
     <Folder Include="SyncLeague\Entities\" />
     <Folder Include="SyncLeague\Mappers\" />
+    <Folder Include="SyncLeague\Repositories\" />
     <Folder Include="Utils\" />
   </ItemGroup>
 

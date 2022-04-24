@@ -1,8 +1,8 @@
-﻿using AOM.FIFA.ManagerPlayer.Application.Base.Interfaces;
-using AOM.FIFA.ManagerPlayer.Application.SyncLeague.Repositories.Interfaces;
-using AOM.FIFA.ManagerPlayer.Persistence.Base;
-using AOM.FIFA.ManagerPlayer.Persistence.SyncLeague.Repository;
+﻿using AOM.FIFA.ManagerPlayer.Persistence.Base;
 using Microsoft.Extensions.DependencyInjection;
+using AOM.FIFA.ManagerPlayer.Application.Base.Interfaces;
+using AOM.FIFA.ManagerPlayer.Persistence.League.Repository;
+using AOM.FIFA.ManagerPlayer.Application.League.Services.Interfaces.Repositories;
 
 namespace AOM.FIFA.ManagerPlayer.Api.Extensions.ServicesCollectionDependencies
 {
