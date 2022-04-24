@@ -9,6 +9,7 @@ namespace AOM.FIFA.ManagerPlayer.Api.Extensions.ServicesCollectionDependencies
         public static IServiceCollection AddingGatewayDependencies(this IServiceCollection services) 
         {
             services.AddScoped<ILeagueService, LeagueService>();
+            services.AddScoped<IClubService, ClubService>();
 
             return services;
         }

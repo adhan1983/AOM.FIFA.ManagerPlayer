@@ -35,7 +35,6 @@ namespace AOM.FIFA.ManagerPlayer.Application.Club.Services
                 Total = leagues.Count,
                 Clubs = leagues.Select(model => new ClubDto { Id = model.Id, Name = model.Name }).ToList()
             };
-
         }
 
     }

@@ -14,6 +14,9 @@
   <ItemGroup>
     <Folder Include="Club\Mappers\" />
     <Folder Include="League\Mappers\" />
+    <Folder Include="SyncClub\Dto\" />
+    <Folder Include="SyncClub\Entities\" />
+    <Folder Include="SyncClub\Mappers\" />
     <Folder Include="SyncLeague\Dto\" />
     <Folder Include="SyncLeague\Entities\" />
     <Folder Include="SyncLeague\Mappers\" />

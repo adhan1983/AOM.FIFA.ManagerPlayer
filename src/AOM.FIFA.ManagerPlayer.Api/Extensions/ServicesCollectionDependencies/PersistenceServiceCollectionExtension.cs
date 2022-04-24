@@ -3,6 +3,7 @@ using Microsoft.Extensions.DependencyInjection;
 using AOM.FIFA.ManagerPlayer.Application.Base.Interfaces;
 using AOM.FIFA.ManagerPlayer.Persistence.League.Repository;
 using AOM.FIFA.ManagerPlayer.Application.League.Interfaces.Repositories;
+using AOM.FIFA.ManagerPlayer.Application.Club.Interfaces.Repositories;
 
 namespace AOM.FIFA.ManagerPlayer.Api.Extensions.ServicesCollectionDependencies
 {
@@ -12,6 +13,7 @@ namespace AOM.FIFA.ManagerPlayer.Api.Extensions.ServicesCollectionDependencies
         {
             services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
             services.AddScoped<ILeagueRepository, LeagueRepository>();
+            services.AddScoped<IClubRepository, ClubRepository>();
 
             return services;
         }

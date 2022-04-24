@@ -9,10 +9,19 @@ namespace AOM.FIFA.ManagerPlayer.Persistence.Configuration
         public void Configure(EntityTypeBuilder<domain.League> builder)
         {
             builder.
-                ToTable(nameof(League)).
+                ToTable(nameof(domain.League)).
                 HasKey(x => x.Id);
-            builder.Property(x => x.Name).HasMaxLength(60).IsRequired();
-            
+            builder.
+                Property(x => x.Name).
+                HasMaxLength(60).
+                IsRequired();
+            builder.
+                Property(x => x.SourceId).
+                IsRequired();
+            builder.
+                HasMany(x => x.Clubs).
+                WithOne(x => x.League).
+                HasForeignKey(x => x.LeagueId);            
         }       
     }
 }

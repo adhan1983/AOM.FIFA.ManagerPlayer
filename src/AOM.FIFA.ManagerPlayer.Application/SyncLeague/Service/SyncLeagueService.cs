@@ -28,7 +28,7 @@ namespace AOM.FIFA.ManagerPlayer.Application.SyncLeague.Services
 
             var leagues = result.
                             items.
-                            Select(x => new entity.League { Name = x.name }).
+                            Select(x => new entity.League { Name = x.name, SourceId = x.id }).
                             ToList();
 
             var resulInsertManyAsync = await _leagueRepository.InsertManyAsync(leagues);

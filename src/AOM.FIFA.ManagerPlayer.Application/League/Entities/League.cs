@@ -7,7 +7,8 @@ namespace AOM.FIFA.ManagerPlayer.Application.League.Entities
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public List<domainClub.Club> Clubs { get; set; }
+        public int SourceId { get; set; }
+        public ICollection<domainClub.Club> Clubs { get; set; }
 
     }
 }
