@@ -1,8 +1,9 @@
-﻿namespace AOM.FIFA.ManagerPlayer.Gateway.Responses.Leagues
+﻿using AOM.FIFA.ManagerPlayer.Gateway.Responses.Base;
+
+namespace AOM.FIFA.ManagerPlayer.Gateway.Responses.Leagues
 {
-    public class LeagueRequest
+    public class LeagueRequest : BaseRequest
     {
-        public int Page { get; set; }
-        public int MaxItemPerPage { get; set; }
+        
     }
 }

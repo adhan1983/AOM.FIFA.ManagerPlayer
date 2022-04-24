@@ -1,7 +1,7 @@
 ﻿using AOM.FIFA.ManagerPlayer.Persistence.Context;
 using repo = AOM.FIFA.ManagerPlayer.Persistence.Base;
 using domain = AOM.FIFA.ManagerPlayer.Application.League.Entities;
-using AOM.FIFA.ManagerPlayer.Application.League.Services.Interfaces.Repositories;
+using AOM.FIFA.ManagerPlayer.Application.League.Interfaces.Repositories;
 
 namespace AOM.FIFA.ManagerPlayer.Persistence.League.Repository
 {

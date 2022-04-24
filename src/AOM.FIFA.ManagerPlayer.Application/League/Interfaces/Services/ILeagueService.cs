@@ -2,7 +2,7 @@
 using AOM.FIFA.ManagerPlayer.Application.League.Responses;
 using System.Threading.Tasks;
 
-namespace AOM.FIFA.ManagerPlayer.Application.League.Services.Interfaces.Services
+namespace AOM.FIFA.ManagerPlayer.Application.League.Interfaces.Services
 {
     public interface ILeagueService
     {

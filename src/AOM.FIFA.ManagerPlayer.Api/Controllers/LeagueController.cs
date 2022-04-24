@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Http;
 using System.Collections.Generic;
 using AOM.FIFA.ManagerPlayer.Application.League.Dtos;
-using AOM.FIFA.ManagerPlayer.Application.League.Services.Interfaces.Services;
+using AOM.FIFA.ManagerPlayer.Application.League.Interfaces.Services;
 
 namespace AOM.FIFA.ManagerPlayer.Api.Controllers
 {

@@ -6,11 +6,17 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="SyncLeague\Repositories\**" />
+    <EmbeddedResource Remove="SyncLeague\Repositories\**" />
+    <None Remove="SyncLeague\Repositories\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Club\Mappers\" />
     <Folder Include="League\Mappers\" />
     <Folder Include="SyncLeague\Dto\" />
     <Folder Include="SyncLeague\Entities\" />
     <Folder Include="SyncLeague\Mappers\" />
-    <Folder Include="SyncLeague\Repositories\" />
     <Folder Include="Utils\" />
   </ItemGroup>
 

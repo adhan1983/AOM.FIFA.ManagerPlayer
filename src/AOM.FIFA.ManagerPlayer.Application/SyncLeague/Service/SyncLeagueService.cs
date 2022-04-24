@@ -2,10 +2,10 @@
 using System.Threading.Tasks;
 using AOM.FIFA.ManagerPlayer.Gateway.Responses.Leagues;
 using AOM.FIFA.ManagerPlayer.Application.SyncLeague.Responses;
+using AOM.FIFA.ManagerPlayer.Application.SyncLeague.Interfaces;
 using entity = AOM.FIFA.ManagerPlayer.Application.League.Entities;
 using gateway = AOM.FIFA.ManagerPlayer.Gateway.Services.Interfaces;
-using AOM.FIFA.ManagerPlayer.Application.SyncLeague.Services.Interfaces;
-using AOM.FIFA.ManagerPlayer.Application.League.Services.Interfaces.Repositories;
+using AOM.FIFA.ManagerPlayer.Application.League.Interfaces.Repositories;
 
 namespace AOM.FIFA.ManagerPlayer.Application.SyncLeague.Services
 {
@@ -48,6 +48,7 @@ namespace AOM.FIFA.ManagerPlayer.Application.SyncLeague.Services
 
             for (int nextPage = firstResponse.page + 1, total = firstResponse.page_total; nextPage <= total; nextPage++)
             {
+                //Thread.Sleep(5000);
                 var resultAnotherResponses = await _leagueService.GetLeaguesAsync(new LeagueRequest { Page = nextPage, MaxItemPerPage = 20 });
                 response.items.AddRange(resultAnotherResponses.items);
             }

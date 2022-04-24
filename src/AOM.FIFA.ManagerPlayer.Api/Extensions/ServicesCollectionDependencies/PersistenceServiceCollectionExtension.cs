@@ -2,7 +2,7 @@
 using Microsoft.Extensions.DependencyInjection;
 using AOM.FIFA.ManagerPlayer.Application.Base.Interfaces;
 using AOM.FIFA.ManagerPlayer.Persistence.League.Repository;
-using AOM.FIFA.ManagerPlayer.Application.League.Services.Interfaces.Repositories;
+using AOM.FIFA.ManagerPlayer.Application.League.Interfaces.Repositories;
 
 namespace AOM.FIFA.ManagerPlayer.Api.Extensions.ServicesCollectionDependencies
 {

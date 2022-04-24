@@ -2,8 +2,8 @@
 using System.Threading.Tasks;
 using AOM.FIFA.ManagerPlayer.Application.League.Dtos;
 using AOM.FIFA.ManagerPlayer.Application.League.Responses;
-using AOM.FIFA.ManagerPlayer.Application.League.Services.Interfaces.Repositories;
-using AOM.FIFA.ManagerPlayer.Application.League.Services.Interfaces.Services;
+using AOM.FIFA.ManagerPlayer.Application.League.Interfaces.Repositories;
+using AOM.FIFA.ManagerPlayer.Application.League.Interfaces.Services;
 
 namespace AOM.FIFA.ManagerPlayer.Application.League.Services
 {

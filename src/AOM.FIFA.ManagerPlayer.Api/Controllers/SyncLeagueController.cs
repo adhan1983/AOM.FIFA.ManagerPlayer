@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using AOM.FIFA.ManagerPlayer.Application.SyncLeague.Responses;
-using AOM.FIFA.ManagerPlayer.Application.SyncLeague.Services.Interfaces;
+using AOM.FIFA.ManagerPlayer.Application.SyncLeague.Interfaces;
 
 namespace AOM.FIFA.ManagerPlayer.Api.Controllers
 {
