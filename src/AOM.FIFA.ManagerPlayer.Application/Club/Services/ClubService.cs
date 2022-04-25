@@ -7,7 +7,7 @@ using AOM.FIFA.ManagerPlayer.Application.Club.Interfaces.Repositories;
 
 namespace AOM.FIFA.ManagerPlayer.Application.Club.Services
 {
-    public class ClubService : IClubeService
+    public class ClubService : IClubService
     {
         private readonly IClubRepository _clubRepository;
 
@@ -26,16 +26,28 @@ namespace AOM.FIFA.ManagerPlayer.Application.Club.Services
 
         }
 
-        public async Task<ClubResponse> GetLeaguesResponseAsync()
+        public async Task<ClubResponse> GetClubsResponseAsync()
         {
-            var leagues = await _clubRepository.GetAllAsync();
+            var clubs = await _clubRepository.GetAllAsync();
 
             return new ClubResponse
             {
-                Total = leagues.Count,
-                Clubs = leagues.Select(model => new ClubDto { Id = model.Id, Name = model.Name }).ToList()
+                Total = clubs.Count,
+                Clubs = clubs.Select(model => new ClubDto { Id = model.Id, Name = model.Name, LeagueId = model.LeagueId }).ToList()
             };
+
         }
 
+        public async Task<ClubLeagueResponse> GetClubsByLeagueIdAsync(int leagueId)
+        {
+            var clubs = await _clubRepository.GetClubsByLeagueIdAsync(leagueId);
+
+            return new ClubLeagueResponse
+            {
+                Total = clubs.Count,
+                NameLeague = clubs?.FirstOrDefault(a => a.League.Id ==  leagueId)?.League?.Name,
+                Clubs = clubs.Select(model => new ClubLeagueDto { Id = model.Id, Name = model.Name }).OrderBy(x => x.Name).ToList()
+            };
+        }
     }
 }

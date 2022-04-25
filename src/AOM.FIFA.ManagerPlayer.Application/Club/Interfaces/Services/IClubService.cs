@@ -4,10 +4,12 @@ using AOM.FIFA.ManagerPlayer.Application.Club.Responses;
 
 namespace AOM.FIFA.ManagerPlayer.Application.Club.Interfaces.Services
 {
-    public interface IClubeService
+    public interface IClubService
     {
         Task<ClubDto> GetClubByIdAsync(int id);
 
-        Task<ClubResponse> GetLeaguesResponseAsync();
+        Task<ClubResponse> GetClubsResponseAsync();
+
+        Task<ClubLeagueResponse> GetClubsByLeagueIdAsync(int leagueId);
     }
 }
