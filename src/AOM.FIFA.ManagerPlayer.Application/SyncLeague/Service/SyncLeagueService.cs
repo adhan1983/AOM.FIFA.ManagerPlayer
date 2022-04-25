@@ -1,11 +1,11 @@
-﻿using System.Linq;
-using System.Threading.Tasks;
-using AOM.FIFA.ManagerPlayer.Gateway.Responses.Leagues;
+﻿using AOM.FIFA.ManagerPlayer.Application.League.Interfaces.Repositories;
+using AOM.FIFA.ManagerPlayer.Application.SyncLeague.Interfaces.Interfaces;
 using AOM.FIFA.ManagerPlayer.Application.SyncLeague.Responses;
-using AOM.FIFA.ManagerPlayer.Application.SyncLeague.Interfaces;
+using AOM.FIFA.ManagerPlayer.Gateway.Responses.Leagues;
+using System.Linq;
+using System.Threading.Tasks;
 using entity = AOM.FIFA.ManagerPlayer.Application.League.Entities;
 using gateway = AOM.FIFA.ManagerPlayer.Gateway.Services.Interfaces;
-using AOM.FIFA.ManagerPlayer.Application.League.Interfaces.Repositories;
 
 namespace AOM.FIFA.ManagerPlayer.Application.SyncLeague.Services
 {

@@ -4,6 +4,7 @@ using AOM.FIFA.ManagerPlayer.Application.Base.Interfaces;
 using AOM.FIFA.ManagerPlayer.Persistence.League.Repository;
 using AOM.FIFA.ManagerPlayer.Application.League.Interfaces.Repositories;
 using AOM.FIFA.ManagerPlayer.Application.Club.Interfaces.Repositories;
+using AOM.FIFA.ManagerPlayer.Persistence.Club.Repository;
 
 namespace AOM.FIFA.ManagerPlayer.Api.Extensions.ServicesCollectionDependencies
 {

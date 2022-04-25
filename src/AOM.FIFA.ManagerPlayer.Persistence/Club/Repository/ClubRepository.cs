@@ -3,7 +3,7 @@ using repo = AOM.FIFA.ManagerPlayer.Persistence.Base;
 using domain = AOM.FIFA.ManagerPlayer.Application.Club.Entities;
 using AOM.FIFA.ManagerPlayer.Application.Club.Interfaces.Repositories;
 
-namespace AOM.FIFA.ManagerPlayer.Persistence.League.Repository
+namespace AOM.FIFA.ManagerPlayer.Persistence.Club.Repository
 {
     public class ClubRepository : repo.Repository<domain.Club>, IClubRepository
     {

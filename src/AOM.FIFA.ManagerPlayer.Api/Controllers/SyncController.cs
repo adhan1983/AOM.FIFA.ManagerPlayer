@@ -1,10 +1,10 @@
-﻿using NSwag.Annotations;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using AOM.FIFA.ManagerPlayer.Application.SyncLeague.Responses;
-using AOM.FIFA.ManagerPlayer.Application.SyncLeague.Interfaces;
-using AOM.FIFA.ManagerPlayer.Application.SyncClub.Interfaces;
+﻿using AOM.FIFA.ManagerPlayer.Application.SyncClub.Interfaces.Services;
 using AOM.FIFA.ManagerPlayer.Application.SyncClub.Responses;
+using AOM.FIFA.ManagerPlayer.Application.SyncLeague.Interfaces.Interfaces;
+using AOM.FIFA.ManagerPlayer.Application.SyncLeague.Responses;
+using Microsoft.AspNetCore.Mvc;
+using NSwag.Annotations;
+using System.Threading.Tasks;
 
 namespace AOM.FIFA.ManagerPlayer.Api.Controllers
 {

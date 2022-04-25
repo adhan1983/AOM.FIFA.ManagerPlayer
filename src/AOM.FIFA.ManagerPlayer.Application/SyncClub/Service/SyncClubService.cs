@@ -1,17 +1,17 @@
 ﻿using AOM.FIFA.ManagerPlayer.Application.Club.Interfaces.Repositories;
 using AOM.FIFA.ManagerPlayer.Application.League.Interfaces.Repositories;
-using AOM.FIFA.ManagerPlayer.Application.SyncClub.Interfaces;
+using AOM.FIFA.ManagerPlayer.Application.SyncClub.Interfaces.Services;
 using AOM.FIFA.ManagerPlayer.Application.SyncClub.Responses;
 using AOM.FIFA.ManagerPlayer.Gateway.Responses.Clubs;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using domainLeague = AOM.FIFA.ManagerPlayer.Application.League.Entities;
 using entity = AOM.FIFA.ManagerPlayer.Application.Club.Entities;
 using gateway = AOM.FIFA.ManagerPlayer.Gateway.Services.Interfaces;
-using domainLeague = AOM.FIFA.ManagerPlayer.Application.League.Entities;
 
-namespace AOM.FIFA.ManagerPlayer.Application.SyncLeague.Services
+namespace AOM.FIFA.ManagerPlayer.Application.SyncClub.Services
 {
     public class SyncClubService : ISyncClubService
     {
