@@ -14,6 +14,7 @@
   <ItemGroup>
     <ProjectReference Include="..\AOM.FIFA.ManagerPlayer.Application\AOM.FIFA.ManagerPlayer.Application.csproj" />
     <ProjectReference Include="..\AOM.FIFA.ManagerPlayer.Gateway\AOM.FIFA.ManagerPlayer.Gateway.csproj" />
+    <ProjectReference Include="..\AOM.FIFA.ManagerPlayer.Logging\AOM.FIFA.ManagerPlayer.Logging.csproj" />
     <ProjectReference Include="..\AOM.FIFA.ManagerPlayer.Persistence\AOM.FIFA.ManagerPlayer.Persistence.csproj" />
   </ItemGroup>
 

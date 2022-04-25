@@ -18,3 +18,5 @@
 /src/AOM.FIFA.ManagerPlayer.Service/obj
 /src/AOM.FIFA.ManagerPlayer.Persistence/bin/Debug/net5.0
 /src/AOM.FIFA.ManagerPlayer.Persistence/obj
+/src/AOM.FIFA.ManagerPlayer.Logging/bin/Debug/net5.0
+/src/AOM.FIFA.ManagerPlayer.Logging/obj

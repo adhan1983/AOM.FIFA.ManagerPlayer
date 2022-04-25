@@ -24,9 +24,11 @@ namespace AOM.FIFA.ManagerPlayer.Api.Extensions.Build
             services.
                 AddingApplicationDependencies().
                 AddingGatewayDependencies().
-                AddingPersistenceDependencies();
+                AddingPersistenceDependencies().
+                AddingLoggerServiceDependencies();            
+
         }
 
-        
+
     }
 }
