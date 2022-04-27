@@ -2,6 +2,8 @@
 using AOM.FIFA.ManagerPlayer.Application.League.Interfaces.Repositories;
 using AOM.FIFA.ManagerPlayer.Application.SyncClub.Interfaces.Services;
 using AOM.FIFA.ManagerPlayer.Application.SyncClub.Responses;
+using AOM.FIFA.ManagerPlayer.Gateway.HttpFactoryClient.Interfaces;
+using AOM.FIFA.ManagerPlayer.Gateway.Responses.Base;
 using AOM.FIFA.ManagerPlayer.Gateway.Responses.Clubs;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,22 +11,21 @@ using System.Threading;
 using System.Threading.Tasks;
 using domainLeague = AOM.FIFA.ManagerPlayer.Application.League.Entities;
 using entity = AOM.FIFA.ManagerPlayer.Application.Club.Entities;
-using gateway = AOM.FIFA.ManagerPlayer.Gateway.Services.Interfaces;
 
 namespace AOM.FIFA.ManagerPlayer.Application.SyncClub.Services
 {
     public class SyncClubService : ISyncClubService
     {
-        private readonly gateway.IClubService _clubService;
+
+        private readonly IHttpClientFactoryService _httpClientServiceImplementation;
         private readonly IClubRepository _clubRepository;
         private readonly ILeagueRepository _leagueRepository;
 
-
-        public SyncClubService(gateway.IClubService clubService, IClubRepository clubRepository, ILeagueRepository leagueRepository) 
-        { 
-            _clubService = clubService;
-            _clubRepository = clubRepository;
-            _leagueRepository = leagueRepository;
+        public SyncClubService(IHttpClientFactoryService httpClientServiceImplementation,  IClubRepository clubRepository, ILeagueRepository leagueRepository) 
+        {            
+            this._clubRepository = clubRepository;
+            this._leagueRepository = leagueRepository;
+            this._httpClientServiceImplementation = httpClientServiceImplementation;
         }
 
         public async Task<SyncClubResponse> SyncClubsAsync()
@@ -37,9 +38,7 @@ namespace AOM.FIFA.ManagerPlayer.Application.SyncClub.Services
 
             var lst  = leagues.ToList();
             
-            var firstResponse = await InsertManyClubsAsync(1, lst);
-
-            bool resulInsertManyAsync = false;
+            var firstResponse = await InsertManyClubsAsync(1, lst);            
             
             for (int nextPage = firstResponse.page + 1, total = firstResponse.page_total; nextPage <= total; nextPage++)
             {
@@ -48,9 +47,7 @@ namespace AOM.FIFA.ManagerPlayer.Application.SyncClub.Services
                 Thread.Sleep(5000);
             }
 
-            resulInsertManyAsync = true;
-
-            response.AllClubsSyncronized = resulInsertManyAsync;
+            response.AllClubsSyncronized = true;
             
             return response;
         }
@@ -59,7 +56,7 @@ namespace AOM.FIFA.ManagerPlayer.Application.SyncClub.Services
         {
             try
             {
-                var response = await _clubService.GetClubsAsync(new ClubRequest { Page = page, MaxItemPerPage = 20 });
+                var response = await _httpClientServiceImplementation.GetClubsAsync(new Request { Page = page, MaxItemPerPage = 20 });
                 
                 response.items.RemoveAll(a => a.league == null);
 

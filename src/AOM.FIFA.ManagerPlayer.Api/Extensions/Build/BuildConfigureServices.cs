@@ -1,8 +1,7 @@
-﻿using Microsoft.OpenApi.Models;
+﻿using AOM.FIFA.ManagerPlayer.Api.Extensions.ServicesCollectionDependencies;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using AOM.FIFA.ManagerPlayer.Api.Extensions.AppSettingConfig;
-using AOM.FIFA.ManagerPlayer.Api.Extensions.ServicesCollectionDependencies;
+using Microsoft.OpenApi.Models;
 
 namespace AOM.FIFA.ManagerPlayer.Api.Extensions.Build
 {
@@ -14,8 +13,6 @@ namespace AOM.FIFA.ManagerPlayer.Api.Extensions.Build
 
             services.AddingDataBasesDependencies(configuration);
 
-            services.AddingGatewayConfigProperties(configuration);
-
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "AOM.FIFA.ManagerPlayer.Api", Version = "v1" });
@@ -23,7 +20,7 @@ namespace AOM.FIFA.ManagerPlayer.Api.Extensions.Build
 
             services.
                 AddingApplicationDependencies().
-                AddingGatewayDependencies().
+                AddingHttpClientFactory(configuration).
                 AddingPersistenceDependencies().
                 AddingLoggerServiceDependencies();            
 
