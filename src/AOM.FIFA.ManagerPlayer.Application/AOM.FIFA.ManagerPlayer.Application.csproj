@@ -6,22 +6,36 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="SyncClub\Dto\**" />
+    <Compile Remove="SyncClub\Entities\**" />
+    <Compile Remove="SyncClub\Mappers\**" />
+    <Compile Remove="SyncLeague\Dto\**" />
+    <Compile Remove="SyncLeague\Entities\**" />
+    <Compile Remove="SyncLeague\Mappers\**" />
     <Compile Remove="SyncLeague\Repositories\**" />
+    <Compile Remove="Utils\**" />
+    <EmbeddedResource Remove="SyncClub\Dto\**" />
+    <EmbeddedResource Remove="SyncClub\Entities\**" />
+    <EmbeddedResource Remove="SyncClub\Mappers\**" />
+    <EmbeddedResource Remove="SyncLeague\Dto\**" />
+    <EmbeddedResource Remove="SyncLeague\Entities\**" />
+    <EmbeddedResource Remove="SyncLeague\Mappers\**" />
     <EmbeddedResource Remove="SyncLeague\Repositories\**" />
+    <EmbeddedResource Remove="Utils\**" />
+    <None Remove="SyncClub\Dto\**" />
+    <None Remove="SyncClub\Entities\**" />
+    <None Remove="SyncClub\Mappers\**" />
+    <None Remove="SyncLeague\Dto\**" />
+    <None Remove="SyncLeague\Entities\**" />
+    <None Remove="SyncLeague\Mappers\**" />
     <None Remove="SyncLeague\Repositories\**" />
+    <None Remove="Utils\**" />
   </ItemGroup>
 
   <ItemGroup>
     <Folder Include="Club\Mappers\" />
     <Folder Include="League\Mappers\" />
     <Folder Include="Player\" />
-    <Folder Include="SyncClub\Dto\" />
-    <Folder Include="SyncClub\Entities\" />
-    <Folder Include="SyncClub\Mappers\" />
-    <Folder Include="SyncLeague\Dto\" />
-    <Folder Include="SyncLeague\Entities\" />
-    <Folder Include="SyncLeague\Mappers\" />
-    <Folder Include="Utils\" />
   </ItemGroup>
 
   <ItemGroup>
