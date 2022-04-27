@@ -13,6 +13,7 @@ namespace AOM.FIFA.ManagerPlayer.Api.Extensions
     {
         public static IServiceCollection AddingHttpClientFactory(this IServiceCollection services, IConfiguration configuration) 
         {
+            
 
             services.AddHttpClient(configuration.GetValue<string>(ApiConstants.FIFAClient), config => 
             {

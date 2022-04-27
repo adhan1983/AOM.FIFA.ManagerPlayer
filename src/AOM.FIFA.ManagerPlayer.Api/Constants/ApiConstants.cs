@@ -6,8 +6,8 @@
         public const string SqlConnectionString = "SqlConnectionString";
         public const string FIFAApiKey = "FIFAGatewaySettings:FIFAApiKey";
         public const string FIFAApiToken = "FIFAGatewaySettings:FIFAApiToken";
-        public const string FIFAClient = "FIFAClient";
-        public const string BaseAddress = "BaseAddress";
+        public const string FIFAClient = "FIFAGatewaySettings:FIFAClient";
+        public const string BaseAddress = "FIFAGatewaySettings:BaseAddress";
 
     }
 }
