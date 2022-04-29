@@ -1,5 +1,6 @@
 ﻿using AOM.FIFA.ManagerPlayer.Api.Constants;
 using AOM.FIFA.ManagerPlayer.Persistence.Context;
+using AOM.FIFA.ManagerPlayer.Persistence.Synchronization.Context;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -27,7 +28,7 @@ namespace AOM.FIFA.ManagerPlayer.Api.Extensions
                 }
                 if (applyMigrationSyncFIFADbContext) 
                 {
-                    var fifaSyncDbContext = scope.ServiceProvider.GetService<FIFAManagerPlayerDbContext>();
+                    var fifaSyncDbContext = scope.ServiceProvider.GetService<FIFASynchronizationDbContext>();
                     fifaSyncDbContext.Database.Migrate();
                 }
 

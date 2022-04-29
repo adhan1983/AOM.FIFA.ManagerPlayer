@@ -1,9 +1,13 @@
 ﻿using AOM.FIFA.ManagerPlayer.Application.League.Interfaces.Repositories;
+using AOM.FIFA.ManagerPlayer.Application.Synchronization.Entities;
+using AOM.FIFA.ManagerPlayer.Application.Synchronization.Interfaces.Repositories;
 using AOM.FIFA.ManagerPlayer.Application.SyncLeague.Interfaces.Interfaces;
 using AOM.FIFA.ManagerPlayer.Application.SyncLeague.Responses;
 using AOM.FIFA.ManagerPlayer.Gateway.HttpFactoryClient.Interfaces;
 using AOM.FIFA.ManagerPlayer.Gateway.Responses.Base;
 using AOM.FIFA.ManagerPlayer.Gateway.Responses.Leagues;
+using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using entity = AOM.FIFA.ManagerPlayer.Application.League.Entities;
@@ -12,48 +16,113 @@ namespace AOM.FIFA.ManagerPlayer.Application.SyncLeague.Services
 {
     public class SyncLeagueService : ISyncLeagueService
     {
-        
+        private readonly ISyncRepository _syncRepository;        
         private readonly ILeagueRepository _leagueRepository;
-        private readonly IHttpClientFactoryService _httpClientServiceImplementation;
-
-        public SyncLeagueService(ILeagueRepository leagueRepository, IHttpClientFactoryService httpClientServiceImplementation) 
-        { 
+        private readonly IHttpClientFactoryService _httpClientServiceImplementation;        
+        public SyncLeagueService(ILeagueRepository leagueRepository, IHttpClientFactoryService httpClientServiceImplementation, ISyncRepository syncRepository)
+        {
             this._leagueRepository = leagueRepository;
+            this._syncRepository = syncRepository;
             this._httpClientServiceImplementation = httpClientServiceImplementation;
         }
 
         public async Task<SyncLeagueResponse> SyncLeaguesAsync()
-        {            
-            var response = new SyncLeagueResponse();            
+        {
+            var sync = await _syncRepository.GetSyncByNameAsync("League");
 
-            var result = await GetLeagueListResponseAsync();
+            var response = new SyncLeagueResponse() {  TypeOfSyncName = sync.Name, SourceIdsDoNotSynchronized = new List<int>() };
+
+            var syncPage = new SyncPage() {  SourcesWithoutSync = new List<SourceWithoutSync>() };
+            
+            if (sync.SyncPages.Any())
+            {
+                var syncPages = sync.SyncPages;
+
+                var totalItemSynchronized = syncPages.Select(x => x.TotalSynchronized).Sum();
+                var totalDosNotSynchronized = syncPages.Where(x => x.TotalDosNotSynchronized > 0).Count();
+                var totalpagesSynchronized = syncPages.Where(x => x.Page > 0).Count();                
+                var totalPagesSync = sync.TotalPages;
+                var sourcesWithoutSync = syncPages.Sum(x => x.SourcesWithoutSync.Count);                
+                var lastPageSynchronized = sync.SyncPages.Max(a => a.Page);                
+
+                var syncPageSuccess = syncPages.Any(a => a.SyncPageSuccess == false);
+
+                if (sync.Synchronized) 
+                {                   
+                    response.TotalPagesSynchronized = totalpagesSynchronized;
+                    response.TotalItemDoNotSynchronized = totalDosNotSynchronized;
+                    response.TotalItemsSynchronized = totalItemSynchronized;
+                    response.SourceIdsDoNotSynchronized = null;
+                    response.AllItemsSynchronized = true;                    
+                    response.Synchronized = sync.Synchronized;
+                    
+                    return response;
+                }
+
+                syncPage.SyncId = sync.Id;
+                syncPage.Page = lastPageSynchronized + 1;                
+            }
+            else
+            {
+                //FirstTime
+                syncPage.SyncId = sync.Id;
+                syncPage.Page = 1;                
+            }
+
+            var result = await GetLeagueListResponseAsync(syncPage.Page, sync.TotalItemsPerPage);
 
             var leagues = result.
                             items.
                             Select(x => new entity.League { Name = x.name, SourceId = x.id }).
                             ToList();
 
-            var resulInsertManyAsync = await _leagueRepository.InsertManyAsync(leagues);
+            foreach (var league in leagues)
+            {
+                try
+                {
+                    if (league.Name == "Eredivisie" || league.Name == "SSE Airtricity League (IRL 1)")
+                        throw new Exception("league not found");
+                    
+                    var model = await _leagueRepository.InsertAsync(league);
+                    if (model.Id > 0)
+                        syncPage.TotalSynchronized++;
+                   
+                }
+                catch (Exception ex)
+                {
+                    syncPage.TotalDosNotSynchronized++;
 
-            response.AllLeaguesSyncronized = resulInsertManyAsync;
-            
+                    var sourceWithoutSync = new SourceWithoutSync
+                    {
+                        SourceId = league.SourceId,
+                        SyncPageId = syncPage.Id
+                    };
+
+                    syncPage.SourcesWithoutSync.Add(sourceWithoutSync);
+                }
+
+            }            
+            syncPage.SyncPageSuccess = syncPage.TotalDosNotSynchronized > 0 ? false : true;
+            sync.SyncPages.Add(syncPage);
+            sync.Synchronized = (sync.SyncPages.Max(a => a.Page) == sync.TotalPages);
+            var syncUpdated = await _syncRepository.UpdateAsync(sync);
+
+            response.TotalItemsSynchronized = syncPage.TotalSynchronized;
+            response.TotalItemDoNotSynchronized = syncPage.TotalDosNotSynchronized;
+            response.SourceIdsDoNotSynchronized.AddRange(syncPage.SourcesWithoutSync.Select(a => a.SourceId).ToList());
+            response.AllItemsSynchronized = syncPage.SyncPageSuccess;
+            response.Synchronized = sync.Synchronized;
+
             return response;
         }
 
-        private async Task<LeagueListResponse> GetLeagueListResponseAsync()
+        private async Task<LeagueListResponse> GetLeagueListResponseAsync(int page, int maxItemPerPage)
         {
             var response = new LeagueListResponse();
-            
-            var firstResponse = await _httpClientServiceImplementation.GetLeaguesAsync(new Request { Page = 1, MaxItemPerPage = 20 });
+
+            var firstResponse = await _httpClientServiceImplementation.GetLeaguesAsync(new Request { Page = page, MaxItemPerPage = maxItemPerPage });
 
             response.items.AddRange(firstResponse.items);
-
-            for (int nextPage = firstResponse.page + 1, total = firstResponse.page_total; nextPage <= total; nextPage++)
-            {
-                //Thread.Sleep(5000);
-                var resultAnotherResponses = await _httpClientServiceImplementation.GetLeaguesAsync(new Request { Page = nextPage, MaxItemPerPage = 20 });
-                response.items.AddRange(resultAnotherResponses.items);
-            }
 
             return response;
         }

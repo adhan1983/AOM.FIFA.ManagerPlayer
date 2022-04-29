@@ -10,7 +10,7 @@ namespace AOM.FIFA.ManagerPlayer.Application.SyncPlayer.Services
 {
     public class SyncPlayerService : ISyncPlayerService
     {
-        private readonly IRepositoryFactory _repositoryFactory;
+        //private readonly IRepositoryFactory _repositoryFactory;
 
         public SyncPlayerService(IRepositoryFactory repositoryFactory)
         {

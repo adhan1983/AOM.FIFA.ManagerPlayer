@@ -19,9 +19,11 @@ namespace AOM.FIFA.ManagerPlayer.Persistence.Synchronization.Context
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            //modelBuilder.ApplyConfiguration(new SyncConfiguration());
-            //modelBuilder.ApplyConfiguration(new SyncPageConfiguration());
-            //modelBuilder.ApplyConfiguration(new SourceWithoutConfiguration());
+            base.OnModelCreating(modelBuilder);
+
+            modelBuilder.ApplyConfiguration(new SyncConfiguration());
+            modelBuilder.ApplyConfiguration(new SyncPageConfiguration());
+            modelBuilder.ApplyConfiguration(new SourceWithoutSyncConfiguration());
         }
     }
 }

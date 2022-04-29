@@ -8,5 +8,9 @@ namespace AOM.FIFA.ManagerPlayer.Application.Base.Interfaces
         Task<List<T>> GetAllAsync();
 
         Task<T> GetByIdAsync(object id);
+
+        Task<bool> InsertAsync(T entity);
+
+        Task<bool> UpdateAsync(T entity);
     }
 }

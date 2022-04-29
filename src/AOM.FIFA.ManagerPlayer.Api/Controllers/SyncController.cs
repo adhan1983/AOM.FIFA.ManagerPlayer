@@ -27,8 +27,8 @@ namespace AOM.FIFA.ManagerPlayer.Api.Controllers
         public async Task<IActionResult> Leagues()
         {
             var response = new SyncLeagueResponse();
-
-            response = await _syncLeagueService.SyncLeaguesAsync();
+                        
+            response = await _syncLeagueService.SyncLeaguesAsync();             
 
             return Ok(response);
 

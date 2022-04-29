@@ -9,6 +9,7 @@ namespace AOM.FIFA.ManagerPlayer.Application.Synchronization.Entities
         public int TotalItems { get; set; }
         public int TotalPages { get; set; }
         public int TotalItemsPerPage { get; set; }
+        public bool Synchronized { get; set; }
         public List<SyncPage> SyncPages { get; set; }
     }
 }

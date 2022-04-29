@@ -1,6 +1,7 @@
 ﻿using AOM.FIFA.ManagerPlayer.Application.Synchronization.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using System.Collections.Generic;
 
 namespace AOM.FIFA.ManagerPlayer.Persistence.Synchronization.Configuration
 {
@@ -28,6 +29,13 @@ namespace AOM.FIFA.ManagerPlayer.Persistence.Synchronization.Configuration
                 HasMany(x => x.SyncPages).
                 WithOne(x => x.Sync).
                 HasForeignKey(x => x.SyncId);
+
+            builder.HasData(new List<Sync>() 
+            {
+                new Sync { Id = 1,  Name = "League", TotalItems = 49, TotalPages = 3, TotalItemsPerPage = 20, Synchronized = false },
+                new Sync { Id = 2,  Name = "Club", TotalItems = 674, TotalPages = 34, TotalItemsPerPage = 20, Synchronized = false },
+                new Sync { Id = 3,  Name = "Players", TotalItems = 20617, TotalPages = 1031, TotalItemsPerPage = 20, Synchronized = false },
+            });
         }
     }
 }

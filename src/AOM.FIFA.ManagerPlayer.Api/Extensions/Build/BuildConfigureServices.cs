@@ -11,8 +11,6 @@ namespace AOM.FIFA.ManagerPlayer.Api.Extensions.Build
         {
             services.AddControllers();
 
-            services.AddingDataBasesDependencies(configuration);
-
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "AOM.FIFA.ManagerPlayer.Api", Version = "v1" });
@@ -22,7 +20,10 @@ namespace AOM.FIFA.ManagerPlayer.Api.Extensions.Build
                 AddingApplicationDependencies().
                 AddingHttpClientFactory(configuration).
                 AddingPersistenceDependencies().
-                AddingLoggerServiceDependencies();            
+                AddingLoggerServiceDependencies();
+
+            services.AddingDataBasesDependencies(configuration);
+
 
         }
 

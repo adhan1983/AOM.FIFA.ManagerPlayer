@@ -11,13 +11,15 @@ namespace AOM.FIFA.ManagerPlayer.Api.Extensions
     {
         public static IServiceCollection AddingDataBasesDependencies(this IServiceCollection services, IConfiguration configuration)
         {
+            services.AddDbContext<FIFASynchronizationDbContext>(options =>
+                     options.
+                     UseSqlServer(configuration.GetConnectionString(ApiConstants.SqlSyncConnectionString)));
+
             services.AddDbContext<FIFAManagerPlayerDbContext>(options =>
                      options.
                      UseSqlServer(configuration.GetConnectionString(ApiConstants.SqlConnectionString)));
 
-            services.AddDbContext<FIFASynchronizationDbContext>(options =>
-                     options.
-                     UseSqlServer(configuration.GetConnectionString(ApiConstants.SqlSyncConnectionString)));
+            
             
 
             return services;
