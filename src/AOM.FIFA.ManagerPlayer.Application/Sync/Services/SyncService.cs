@@ -1,28 +1,30 @@
-﻿using System.Threading.Tasks;
-using s = AOM.FIFA.ManagerPlayer.Application.Sync.Entities;
-using AOM.FIFA.ManagerPlayer.Application.Synchronization.Interfaces;
-using AOM.FIFA.ManagerPlayer.Application.Synchronization.Interfaces.Repositories;
-using AOM.FIFA.ManagerPlayer.Application.Sync.Responses;
+﻿using System.Linq;
+using System.Threading.Tasks;
 using System.Collections.Generic;
 using AOM.FIFA.ManagerPlayer.Application.Sync.Entities;
-using System.Linq;
+using AOM.FIFA.ManagerPlayer.Application.Sync.Responses;
+using s = AOM.FIFA.ManagerPlayer.Application.Sync.Entities;
+using AOM.FIFA.ManagerPlayer.Application.Synchronization.Interfaces;
 using AOM.FIFA.ManagerPlayer.Application.SyncLeague.Interfaces.Interfaces;
+using AOM.FIFA.ManagerPlayer.Application.Synchronization.Interfaces.Repositories;
+using AOM.FIFA.ManagerPlayer.Application.SyncClub.Interfaces.Services;
 
 namespace AOM.FIFA.ManagerPlayer.Application.Synchronization.Services
 {
     public class SyncService : ISyncService
     {
         private readonly ISyncRepository _syncRepository;
+        private readonly ISyncLeagueService _syncLeagueService;
+        private readonly ISyncClubService _syncClubService;
 
-        public ISyncLeagueService _syncLeagueService { get; }
-
-        public SyncService(ISyncRepository syncRepository, ISyncLeagueService syncLeagueService)
+        public SyncService(ISyncRepository syncRepository, ISyncLeagueService syncLeagueService, ISyncClubService syncClubService)
         {
             this._syncRepository = syncRepository;
             this._syncLeagueService = syncLeagueService;
+            this._syncClubService = syncClubService;
         }
 
-        public async Task<SyncResponse> SyncByNameAsync(string name) 
+        public async Task<SyncResponse> SyncByNameAsync(string name)
         {
             var sync = await _syncRepository.GetSyncByNameAsync(name);
 
@@ -54,12 +56,24 @@ namespace AOM.FIFA.ManagerPlayer.Application.Synchronization.Services
             }
             else
             {
-                //FirstTime
                 syncPage.SyncId = sync.Id;
                 syncPage.Page = 1;
-            }           
-            
-            await _syncLeagueService.SyncLeaguesAsync(syncPage.Page, sync.TotalItemsPerPage, syncPage);
+            }
+
+            switch (name)
+            {
+                case "league":
+                    await _syncLeagueService.SyncLeaguesAsync(sync.TotalItemsPerPage, syncPage);
+                    break;
+                case "club":
+                    await _syncClubService.SyncClubsAsync(sync.TotalItemsPerPage, syncPage);
+                    break;
+                case "player":
+                    break;
+                default:
+                    break;
+            }
+
 
             syncPage.SyncPageSuccess = syncPage.TotalDosNotSynchronized > 0 ? false : true;
             sync.SyncPages.Add(syncPage);
@@ -88,7 +102,7 @@ namespace AOM.FIFA.ManagerPlayer.Application.Synchronization.Services
             var result = await _syncRepository.UpdateAsync(sync);
 
             return result;
-                
+
         }
     }
 }

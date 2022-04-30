@@ -5,6 +5,6 @@ namespace AOM.FIFA.ManagerPlayer.Application.SyncLeague.Interfaces.Interfaces
 {
     public interface ISyncLeagueService
     {
-        Task<SyncPage> SyncLeaguesAsync(int page, int totalItemsPerPage, SyncPage syncPage);
+        Task<SyncPage> SyncLeaguesAsync(int totalItemsPerPage, SyncPage syncPage);
     }
 }

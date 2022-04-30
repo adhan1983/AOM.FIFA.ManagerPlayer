@@ -1,10 +1,10 @@
-﻿using AOM.FIFA.ManagerPlayer.Application.SyncClub.Responses;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
+using AOM.FIFA.ManagerPlayer.Application.Sync.Entities;
 
 namespace AOM.FIFA.ManagerPlayer.Application.SyncClub.Interfaces.Services
 {
     public interface ISyncClubService
     {
-        Task<SyncClubResponse> SyncClubsAsync();
+        Task<SyncPage> SyncClubsAsync(int totalItemPerPage, SyncPage syncPage);
     }
 }

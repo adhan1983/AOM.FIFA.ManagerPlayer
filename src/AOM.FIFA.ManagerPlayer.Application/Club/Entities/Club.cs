@@ -12,6 +12,6 @@ namespace AOM.FIFA.ManagerPlayer.Application.Club.Entities
 
         public int LeagueId { get; set; }
 
-        public int? SourceId { get; set; }
+        public int SourceId { get; set; }
     }
 }
