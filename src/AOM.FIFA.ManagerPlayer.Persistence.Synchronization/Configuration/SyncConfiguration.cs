@@ -1,4 +1,4 @@
-﻿using AOM.FIFA.ManagerPlayer.Application.Synchronization.Entities;
+﻿using AOM.FIFA.ManagerPlayer.Application.Sync.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System.Collections.Generic;

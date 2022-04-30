@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using AOM.FIFA.ManagerPlayer.Application.Synchronization.Entities;
+using AOM.FIFA.ManagerPlayer.Application.Sync.Entities;
 using AOM.FIFA.ManagerPlayer.Persistence.Synchronization.Configuration;
 
 namespace AOM.FIFA.ManagerPlayer.Persistence.Synchronization.Context

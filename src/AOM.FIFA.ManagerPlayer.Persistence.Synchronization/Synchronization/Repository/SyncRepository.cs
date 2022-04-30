@@ -1,4 +1,4 @@
-﻿using AOM.FIFA.ManagerPlayer.Application.Synchronization.Entities;
+﻿using AOM.FIFA.ManagerPlayer.Application.Sync.Entities;
 using AOM.FIFA.ManagerPlayer.Application.Synchronization.Interfaces.Repositories;
 using AOM.FIFA.ManagerPlayer.Persistence.Synchronization.Base;
 using AOM.FIFA.ManagerPlayer.Persistence.Synchronization.Context;

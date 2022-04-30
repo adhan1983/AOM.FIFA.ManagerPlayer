@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 
-namespace AOM.FIFA.ManagerPlayer.Application.SyncLeague.Responses
+namespace AOM.FIFA.ManagerPlayer.Application.Sync.Responses
 {
-    public class SyncLeagueResponse
+    public class SyncResponse
     {
         public string TypeOfSyncName { get; set; }
         public bool AllItemsSynchronized { get; set; }
@@ -11,6 +11,5 @@ namespace AOM.FIFA.ManagerPlayer.Application.SyncLeague.Responses
         public int TotalItemsSynchronized { get; set; }
         public int TotalItemDoNotSynchronized { get; set; }
         public List<int> SourceIdsDoNotSynchronized { get; set; }
-
     }
 }

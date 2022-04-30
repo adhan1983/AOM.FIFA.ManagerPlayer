@@ -1,5 +1,5 @@
 ﻿using AOM.FIFA.ManagerPlayer.Application.Base.Interfaces;
-using AOM.FIFA.ManagerPlayer.Application.Synchronization.Entities;
+using AOM.FIFA.ManagerPlayer.Application.Sync.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;

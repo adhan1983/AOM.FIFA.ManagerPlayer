@@ -1,4 +1,4 @@
-﻿namespace AOM.FIFA.ManagerPlayer.Application.Synchronization.Entities
+﻿namespace AOM.FIFA.ManagerPlayer.Application.Sync.Entities
 {
     public class SourceWithoutSync
     {

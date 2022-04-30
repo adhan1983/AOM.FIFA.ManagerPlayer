@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace AOM.FIFA.ManagerPlayer.Application.Synchronization.Entities
+namespace AOM.FIFA.ManagerPlayer.Application.Sync.Entities
 {
     public class SyncPage
     {

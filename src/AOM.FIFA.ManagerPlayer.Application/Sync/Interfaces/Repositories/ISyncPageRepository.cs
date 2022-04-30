@@ -1,7 +1,7 @@
 ﻿using System.Threading.Tasks;
 using System.Collections.Generic;
 using AOM.FIFA.ManagerPlayer.Application.Base.Interfaces;
-using AOM.FIFA.ManagerPlayer.Application.Synchronization.Entities;
+using AOM.FIFA.ManagerPlayer.Application.Sync.Entities;
 
 namespace AOM.FIFA.ManagerPlayer.Application.Synchronization.Interfaces.Repositories
 {
