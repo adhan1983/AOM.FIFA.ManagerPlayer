@@ -1,16 +1,14 @@
-﻿using AOM.FIFA.ManagerPlayer.Application.Club.Interfaces.Repositories;
-using AOM.FIFA.ManagerPlayer.Application.League.Interfaces.Repositories;
-using AOM.FIFA.ManagerPlayer.Application.SyncClub.Interfaces.Services;
-using AOM.FIFA.ManagerPlayer.Application.SyncClub.Responses;
-using AOM.FIFA.ManagerPlayer.Gateway.HttpFactoryClient.Interfaces;
-using AOM.FIFA.ManagerPlayer.Gateway.Responses.Base;
-using AOM.FIFA.ManagerPlayer.Gateway.Responses.Clubs;
-using System.Collections.Generic;
+﻿using System;
 using System.Linq;
-using System.Threading;
 using System.Threading.Tasks;
-using domainLeague = AOM.FIFA.ManagerPlayer.Application.League.Entities;
+using AOM.FIFA.ManagerPlayer.Gateway.Responses.Base;
+using AOM.FIFA.ManagerPlayer.Application.Sync.Entities;
 using entity = AOM.FIFA.ManagerPlayer.Application.Club.Entities;
+using AOM.FIFA.ManagerPlayer.Gateway.HttpFactoryClient.Interfaces;
+using AOM.FIFA.ManagerPlayer.Application.Club.Interfaces.Repositories;
+using AOM.FIFA.ManagerPlayer.Application.SyncClub.Interfaces.Services;
+using AOM.FIFA.ManagerPlayer.Application.League.Interfaces.Repositories;
+using AOM.FIFA.ManagerPlayer.Gateway.Responses.Clubs;
 
 namespace AOM.FIFA.ManagerPlayer.Application.SyncClub.Services
 {
@@ -28,57 +26,73 @@ namespace AOM.FIFA.ManagerPlayer.Application.SyncClub.Services
             this._httpClientServiceImplementation = httpClientServiceImplementation;
         }
 
-        public async Task<SyncClubResponse> SyncClubsAsync()
+        public async Task<SyncPage> SyncClubsAsync(int totalItemPerPage, SyncPage syncPage)
         {
             //TO TO : We should have syncronized 674 clubs instead 668. Maybe because some of them has leage as null parameter.
 
-            var response = new SyncClubResponse();
+            var response = await _httpClientServiceImplementation.
+                                    GetClubsAsync(new Request { Page = syncPage.Page, MaxItemPerPage = totalItemPerPage });
+
+            RemoveSourceWillNotBeSync(response, syncPage);
 
             var leagues = await _leagueRepository.GetAllAsync();
+            
+            var clubs = response.
+                             items.
+                             Select(x => new entity.Club
+                             {
+                                 Name = x.name,
+                                 LeagueId = leagues.FirstOrDefault(c => c.SourceId == x.league).Id,
+                                 SourceId = x.id,
+                             }).
+                             ToList();
 
-            var lst  = leagues.ToList();
-            
-            var firstResponse = await InsertManyClubsAsync(1, lst);            
-            
-            for (int nextPage = firstResponse.page + 1, total = firstResponse.page_total; nextPage <= total; nextPage++)
+            foreach (var club in clubs)
             {
-                await InsertManyClubsAsync(nextPage, lst);
+                try
+                {
+                    var model = await _clubRepository.InsertAsync(club);
+                    if (model.Id > 0)
+                        syncPage.TotalSynchronized++;
+                }
+                catch (Exception ex)
+                {
+                    syncPage.TotalDosNotSynchronized++;
+
+                    var sourceWithoutSync = new SourceWithoutSync
+                    {
+                        SourceId = club.SourceId,
+                        SyncPageId = syncPage.Id
+                    };
+
+                    syncPage.SourcesWithoutSync.Add(sourceWithoutSync);
+                }
+            }
+            
+            return syncPage;
+        }
+
+        private ClubListResponse RemoveSourceWillNotBeSync(ClubListResponse response, SyncPage syncPage) 
+        {
+            var itemsNeedToBeRemoved = response.items.Where(x => x.league == null).ToList();
+
+            foreach (var item in itemsNeedToBeRemoved)
+            {
+                var sourceWithoutSync = new SourceWithoutSync
+                {
+                    SourceId = item.id,
+                    SyncPageId = syncPage.Id
+                };
                 
-                Thread.Sleep(5000);
+                syncPage.SourcesWithoutSync.Add(sourceWithoutSync);
+
+                syncPage.TotalDosNotSynchronized++;
             }
 
-            response.AllClubsSyncronized = true;
+            response.items.RemoveAll(x => itemsNeedToBeRemoved.Contains(x));
             
             return response;
         }
 
-        private async Task<ClubListResponse> InsertManyClubsAsync(int page, List<domainLeague.League> leagues)
-        {
-            try
-            {
-                var response = await _httpClientServiceImplementation.GetClubsAsync(new Request { Page = page, MaxItemPerPage = 20 });
-                
-                response.items.RemoveAll(a => a.league == null);
-
-                var clubs = response.
-                                items.
-                                Select(x => new entity.Club
-                                {
-                                    Name = x.name,
-                                    LeagueId = leagues.FirstOrDefault(c => c.SourceId == x.league).Id,
-                                    SourceId = x.id,
-                                }).
-                                ToList();
-
-                var status = await _clubRepository.InsertManyAsync(clubs);
-
-                return response;
-            }
-            catch (System.Exception ex)
-            {
-                throw ex;
-            }
-
-        }
     }
 }

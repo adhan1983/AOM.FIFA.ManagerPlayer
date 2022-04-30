@@ -1,10 +1,8 @@
-﻿using AOM.FIFA.ManagerPlayer.Application.SyncClub.Interfaces.Services;
-using AOM.FIFA.ManagerPlayer.Application.SyncClub.Responses;
-using AOM.FIFA.ManagerPlayer.Application.SyncLeague.Interfaces.Interfaces;
-using AOM.FIFA.ManagerPlayer.Application.SyncLeague.Responses;
-using Microsoft.AspNetCore.Mvc;
-using NSwag.Annotations;
+﻿using NSwag.Annotations;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
+using AOM.FIFA.ManagerPlayer.Application.Sync.Responses;
+using AOM.FIFA.ManagerPlayer.Application.Synchronization.Interfaces;
 
 namespace AOM.FIFA.ManagerPlayer.Api.Controllers
 {
@@ -13,22 +11,18 @@ namespace AOM.FIFA.ManagerPlayer.Api.Controllers
     [OpenApiTag("Sync FIFA", Description = "End point responsable for Synchronazation")]
     public class SyncController : ControllerBase
     {
-        private readonly ISyncLeagueService _syncLeagueService;
-        private readonly ISyncClubService _syncClubService;
+        private readonly ISyncService _syncService;       
 
-        public SyncController(ISyncLeagueService syncLeagueService, ISyncClubService syncClubService)
-        {            
-            this._syncLeagueService = syncLeagueService;
-            this._syncClubService = syncClubService;
-        }        
+        public SyncController(ISyncService syncService) => this._syncService = syncService;
+               
 
         [HttpPost]
         [Route("leagues")]
         public async Task<IActionResult> Leagues()
         {
-            var response = new SyncLeagueResponse();
+            var response = new SyncResponse();
 
-            response = await _syncLeagueService.SyncLeaguesAsync();
+            response = await _syncService.SyncByNameAsync("league");
 
             return Ok(response);
 
@@ -38,9 +32,9 @@ namespace AOM.FIFA.ManagerPlayer.Api.Controllers
         [Route("clubs")]
         public async Task<IActionResult> Clubs()
         {
-            var response = new SyncClubResponse();
+            var response = new SyncResponse();
 
-            response = await _syncClubService.SyncClubsAsync();
+            response = await _syncService.SyncByNameAsync("club");
 
             return Ok(response);
 
