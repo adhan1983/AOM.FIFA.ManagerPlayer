@@ -39,5 +39,17 @@ namespace AOM.FIFA.ManagerPlayer.Api.Controllers
             return Ok(response);
 
         }
+
+        [HttpPost]
+        [Route("nations")]
+        public async Task<IActionResult> Nations()
+        {
+            var response = new SyncResponse();
+
+            response = await _syncService.SyncByNameAsync("nation");
+
+            return Ok(response);
+
+        }
     }
 }

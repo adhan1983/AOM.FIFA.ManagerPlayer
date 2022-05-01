@@ -34,7 +34,8 @@ namespace AOM.FIFA.ManagerPlayer.Persistence.Synchronization.Configuration
             {
                 new Sync { Id = 1,  Name = "League", TotalItems = 49, TotalPages = 3, TotalItemsPerPage = 20, Synchronized = false },
                 new Sync { Id = 2,  Name = "Club", TotalItems = 674, TotalPages = 34, TotalItemsPerPage = 20, Synchronized = false },
-                new Sync { Id = 3,  Name = "Players", TotalItems = 20617, TotalPages = 1031, TotalItemsPerPage = 20, Synchronized = false },
+                new Sync { Id = 3,  Name = "Player", TotalItems = 20617, TotalPages = 1031, TotalItemsPerPage = 20, Synchronized = false },
+                new Sync { Id = 4,  Name = "Nation", TotalItems = 160, TotalPages = 8, TotalItemsPerPage = 20, Synchronized = false },
             });
         }
     }

@@ -3,14 +3,16 @@ using AOM.FIFA.ManagerPlayer.Persistence.Synchronization.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace AOM.FIFA.ManagerPlayer.Persistence.Synchronization.Migrations
 {
     [DbContext(typeof(FIFASynchronizationDbContext))]
-    partial class FIFASynchronizationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220501170026_AddingNationColumnsIntoSynctable")]
+    partial class AddingNationColumnsIntoSynctable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -88,7 +90,7 @@ namespace AOM.FIFA.ManagerPlayer.Persistence.Synchronization.Migrations
                         new
                         {
                             Id = 3,
-                            Name = "Player",
+                            Name = "Players",
                             Synchronized = false,
                             TotalItems = 20617,
                             TotalItemsPerPage = 20,
@@ -97,7 +99,7 @@ namespace AOM.FIFA.ManagerPlayer.Persistence.Synchronization.Migrations
                         new
                         {
                             Id = 4,
-                            Name = "Nation",
+                            Name = "Nations",
                             Synchronized = false,
                             TotalItems = 160,
                             TotalItemsPerPage = 20,
