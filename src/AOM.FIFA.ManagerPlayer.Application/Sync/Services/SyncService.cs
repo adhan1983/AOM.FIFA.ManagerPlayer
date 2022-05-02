@@ -1,13 +1,13 @@
-﻿using AOM.FIFA.ManagerPlayer.Application.Sync.Entities;
-using AOM.FIFA.ManagerPlayer.Application.Sync.Responses;
-using AOM.FIFA.ManagerPlayer.Application.SyncClub.Interfaces.Services;
-using AOM.FIFA.ManagerPlayer.Application.Synchronization.Interfaces;
-using AOM.FIFA.ManagerPlayer.Application.Synchronization.Interfaces.Repositories;
-using AOM.FIFA.ManagerPlayer.Application.SyncLeague.Interfaces.Interfaces;
-using AOM.FIFA.ManagerPlayer.Application.SyncNation.Interfaces;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using System.Threading.Tasks;
+using System.Collections.Generic;
+using AOM.FIFA.ManagerPlayer.Application.Sync.Entities;
+using AOM.FIFA.ManagerPlayer.Application.Sync.Responses;
+using AOM.FIFA.ManagerPlayer.Application.SyncNation.Interfaces;
+using AOM.FIFA.ManagerPlayer.Application.Synchronization.Interfaces;
+using AOM.FIFA.ManagerPlayer.Application.SyncClub.Interfaces.Services;
+using AOM.FIFA.ManagerPlayer.Application.SyncLeague.Interfaces.Interfaces;
+using AOM.FIFA.ManagerPlayer.Application.Synchronization.Interfaces.Repositories;
 
 namespace AOM.FIFA.ManagerPlayer.Application.Synchronization.Services
 {

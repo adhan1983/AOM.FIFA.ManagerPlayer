@@ -36,7 +36,6 @@
     <Folder Include="Club\Mappers\" />
     <Folder Include="League\Mappers\" />
     <Folder Include="Nation\Responses\" />
-    <Folder Include="Player\" />
   </ItemGroup>
 
   <ItemGroup>

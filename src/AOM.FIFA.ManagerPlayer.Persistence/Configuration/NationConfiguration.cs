@@ -18,7 +18,6 @@ namespace AOM.FIFA.ManagerPlayer.Persistence.Configuration
             builder.
                 Property(x => x.SourceId).
                 IsRequired();
-            
         }       
     }
 }

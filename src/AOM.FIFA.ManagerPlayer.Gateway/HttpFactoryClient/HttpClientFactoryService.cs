@@ -58,7 +58,7 @@ namespace AOM.FIFA.ManagerPlayer.Gateway.HttpFactoryClient
         {
             using (var httpClient = _httpClientFactory.CreateClient(_fifaGatewayConfig.FIFAClient))
             {
-                string urlRequest = string.Concat(httpClient.BaseAddress, url, request.Page, "&limit=", request.MaxItemPerPage);
+                string urlRequest = string.Concat(httpClient.BaseAddress, url, request.Page, _queryString.Limit, request.MaxItemPerPage);
 
                 var requestMessage = new HttpRequestMessage
                 {
