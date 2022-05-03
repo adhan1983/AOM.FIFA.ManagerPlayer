@@ -4,14 +4,16 @@ using AOM.FIFA.ManagerPlayer.Persistence.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace AOM.FIFA.ManagerPlayer.Persistence.Migrations
 {
     [DbContext(typeof(FIFAManagerPlayerDbContext))]
-    partial class FIFAManagerPlayerDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220502231133_CreatingPlayerTableMigration")]
+    partial class CreatingPlayerTableMigration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -118,8 +120,8 @@ namespace AOM.FIFA.ManagerPlayer.Persistence.Migrations
                     b.Property<int>("Height")
                         .HasColumnType("int");
 
-                    b.Property<string>("LastName")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("LastName")
+                        .HasColumnType("int");
 
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");

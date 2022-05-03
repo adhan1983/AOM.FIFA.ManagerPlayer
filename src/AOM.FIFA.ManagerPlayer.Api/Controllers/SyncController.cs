@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using AOM.FIFA.ManagerPlayer.Application.Sync.Responses;
 using AOM.FIFA.ManagerPlayer.Application.Synchronization.Interfaces;
+using System.Threading;
 
 namespace AOM.FIFA.ManagerPlayer.Api.Controllers
 {
@@ -47,6 +48,22 @@ namespace AOM.FIFA.ManagerPlayer.Api.Controllers
             var response = new SyncResponse();
 
             response = await _syncService.SyncByNameAsync("nation");
+
+            return Ok(response);
+
+        }
+
+        [HttpPost]
+        [Route("player")]
+        public async Task<IActionResult> Player()
+        {
+            var response = new SyncResponse();
+
+            for (int i = 1; i < 10; i++)
+            {
+                response = await _syncService.SyncByNameAsync("player");
+                Thread.Sleep(3000);
+            }
 
             return Ok(response);
 

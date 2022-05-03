@@ -12,7 +12,7 @@ namespace AOM.FIFA.ManagerPlayer.Gateway.Responses.Player
     {
         public int id { get; set; }
         public string name { get; set; }
-        public int last_name { get; set; }
+        public string last_name { get; set; }
         public int age { get; set; }
         public string common_name { get; set; }
         public int height { get; set; }

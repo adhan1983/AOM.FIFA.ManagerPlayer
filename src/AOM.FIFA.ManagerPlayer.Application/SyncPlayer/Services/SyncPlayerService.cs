@@ -1,4 +1,5 @@
 ﻿using AOM.FIFA.ManagerPlayer.Application.Club.Interfaces.Repositories;
+using AOM.FIFA.ManagerPlayer.Application.Nation.Interfaces.Repositories;
 using AOM.FIFA.ManagerPlayer.Application.Player.Intefaces.Repositories;
 using AOM.FIFA.ManagerPlayer.Application.Sync.Entities;
 using AOM.FIFA.ManagerPlayer.Application.SyncPlayer.Interfaces.Services;
@@ -16,13 +17,15 @@ namespace AOM.FIFA.ManagerPlayer.Application.SyncPlayer.Services
     {
         private readonly IPlayerRepository _playerRepository;
         private readonly IClubRepository _clubRepository;
+        private readonly INationRepository _nationRepository;
         private readonly IHttpClientFactoryService _httpClientServiceImplementation;
 
-        public SyncPlayerService(IPlayerRepository playerRepository, IHttpClientFactoryService httpClientServiceImplementation, IClubRepository clubRepository)
+        public SyncPlayerService(INationRepository nationRepository, IPlayerRepository playerRepository, IHttpClientFactoryService httpClientServiceImplementation, IClubRepository clubRepository)
         {
             this._playerRepository = playerRepository;
             this._httpClientServiceImplementation = httpClientServiceImplementation;
             this._clubRepository = clubRepository;
+            this._nationRepository = nationRepository;
         }
 
         public async Task<SyncPage> SyncPlayerAsync(int totalItemsPerPage, SyncPage syncPage)
@@ -34,6 +37,9 @@ namespace AOM.FIFA.ManagerPlayer.Application.SyncPlayer.Services
             });
 
             var clubs = await _clubRepository.GetAllAsync();
+            
+            var nations = await _nationRepository.GetAllAsync();
+            
 
             foreach (var item in response.items)
             {
@@ -48,11 +54,27 @@ namespace AOM.FIFA.ManagerPlayer.Application.SyncPlayer.Services
                             SourceId = item.id,
                             SyncPageId = syncPage.Id
                         };
-
+                        syncPage.TotalDosNotSynchronized++;
+                        syncPage.SourcesWithoutSync.Add(sourceWithoutSync);
                         continue;
                     }
 
-                    var model = await _playerRepository.InsertAsync(Mapper(item));
+                    var nation = nations?.FirstOrDefault(x => x.SourceId == item?.nation);
+
+                    if (nation == null) 
+                    {
+                        var sourceWithoutSync = new SourceWithoutSync
+                        {
+                            SourceId = item.id,
+                            SyncPageId = syncPage.Id
+                        };
+                        syncPage.TotalDosNotSynchronized++;
+                        syncPage.SourcesWithoutSync.Add(sourceWithoutSync);
+                        continue;
+                    }
+
+                    var model = await _playerRepository.InsertAsync(Mapper(item, club.Id, nation.Id));
+                    
                     if (model.Id > 0)
                         syncPage.TotalSynchronized++;
 
@@ -76,14 +98,14 @@ namespace AOM.FIFA.ManagerPlayer.Application.SyncPlayer.Services
         }
 
 
-        private m.Player Mapper(r.Player player)
+        private m.Player Mapper(r.Player player, int clubId, int nationId)
         {
             var model = new m.Player
             {
                 Name = player.name,
                 Age = player.age,
                 AttackWorkRate = player.attack_work_rate,
-                ClubId = player.id,
+                ClubId = clubId,
                 CommonName = player.common_name,
                 Defending = player.defending,
                 DefenseWorkRate = player.defense_work_rate,
@@ -91,7 +113,7 @@ namespace AOM.FIFA.ManagerPlayer.Application.SyncPlayer.Services
                 Foot = player.foot,
                 Height = player.height,
                 LastName = player.last_name,
-                NationId = player.nation,
+                NationId = nationId,
                 Pace = player.pace,
                 Passing = player.passing,
                 Physicality = player.physicality,

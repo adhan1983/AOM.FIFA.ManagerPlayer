@@ -8,6 +8,7 @@ using AOM.FIFA.ManagerPlayer.Application.Synchronization.Interfaces;
 using AOM.FIFA.ManagerPlayer.Application.SyncClub.Interfaces.Services;
 using AOM.FIFA.ManagerPlayer.Application.SyncLeague.Interfaces.Interfaces;
 using AOM.FIFA.ManagerPlayer.Application.Synchronization.Interfaces.Repositories;
+using AOM.FIFA.ManagerPlayer.Application.SyncPlayer.Interfaces.Services;
 
 namespace AOM.FIFA.ManagerPlayer.Application.Synchronization.Services
 {
@@ -17,13 +18,19 @@ namespace AOM.FIFA.ManagerPlayer.Application.Synchronization.Services
         private readonly ISyncLeagueService _syncLeagueService;
         private readonly ISyncClubService _syncClubService;
         private readonly ISyncNationService _syncNationService;
+        private readonly ISyncPlayerService _syncPlayerService;
 
-        public SyncService(ISyncRepository syncRepository, ISyncLeagueService syncLeagueService, ISyncClubService syncClubService, ISyncNationService syncNationService)
+        public SyncService(
+                ISyncRepository syncRepository, ISyncLeagueService syncLeagueService, 
+                ISyncClubService syncClubService, ISyncNationService syncNationService,
+                ISyncPlayerService syncPlayerService
+            )
         {
             this._syncRepository = syncRepository;
             this._syncLeagueService = syncLeagueService;
             this._syncClubService = syncClubService;
             this._syncNationService = syncNationService;
+            this._syncPlayerService = syncPlayerService;
         }
 
         public async Task<SyncResponse> SyncByNameAsync(string name)
@@ -74,6 +81,7 @@ namespace AOM.FIFA.ManagerPlayer.Application.Synchronization.Services
                     await _syncNationService.SyncNationAsync(sync.TotalItemsPerPage, syncPage); 
                     break;
                 case "player":
+                    await _syncPlayerService.SyncPlayerAsync(sync.TotalItemsPerPage, syncPage);
                     break;
                 default:
                     break;
