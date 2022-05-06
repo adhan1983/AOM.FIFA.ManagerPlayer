@@ -1,7 +1,7 @@
 ﻿using System.Linq;
 using System.Threading.Tasks;
 using System.Collections.Generic;
-using AOM.FIFA.ManagerPlayer.Application.Sync.Entities;
+using s = AOM.FIFA.ManagerPlayer.Application.Sync.Entities;
 using AOM.FIFA.ManagerPlayer.Application.Sync.Responses;
 using AOM.FIFA.ManagerPlayer.Application.SyncNation.Interfaces;
 using AOM.FIFA.ManagerPlayer.Application.Synchronization.Interfaces;
@@ -33,55 +33,92 @@ namespace AOM.FIFA.ManagerPlayer.Application.Synchronization.Services
             this._syncPlayerService = syncPlayerService;
         }
 
-        public async Task<SyncResponse> SyncByNameAsync(string name)
+        public async Task PublishingFifaJobs()
         {
-            var sync = await _syncRepository.GetSyncByNameAsync(name);
+            var jobs = await _syncRepository.GetJobsAsync();
 
-            var response = new SyncResponse() { TypeOfSyncName = sync.Name, SourceIdsDoNotSynchronized = new List<int>() };
-
-            var syncPage = new SyncPage() { SourcesWithoutSync = new List<SourceWithoutSync>() };
-
-            if (sync.SyncPages.Any())
+            if (jobs.Any(a => !a.Synchronized))
             {
-                var syncPages = sync.SyncPages;
-                var lastPageSynchronized = sync.SyncPages.Max(a => a.Page);
+                foreach (var job in jobs)
+                {
+                    switch (job.Name)
+                    {
+                        case "League":
+                            if (!job.Synchronized)
+                            {
+                                await SyncByNameAsync(job);
+                            }
+                            break;
+                        case "Nation":
+                            if (!job.Synchronized)
+                            {
+                                await SyncByNameAsync(job);
+                            }
+                            break;
+                        case "Club":
+                            if (!job.Synchronized && jobs.FirstOrDefault(x => x.Name == "Nation").Synchronized && jobs.FirstOrDefault(x => x.Name == "League").Synchronized)
+                            {
+                                await SyncByNameAsync(job);
+                            }
+                            break;
+                        case "Player":
+                            if (!job.Synchronized && jobs.FirstOrDefault(x => x.Name == "Club").Synchronized && jobs.FirstOrDefault(x => x.Name == "Nation").Synchronized && jobs.FirstOrDefault(x => x.Name == "League").Synchronized)
+                            {
+                                await SyncByNameAsync(job);
+                            }
+                            break;
+                    }
+                } 
+            }
+        }
+
+        public async Task<SyncResponse> SyncByNameAsync(s.Sync job)
+        {           
+            var response = new SyncResponse() { TypeOfSyncName = job.Name, SourceIdsDoNotSynchronized = new List<int>() };
+
+            var syncPage = new s.SyncPage() { SourcesWithoutSync = new List<s.SourceWithoutSync>() };
+
+            if (job.SyncPages.Any())
+            {
+                var syncPages = job.SyncPages;
+                var lastPageSynchronized = job.SyncPages.Max(a => a.Page);
 
                 var syncPageSuccess = syncPages.Any(a => a.SyncPageSuccess == false);
 
-                if (sync.Synchronized)
+                if (job.Synchronized)
                 {
                     response.TotalPagesSynchronized = syncPages.Where(x => x.Page > 0).Count();
                     response.TotalItemDoNotSynchronized = syncPages.Where(x => x.TotalDosNotSynchronized > 0).Count();
                     response.TotalItemsSynchronized = syncPages.Select(x => x.TotalSynchronized).Sum();
                     response.SourceIdsDoNotSynchronized = null;
                     response.AllItemsSynchronized = true;
-                    response.Synchronized = sync.Synchronized;
+                    response.Synchronized = job.Synchronized;
 
                     return response;
                 }
 
-                syncPage.SyncId = sync.Id;
+                syncPage.SyncId = job.Id;
                 syncPage.Page = lastPageSynchronized + 1;
             }
             else
             {
-                syncPage.SyncId = sync.Id;
+                syncPage.SyncId = job.Id;
                 syncPage.Page = 1;
             }
 
-            switch (name)
+            switch (job.Name)
             {
-                case "league":
-                    await _syncLeagueService.SyncLeaguesAsync(sync.TotalItemsPerPage, syncPage);
+                case "League":
+                    await _syncLeagueService.SyncLeaguesAsync(job.TotalItemsPerPage, syncPage);
                     break;
-                case "club":
-                    await _syncClubService.SyncClubsAsync(sync.TotalItemsPerPage, syncPage);
+                case "Club":
+                    await _syncClubService.SyncClubsAsync(job.TotalItemsPerPage, syncPage);
                     break;
-                case "nation":
-                    await _syncNationService.SyncNationAsync(sync.TotalItemsPerPage, syncPage); 
+                case "Nation":
+                    await _syncNationService.SyncNationAsync(job.TotalItemsPerPage, syncPage); 
                     break;
-                case "player":
-                    await _syncPlayerService.SyncPlayerAsync(sync.TotalItemsPerPage, syncPage);
+                case "Player":
+                    await _syncPlayerService.SyncPlayerAsync(job.TotalItemsPerPage, syncPage);
                     break;
                 default:
                     break;
@@ -89,15 +126,15 @@ namespace AOM.FIFA.ManagerPlayer.Application.Synchronization.Services
 
 
             syncPage.SyncPageSuccess = syncPage.TotalDosNotSynchronized > 0 ? false : true;
-            sync.SyncPages.Add(syncPage);
-            sync.Synchronized = (sync.SyncPages.Max(a => a.Page) == sync.TotalPages);
-            var syncUpdated = await _syncRepository.UpdateAsync(sync);
+            job.SyncPages.Add(syncPage);
+            job.Synchronized = (job.SyncPages.Max(a => a.Page) == job.TotalPages);
+            var syncUpdated = await _syncRepository.UpdateAsync(job);
 
             response.TotalItemsSynchronized = syncPage.TotalSynchronized;
             response.TotalItemDoNotSynchronized = syncPage.TotalDosNotSynchronized;
             response.SourceIdsDoNotSynchronized.AddRange(syncPage.SourcesWithoutSync.Select(a => a.SourceId).ToList());
             response.AllItemsSynchronized = syncPage.SyncPageSuccess;
-            response.Synchronized = sync.Synchronized;
+            response.Synchronized = job.Synchronized;
 
             return response;
 

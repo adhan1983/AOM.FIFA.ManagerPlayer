@@ -20,7 +20,8 @@ namespace AOM.FIFA.ManagerPlayer.Api.Extensions.Build
                 AddingApplicationDependencies().
                 AddingHttpClientFactory(configuration).
                 AddingPersistenceDependencies().
-                AddingLoggerServiceDependencies();
+                AddingHangFireDependencies(configuration).
+                AddingLoggerServiceDependencies();                
 
             services.AddingDataBasesDependencies(configuration);
 

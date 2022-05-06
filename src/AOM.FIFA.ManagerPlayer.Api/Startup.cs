@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using AOM.FIFA.ManagerPlayer.Api.Extensions.Build;
+using Hangfire;
 
 namespace AOM.FIFA.ManagerPlayer.Api
 {
@@ -14,7 +15,7 @@ namespace AOM.FIFA.ManagerPlayer.Api
 
         public void ConfigureServices(IServiceCollection services) => services.Build(Configuration);        
         
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env) => app.Build(env);
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IBackgroundJobClient backgroundJobs) => app.Build(env, backgroundJobs);
         
     }
 }

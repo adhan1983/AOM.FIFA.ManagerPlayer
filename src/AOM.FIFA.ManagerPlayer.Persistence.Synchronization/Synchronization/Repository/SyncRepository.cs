@@ -4,8 +4,10 @@ using AOM.FIFA.ManagerPlayer.Persistence.Synchronization.Base;
 using AOM.FIFA.ManagerPlayer.Persistence.Synchronization.Context;
 using Microsoft.EntityFrameworkCore;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+
 
 namespace AOM.FIFA.ManagerPlayer.Persistence.Synchronization.Synchronization.Repository
 {
@@ -22,6 +24,18 @@ namespace AOM.FIFA.ManagerPlayer.Persistence.Synchronization.Synchronization.Rep
                                 FirstOrDefaultAsync(a => a.Name == name);
 
             return model;
+        }
+
+        public async Task<List<Sync>> GetJobsAsync()
+        {
+            var models = await this._fifaSynchronizationDbContext.
+                                    Sync.
+                                    Include(a => a.SyncPages).
+                                    ThenInclude(b => b.SourcesWithoutSync).
+                                    ToListAsync();
+
+            
+            return models;
         }
 
         public async Task<bool> UpdateSyncWithSyncPages(Sync sync) 
