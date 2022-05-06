@@ -16,33 +16,7 @@ namespace AOM.FIFA.ManagerPlayer.Api
             Host.CreateDefaultBuilder(args)
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
-                    webBuilder.UseStartup<Startup>();
-                    //UseKestrel(options =>
-                    //{
-                    //    var restSectionValue = config.GetSection("Ports").GetSection("REST").Value;
-                    //    var gRpcSectionValue = config.GetSection("Ports").GetSection("GRPC").Value;
-
-                    //    if (restSectionValue == null || !int.TryParse(restSectionValue, out var restPort))
-                    //    {
-                    //        restPort = 80;
-                    //    }
-
-                    //    if (gRpcSectionValue == null || !int.TryParse(gRpcSectionValue, out var gRpcPort))
-                    //    {
-                    //        gRpcPort = 81;
-                    //    }
-                    //    options.ListenAnyIP(restPort, listenOptions =>
-                    //    {
-                    //        listenOptions.Protocols = HttpProtocols.Http1;
-                    //    });
-
-                    //    options.ListenAnyIP(gRpcPort, listenOptions =>
-                    //    {
-                    //        listenOptions.Protocols = HttpProtocols.Http2;
-                    //    });
-
-                    //    options.Limits.MaxRequestBodySize = null;
-                    //}); 
+                    webBuilder.UseStartup<Startup>();                    
                 });
     }
 }
