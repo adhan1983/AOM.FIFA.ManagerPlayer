@@ -1,12 +1,13 @@
-﻿using AOM.FIFA.ManagerPlayer.Application.League.Dtos;
+﻿using System.Threading.Tasks;
+using AOM.FIFA.ManagerPlayer.Application.League.Dtos;
+using AOM.FIFA.ManagerPlayer.Application.League.Requests;
 using AOM.FIFA.ManagerPlayer.Application.League.Responses;
-using System.Threading.Tasks;
 
 namespace AOM.FIFA.ManagerPlayer.Application.League.Interfaces.Services
 {
     public interface ILeagueService
     {
-        Task<LeaguesResponse> GetLeaguesResponseAsync();
+        Task<LeaguesResponse> GetLeaguesResponseAsync(LeagueParameters leagueParameters);
 
         Task<LeagueDto> GetLeagueByIdAsync(int id);
     }

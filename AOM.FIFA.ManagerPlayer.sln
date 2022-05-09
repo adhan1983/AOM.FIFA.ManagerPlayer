@@ -27,7 +27,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Log", "Log", "{EFCBDA20-867
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AOM.FIFA.ManagerPlayer.Logging", "src\AOM.FIFA.ManagerPlayer.Logging\AOM.FIFA.ManagerPlayer.Logging.csproj", "{1F9DFBF7-8374-4F91-966D-C3146C89A2E5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AOM.FIFA.ManagerPlayer.Persistence.Synchronization", "src\AOM.FIFA.ManagerPlayer.Persistence.Synchronization\AOM.FIFA.ManagerPlayer.Persistence.Synchronization.csproj", "{C9646FCA-68A2-44E7-8C06-6633746F795F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AOM.FIFA.ManagerPlayer.Persistence.Synchronization", "src\AOM.FIFA.ManagerPlayer.Persistence.Synchronization\AOM.FIFA.ManagerPlayer.Persistence.Synchronization.csproj", "{C9646FCA-68A2-44E7-8C06-6633746F795F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AOM.FIFA.ManagerPlayer.gRPCServer", "src\AOM.FIFA.ManagerPlayer.gRPCServer\AOM.FIFA.ManagerPlayer.gRPCServer.csproj", "{7785C278-BC0B-4DF7-ADAC-FC68DCA970B1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -59,6 +61,10 @@ Global
 		{C9646FCA-68A2-44E7-8C06-6633746F795F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C9646FCA-68A2-44E7-8C06-6633746F795F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C9646FCA-68A2-44E7-8C06-6633746F795F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7785C278-BC0B-4DF7-ADAC-FC68DCA970B1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7785C278-BC0B-4DF7-ADAC-FC68DCA970B1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7785C278-BC0B-4DF7-ADAC-FC68DCA970B1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7785C278-BC0B-4DF7-ADAC-FC68DCA970B1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -76,6 +82,7 @@ Global
 		{EFCBDA20-867C-40FF-A28A-D41B218CADE0} = {40787040-AAEF-4B7C-A164-4691811666EB}
 		{1F9DFBF7-8374-4F91-966D-C3146C89A2E5} = {EFCBDA20-867C-40FF-A28A-D41B218CADE0}
 		{C9646FCA-68A2-44E7-8C06-6633746F795F} = {1ABCE0B2-CE54-4929-B123-5AA5DA737C69}
+		{7785C278-BC0B-4DF7-ADAC-FC68DCA970B1} = {0AC3CCCB-7B82-43C7-A9F2-64007E5FF1FC}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {140490B8-5B42-4D57-B540-4245E47C65B5}

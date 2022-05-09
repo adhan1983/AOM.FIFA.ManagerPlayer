@@ -4,6 +4,7 @@ using AOM.FIFA.ManagerPlayer.Application.League.Dtos;
 using AOM.FIFA.ManagerPlayer.Application.League.Responses;
 using AOM.FIFA.ManagerPlayer.Application.League.Interfaces.Repositories;
 using AOM.FIFA.ManagerPlayer.Application.League.Interfaces.Services;
+using AOM.FIFA.ManagerPlayer.Application.League.Requests;
 
 namespace AOM.FIFA.ManagerPlayer.Application.League.Services
 {
@@ -23,9 +24,9 @@ namespace AOM.FIFA.ManagerPlayer.Application.League.Services
             };
             
         }
-        public async Task<LeaguesResponse> GetLeaguesResponseAsync()
+        public async Task<LeaguesResponse> GetLeaguesResponseAsync(LeagueParameters leagueParameters)
         {
-            var leagues = await _leagueRepository.GetAllAsync();
+            var leagues = await _leagueRepository.GetPagedListLeaguesAsync(leagueParameters);
 
             return new LeaguesResponse
             {
@@ -33,5 +34,6 @@ namespace AOM.FIFA.ManagerPlayer.Application.League.Services
                 Leagues = leagues.Select(model => new LeagueDto { Id = model.Id, Name = model.Name }).ToList()
             };
         }
+        
     }
 }

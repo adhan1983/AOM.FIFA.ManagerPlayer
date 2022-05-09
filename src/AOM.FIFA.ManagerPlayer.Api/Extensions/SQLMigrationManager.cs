@@ -36,12 +36,12 @@ namespace AOM.FIFA.ManagerPlayer.Api.Extensions
                     fifaSyncDbContext.Database.Migrate();
                 }
 
-                var _syncService = scope.ServiceProvider.GetService<Application.Synchronization.Interfaces.ISyncService>();
+                //var _syncService = scope.ServiceProvider.GetService<Application.Synchronization.Interfaces.ISyncService>();
 
-                RecurringJob.AddOrUpdate(
-                "FifaJob",
-                () => _syncService.PublishingFifaJobs(),
-                Cron.Minutely);                
+                //RecurringJob.AddOrUpdate(
+                //"FifaJob",
+                //() => _syncService.PublishingFifaJobs(),
+                //Cron.Minutely);                
                
             }
         }

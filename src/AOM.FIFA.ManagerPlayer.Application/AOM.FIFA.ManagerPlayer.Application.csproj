@@ -6,6 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="League\Mappers\**" />
     <Compile Remove="SyncClub\Dto\**" />
     <Compile Remove="SyncClub\Entities\**" />
     <Compile Remove="SyncClub\Mappers\**" />
@@ -14,6 +15,7 @@
     <Compile Remove="SyncLeague\Mappers\**" />
     <Compile Remove="SyncLeague\Repositories\**" />
     <Compile Remove="Utils\**" />
+    <EmbeddedResource Remove="League\Mappers\**" />
     <EmbeddedResource Remove="SyncClub\Dto\**" />
     <EmbeddedResource Remove="SyncClub\Entities\**" />
     <EmbeddedResource Remove="SyncClub\Mappers\**" />
@@ -22,6 +24,7 @@
     <EmbeddedResource Remove="SyncLeague\Mappers\**" />
     <EmbeddedResource Remove="SyncLeague\Repositories\**" />
     <EmbeddedResource Remove="Utils\**" />
+    <None Remove="League\Mappers\**" />
     <None Remove="SyncClub\Dto\**" />
     <None Remove="SyncClub\Entities\**" />
     <None Remove="SyncClub\Mappers\**" />
@@ -34,12 +37,12 @@
 
   <ItemGroup>
     <Folder Include="Club\Mappers\" />
-    <Folder Include="League\Mappers\" />
     <Folder Include="Nation\Responses\" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" Version="5.0.0" />
+	<PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.0" />
   </ItemGroup>
 
   <ItemGroup>

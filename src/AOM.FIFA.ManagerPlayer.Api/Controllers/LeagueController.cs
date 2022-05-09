@@ -1,10 +1,11 @@
-﻿using NSwag.Annotations;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Http;
-using System.Collections.Generic;
-using AOM.FIFA.ManagerPlayer.Application.League.Dtos;
+﻿using AOM.FIFA.ManagerPlayer.Application.League.Dtos;
 using AOM.FIFA.ManagerPlayer.Application.League.Interfaces.Services;
+using AOM.FIFA.ManagerPlayer.Application.League.Requests;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using NSwag.Annotations;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace AOM.FIFA.ManagerPlayer.Api.Controllers
 {
@@ -22,9 +23,9 @@ namespace AOM.FIFA.ManagerPlayer.Api.Controllers
         [HttpGet]
         [ProducesResponseType(typeof(List<LeagueDto>), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(string), StatusCodes.Status404NotFound)]
-        public async Task<IActionResult> Get()
+        public async Task<IActionResult> Get([FromQuery]LeagueParameters leagueParameters)
         {
-            var result = await _leagueService.GetLeaguesResponseAsync();
+            var result = await _leagueService.GetLeaguesResponseAsync(leagueParameters);
             
             return Ok(result);
         }
