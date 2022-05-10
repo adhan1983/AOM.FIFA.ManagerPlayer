@@ -1,4 +1,4 @@
-﻿namespace AOM.FIFA.ManagerPlayer.Application.League.Requests
+﻿namespace AOM.FIFA.ManagerPlayer.Application.Base
 {
     public abstract class QueryStringParameters
     {

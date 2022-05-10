@@ -10,8 +10,8 @@ namespace AOM.FIFA.ManagerPlayer.Application.League.Interfaces.Repositories
     public  interface ILeagueRepository : IRepository<domain.League>
     {
         
-        Task<List<domain.League>> GetLeaguesByParametersAsync(LeagueParameters leagueParameters);
+        Task<List<domain.League>> GetLeaguesByParametersAsync(LeagueParametersRequest leagueParameters);
 
-        Task<PagedList<domain.League>> GetPagedListLeaguesAsync(LeagueParameters leagueParameters);
+        Task<PagedList<domain.League>> GetPagedListLeaguesAsync(LeagueParametersRequest leagueParameters);
     }
 }

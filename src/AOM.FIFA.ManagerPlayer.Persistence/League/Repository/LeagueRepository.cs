@@ -18,7 +18,7 @@ namespace AOM.FIFA.ManagerPlayer.Persistence.League.Repository
         public LeagueRepository(FIFAManagerPlayerDbContext dbContext) : base(dbContext)
         { }
 
-        public async Task<List<domain.League>> GetLeaguesByParametersAsync(LeagueParameters leagueParameters)
+        public async Task<List<domain.League>> GetLeaguesByParametersAsync(LeagueParametersRequest leagueParameters)
         {
             var models = await this._fifaManagerPlayerDbContext.
                                 Leagues.
@@ -30,7 +30,7 @@ namespace AOM.FIFA.ManagerPlayer.Persistence.League.Repository
             return models;
         }
 
-        public async Task<PagedList<domain.League>> GetPagedListLeaguesAsync(LeagueParameters leagueParameters)
+        public async Task<PagedList<domain.League>> GetPagedListLeaguesAsync(LeagueParametersRequest leagueParameters)
         {
             var models = await PagedList<domain.League>.ToPagedListAsync(this._fifaManagerPlayerDbContext.
                                 Leagues.OrderBy(x => x.Name), leagueParameters.PageNumber, leagueParameters.PageSize);                                                                

@@ -24,7 +24,7 @@ namespace AOM.FIFA.ManagerPlayer.Application.League.Services
             };
             
         }
-        public async Task<LeaguesResponse> GetLeaguesResponseAsync(LeagueParameters leagueParameters)
+        public async Task<LeaguesResponse> GetLeaguesResponseAsync(LeagueParametersRequest leagueParameters)
         {
             var leagues = await _leagueRepository.GetPagedListLeaguesAsync(leagueParameters);
 

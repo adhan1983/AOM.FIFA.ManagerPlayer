@@ -23,7 +23,7 @@ namespace AOM.FIFA.ManagerPlayer.Api.Controllers
         [HttpGet]
         [ProducesResponseType(typeof(List<LeagueDto>), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(string), StatusCodes.Status404NotFound)]
-        public async Task<IActionResult> Get([FromQuery]LeagueParameters leagueParameters)
+        public async Task<IActionResult> Get([FromQuery]LeagueParametersRequest leagueParameters)
         {
             var result = await _leagueService.GetLeaguesResponseAsync(leagueParameters);
             

@@ -16,6 +16,8 @@ using AOM.FIFA.ManagerPlayer.Application.Nation.Interfaces.Services;
 using AOM.FIFA.ManagerPlayer.Application.Nation.Services;
 using AOM.FIFA.ManagerPlayer.Application.League.Services;
 using AOM.FIFA.ManagerPlayer.Application.League.Interfaces.Services;
+using AOM.FIFA.ManagerPlayer.Application.Player.Intefaces.Services;
+using AOM.FIFA.ManagerPlayer.Application.Player.Services;
 
 namespace AOM.FIFA.ManagerPlayer.Api.Extensions.ServicesCollectionDependencies
 {
@@ -26,8 +28,10 @@ namespace AOM.FIFA.ManagerPlayer.Api.Extensions.ServicesCollectionDependencies
 
             //services.AddScoped<INationService, NationService>();
             services.AddScoped<ILeagueService, LeagueService>();
-            services.AddScoped<IClubService, ClubService>();            
-            
+            services.AddScoped<IClubService, ClubService>();
+            services.AddScoped<IPlayerService, PlayerService>();
+
+
             services.AddScoped<ISyncLeagueService, SyncLeagueService>();
             services.AddScoped<ISyncNationService, SyncNationService>();
 
