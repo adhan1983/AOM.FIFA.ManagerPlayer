@@ -73,10 +73,23 @@ namespace AOM.FIFA.ManagerPlayer.Application.SyncPlayer.Services
                         continue;
                     }
 
-                    var model = await _playerRepository.InsertAsync(Mapper(item, club.Id, nation.Id));
-                    
-                    if (model.Id > 0)
-                        syncPage.TotalSynchronized++;
+                    var playersInserted = await _playerRepository.GetPlayerByExpression(a => a.Nation.Id == item.nation && a.Name == item.name && a.IsActive);
+
+                    if (playersInserted != null) 
+                    {
+                        bool isActive = false;
+                        
+                        if (item.id > playersInserted.SourceId) 
+                        {
+                            isActive = true;
+                            playersInserted.IsActive = false;
+                            await _playerRepository.UpdateAsync(playersInserted);
+                        }                        
+
+                        var model = await _playerRepository.InsertAsync(Mapper(item, club.Id, nation.Id, isActive));
+                        if (model.Id > 0)
+                            syncPage.TotalSynchronized++;
+                    }
 
                 }
                 catch (Exception ex)
@@ -98,7 +111,7 @@ namespace AOM.FIFA.ManagerPlayer.Application.SyncPlayer.Services
         }
 
 
-        private m.Player Mapper(r.Player player, int clubId, int nationId)
+        private m.Player Mapper(r.Player player, int clubId, int nationId, bool isActive)
         {
             var model = new m.Player
             {
@@ -124,6 +137,7 @@ namespace AOM.FIFA.ManagerPlayer.Application.SyncPlayer.Services
                 SourceId = player.id,
                 TotalStats = player.total_stats,
                 Weight = player.weight,
+                IsActive = isActive
             };
 
             return model;

@@ -28,6 +28,7 @@ namespace AOM.FIFA.ManagerPlayer.Application.Player.Entities
         public int Defending { get; set; }
         public int Physicality { get; set; }
         public int SourceId { get; set; }
+        public bool IsActive { get; set; }
         public n.Nation Nation { get; set; }
         public c.Club Club { get; set; }        
     }

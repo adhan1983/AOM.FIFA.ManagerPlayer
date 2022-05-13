@@ -50,6 +50,6 @@ namespace AOM.FIFA.ManagerPlayer.Persistence.Player.Repository
                                OrderBy(x => x.Name).
                                ToListAsync();
             return models;
-        }        
+        } 
     }
 }
