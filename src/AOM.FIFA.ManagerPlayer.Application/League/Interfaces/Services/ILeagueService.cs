@@ -8,7 +8,8 @@ namespace AOM.FIFA.ManagerPlayer.Application.League.Interfaces.Services
     public interface ILeagueService
     {
         Task<LeaguesResponse> GetLeaguesResponseAsync(LeagueParametersRequest leagueParameters);
-
         Task<LeagueDto> GetLeagueByIdAsync(int id);
+        Task<int> InsertLeagueAsync(LeagueDto leagueDto);
+        Task<LeagueDto> GetLeagueBySourceId(int sourceId);
     }
 }

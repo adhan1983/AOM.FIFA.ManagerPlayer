@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Server.Kestrel.Core;
 using Microsoft.Extensions.Hosting;
 
 namespace AOM.FIFA.ManagerPlayer.Api
@@ -16,7 +17,8 @@ namespace AOM.FIFA.ManagerPlayer.Api
             Host.CreateDefaultBuilder(args)
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
-                    webBuilder.UseStartup<Startup>();                    
+                    webBuilder.UseStartup<Startup>();
+                    
                 });
     }
 }

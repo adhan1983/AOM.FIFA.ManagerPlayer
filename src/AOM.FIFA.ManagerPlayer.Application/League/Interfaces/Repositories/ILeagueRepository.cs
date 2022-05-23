@@ -13,5 +13,8 @@ namespace AOM.FIFA.ManagerPlayer.Application.League.Interfaces.Repositories
         Task<List<domain.League>> GetLeaguesByParametersAsync(LeagueParametersRequest leagueParameters);
 
         Task<PagedList<domain.League>> GetPagedListLeaguesAsync(LeagueParametersRequest leagueParameters);
+
+        Task<domain.League> GetLeagueBySourceId(int sourceId);
+
     }
 }

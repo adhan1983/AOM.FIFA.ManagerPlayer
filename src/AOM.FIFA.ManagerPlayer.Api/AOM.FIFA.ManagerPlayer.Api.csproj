@@ -12,12 +12,14 @@
 		<PackageReference Include="Hangfire.Core" Version="1.7" />
 		<PackageReference Include="Hangfire.SqlServer" Version="1.7" />
 		<PackageReference Include="Hangfire.AspNetCore" Version="1.7" />
+		<PackageReference Include="Grpc.AspNetCore" Version="2.34.0" />
 
 	</ItemGroup>
 
 	<ItemGroup>
 		<ProjectReference Include="..\AOM.FIFA.ManagerPlayer.Application\AOM.FIFA.ManagerPlayer.Application.csproj" />
 		<ProjectReference Include="..\AOM.FIFA.ManagerPlayer.Gateway\AOM.FIFA.ManagerPlayer.Gateway.csproj" />
+		<ProjectReference Include="..\AOM.FIFA.ManagerPlayer.gRPCServer\AOM.FIFA.ManagerPlayer.gRPCServer.csproj" />
 		<ProjectReference Include="..\AOM.FIFA.ManagerPlayer.Logging\AOM.FIFA.ManagerPlayer.Logging.csproj" />
 		<ProjectReference Include="..\AOM.FIFA.ManagerPlayer.Persistence.Synchronization\AOM.FIFA.ManagerPlayer.Persistence.Synchronization.csproj" />
 		<ProjectReference Include="..\AOM.FIFA.ManagerPlayer.Persistence\AOM.FIFA.ManagerPlayer.Persistence.csproj" />

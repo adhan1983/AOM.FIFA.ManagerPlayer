@@ -3,8 +3,8 @@
     public class ApiConstants
     {
         public const string ApplyMigrationFIFADbContext = "ApplyMigrationFIFADbContext";
-        public const string ApplyMigrationSyncFIFADbContext = "ApplyMigrationSyncFIFADbContext";
-        public const string ApplyMigrationFIFAHangFireDbContext = "ApplyMigrationFIFAHangFireDbContext";
+        //public const string ApplyMigrationSyncFIFADbContext = "ApplyMigrationSyncFIFADbContext";
+        //public const string ApplyMigrationFIFAHangFireDbContext = "ApplyMigrationFIFAHangFireDbContext";
 
         public const string SqlConnectionString = "SqlConnectionString";
         public const string SqlSyncConnectionString = "SqlSyncConnectionString";

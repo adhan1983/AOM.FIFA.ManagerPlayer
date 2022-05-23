@@ -56,7 +56,7 @@ namespace AOM.FIFA.ManagerPlayer.Application.Synchronization.Services
                             }
                             break;
                         case "Club":
-                            if (!job.Synchronized && jobs.FirstOrDefault(x => x.Name == "Nation").Synchronized && jobs.FirstOrDefault(x => x.Name == "League").Synchronized)
+                            if (!job.Synchronized && jobs.FirstOrDefault(x => x.Name == "League").Synchronized)
                             {
                                 await SyncByNameAsync(job);
                             }

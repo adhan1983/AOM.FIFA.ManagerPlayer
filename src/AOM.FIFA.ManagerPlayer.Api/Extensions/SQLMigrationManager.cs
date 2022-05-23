@@ -19,8 +19,8 @@ namespace AOM.FIFA.ManagerPlayer.Api.Extensions
                 var config = scope.ServiceProvider.GetService<IConfiguration>();
 
                 bool applyMigrationFIFADbContext = config.GetSection(ApiConstants.ApplyMigrationFIFADbContext).Get<bool>();
-                bool applyMigrationSyncFIFADbContext = config.GetSection(ApiConstants.ApplyMigrationSyncFIFADbContext).Get<bool>();
-                bool applyMigrationFIFAHangFireDbContext = config.GetSection(ApiConstants.ApplyMigrationFIFAHangFireDbContext).Get<bool>();
+                //bool applyMigrationSyncFIFADbContext = config.GetSection(ApiConstants.ApplyMigrationSyncFIFADbContext).Get<bool>();
+                //bool applyMigrationFIFAHangFireDbContext = config.GetSection(ApiConstants.ApplyMigrationFIFAHangFireDbContext).Get<bool>();
 
                 if (applyMigrationFIFADbContext)
                 {
@@ -30,11 +30,11 @@ namespace AOM.FIFA.ManagerPlayer.Api.Extensions
                     //dbContext.Database.SetCommandTimeout(TimeSpan.FromMinutes(5));                    
                 }
 
-                if (applyMigrationSyncFIFADbContext) 
-                {
-                    var fifaSyncDbContext = scope.ServiceProvider.GetService<FIFASynchronizationDbContext>();
-                    fifaSyncDbContext.Database.Migrate();
-                }
+                //if (applyMigrationSyncFIFADbContext) 
+                //{
+                //    var fifaSyncDbContext = scope.ServiceProvider.GetService<FIFASynchronizationDbContext>();
+                //    fifaSyncDbContext.Database.Migrate();
+                //}
 
                 //var _syncService = scope.ServiceProvider.GetService<Application.Synchronization.Interfaces.ISyncService>();
 

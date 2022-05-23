@@ -1,4 +1,5 @@
 ﻿using System.Threading.Tasks;
+using AOM.FIFA.ManagerPlayer.Application.Player.Dtos;
 using AOM.FIFA.ManagerPlayer.Application.Player.Requests;
 using AOM.FIFA.ManagerPlayer.Application.Player.Responses;
 
@@ -12,6 +13,7 @@ namespace AOM.FIFA.ManagerPlayer.Application.Player.Intefaces.Services
 
         Task<PlayerListResponse> GetPlayersByClubAsync(PlayerClubParameterRequest request);
 
+        Task<int> InsertPlayerAsync(PlayerDto playerDto);
 
     }
 }

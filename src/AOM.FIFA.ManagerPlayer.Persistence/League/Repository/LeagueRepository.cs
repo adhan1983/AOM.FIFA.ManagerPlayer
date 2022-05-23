@@ -8,6 +8,7 @@ using AOM.FIFA.ManagerPlayer.Application.League.Requests;
 using domain = AOM.FIFA.ManagerPlayer.Application.League.Entities;
 using AOM.FIFA.ManagerPlayer.Application.League.Interfaces.Repositories;
 using AOM.FIFA.ManagerPlayer.Application.Base.Repository.Pagination;
+using System;
 
 namespace AOM.FIFA.ManagerPlayer.Persistence.League.Repository
 {
@@ -36,6 +37,13 @@ namespace AOM.FIFA.ManagerPlayer.Persistence.League.Repository
                                 Leagues.OrderBy(x => x.Name), leagueParameters.PageNumber, leagueParameters.PageSize);                                                                
 
             return models;
+        }
+
+        public async Task<domain.League> GetLeagueBySourceId(int sourceId)
+        {
+            var model = await this._fifaManagerPlayerDbContext.Leagues.FirstOrDefaultAsync(x => x.SourceId == sourceId);
+
+            return model;
         }
     }
 }

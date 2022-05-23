@@ -13,9 +13,10 @@ namespace AOM.FIFA.ManagerPlayer.Api
 
         public IConfiguration Configuration { get; }
 
-        public void ConfigureServices(IServiceCollection services) => services.Build(Configuration);        
-        
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IBackgroundJobClient backgroundJobs) => app.Build(env, backgroundJobs);
+        public void ConfigureServices(IServiceCollection services) => services.Build(Configuration);
+
+        //IBackgroundJobClient backgroundJobs
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env) => app.Build(env);
         
     }
 }

@@ -14,6 +14,8 @@ namespace AOM.FIFA.ManagerPlayer.Application.Player.Dtos
         public int Weight { get; set; }
         public int NationId { get; set; }
         public int? ClubId { get; set; }
+        public int SourceNationId { get; set; }
+        public int? SourceClubId { get; set; }
         public int? Rarity { get; set; }
         public string Position { get; set; }
         public string Foot { get; set; }

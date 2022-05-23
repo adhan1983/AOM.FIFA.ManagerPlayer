@@ -6,43 +6,18 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="League\Mappers\**" />
-    <Compile Remove="SyncClub\Dto\**" />
-    <Compile Remove="SyncClub\Entities\**" />
-    <Compile Remove="SyncClub\Mappers\**" />
-    <Compile Remove="SyncLeague\Dto\**" />
-    <Compile Remove="SyncLeague\Entities\**" />
-    <Compile Remove="SyncLeague\Mappers\**" />
-    <Compile Remove="SyncLeague\Repositories\**" />
-    <Compile Remove="Utils\**" />
-    <EmbeddedResource Remove="League\Mappers\**" />
-    <EmbeddedResource Remove="SyncClub\Dto\**" />
-    <EmbeddedResource Remove="SyncClub\Entities\**" />
-    <EmbeddedResource Remove="SyncClub\Mappers\**" />
-    <EmbeddedResource Remove="SyncLeague\Dto\**" />
-    <EmbeddedResource Remove="SyncLeague\Entities\**" />
-    <EmbeddedResource Remove="SyncLeague\Mappers\**" />
-    <EmbeddedResource Remove="SyncLeague\Repositories\**" />
-    <EmbeddedResource Remove="Utils\**" />
-    <None Remove="League\Mappers\**" />
-    <None Remove="SyncClub\Dto\**" />
-    <None Remove="SyncClub\Entities\**" />
-    <None Remove="SyncClub\Mappers\**" />
-    <None Remove="SyncLeague\Dto\**" />
-    <None Remove="SyncLeague\Entities\**" />
-    <None Remove="SyncLeague\Mappers\**" />
-    <None Remove="SyncLeague\Repositories\**" />
-    <None Remove="Utils\**" />
-  </ItemGroup>
+    <Compile Remove="Club\Mappers\**" />
+    <EmbeddedResource Remove="Club\Mappers\**" />
+    <None Remove="Club\Mappers\**" />
+  </ItemGroup>  
 
   <ItemGroup>
-    <Folder Include="Club\Mappers\" />
     <Folder Include="Nation\Responses\" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" Version="5.0.0" />
-	<PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.0" />
+	<PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.0" />	
   </ItemGroup>
 
   <ItemGroup>
