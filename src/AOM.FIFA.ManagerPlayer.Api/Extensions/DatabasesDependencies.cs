@@ -17,9 +17,7 @@ namespace AOM.FIFA.ManagerPlayer.Api.Extensions
 
             services.AddDbContext<FIFAManagerPlayerDbContext>(options =>
                      options.
-                     UseSqlServer(configuration.GetConnectionString(ApiConstants.SqlConnectionString)));
-
-            
+                     UseSqlServer(configuration.GetConnectionString(ApiConstants.SqlConnectionString)));            
             
 
             return services;

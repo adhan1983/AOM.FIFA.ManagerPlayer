@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using AOM.FIFA.ManagerPlayer.Application.Sync.Responses;
 using AOM.FIFA.ManagerPlayer.Application.Synchronization.Interfaces;
+using System.Threading;
 
 namespace AOM.FIFA.ManagerPlayer.Api.Controllers
 {
@@ -16,28 +17,52 @@ namespace AOM.FIFA.ManagerPlayer.Api.Controllers
         public SyncController(ISyncService syncService) => this._syncService = syncService;
                
 
-        [HttpPost]
-        [Route("leagues")]
-        public async Task<IActionResult> Leagues()
-        {
-            var response = new SyncResponse();
+        //[HttpPost]
+        //[Route("leagues")]
+        //public async Task<IActionResult> Leagues()
+        //{
+        //    var response = new SyncResponse();
 
-            response = await _syncService.SyncByNameAsync("league");
+        //    response = await _syncService.SyncByNameAsync("league");
 
-            return Ok(response);
+        //    return Ok(response);
 
-        }
+        //}
 
-        [HttpPost]
-        [Route("clubs")]
-        public async Task<IActionResult> Clubs()
-        {
-            var response = new SyncResponse();
+        //[HttpPost]
+        //[Route("clubs")]
+        //public async Task<IActionResult> Clubs()
+        //{
+        //    var response = new SyncResponse();
 
-            response = await _syncService.SyncByNameAsync("club");
+        //    response = await _syncService.SyncByNameAsync("club");
 
-            return Ok(response);
+        //    return Ok(response);
 
-        }
+        //}
+
+        //[HttpPost]
+        //[Route("nations")]
+        //public async Task<IActionResult> Nations()
+        //{
+        //    var response = new SyncResponse();
+
+        //    response = await _syncService.SyncByNameAsync("nation");
+
+        //    return Ok(response);
+
+        //}
+
+        //[HttpPost]
+        //[Route("player")]
+        //public async Task<IActionResult> Player()
+        //{
+        //    var response = new SyncResponse();
+
+        //    response = await _syncService.SyncByNameAsync("player");
+
+        //    return Ok(response);
+
+        //}
     }
 }

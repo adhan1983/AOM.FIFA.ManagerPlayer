@@ -18,7 +18,7 @@ namespace AOM.FIFA.ManagerPlayer.Persistence.Synchronization.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("ProductVersion", "5.0.13");
 
-            modelBuilder.Entity("AOM.FIFA.ManagerPlayer.Application.Synchronization.Entities.SourceWithoutSync", b =>
+            modelBuilder.Entity("AOM.FIFA.ManagerPlayer.Application.Sync.Entities.SourceWithoutSync", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -38,7 +38,7 @@ namespace AOM.FIFA.ManagerPlayer.Persistence.Synchronization.Migrations
                     b.ToTable("SourceWithoutSync");
                 });
 
-            modelBuilder.Entity("AOM.FIFA.ManagerPlayer.Application.Synchronization.Entities.Sync", b =>
+            modelBuilder.Entity("AOM.FIFA.ManagerPlayer.Application.Sync.Entities.Sync", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -88,15 +88,24 @@ namespace AOM.FIFA.ManagerPlayer.Persistence.Synchronization.Migrations
                         new
                         {
                             Id = 3,
-                            Name = "Players",
+                            Name = "Player",
                             Synchronized = false,
                             TotalItems = 20617,
                             TotalItemsPerPage = 20,
                             TotalPages = 1031
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Name = "Nation",
+                            Synchronized = false,
+                            TotalItems = 160,
+                            TotalItemsPerPage = 20,
+                            TotalPages = 8
                         });
                 });
 
-            modelBuilder.Entity("AOM.FIFA.ManagerPlayer.Application.Synchronization.Entities.SyncPage", b =>
+            modelBuilder.Entity("AOM.FIFA.ManagerPlayer.Application.Sync.Entities.SyncPage", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -125,9 +134,9 @@ namespace AOM.FIFA.ManagerPlayer.Persistence.Synchronization.Migrations
                     b.ToTable("SyncPage");
                 });
 
-            modelBuilder.Entity("AOM.FIFA.ManagerPlayer.Application.Synchronization.Entities.SourceWithoutSync", b =>
+            modelBuilder.Entity("AOM.FIFA.ManagerPlayer.Application.Sync.Entities.SourceWithoutSync", b =>
                 {
-                    b.HasOne("AOM.FIFA.ManagerPlayer.Application.Synchronization.Entities.SyncPage", "SyncPage")
+                    b.HasOne("AOM.FIFA.ManagerPlayer.Application.Sync.Entities.SyncPage", "SyncPage")
                         .WithMany("SourcesWithoutSync")
                         .HasForeignKey("SyncPageId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -136,9 +145,9 @@ namespace AOM.FIFA.ManagerPlayer.Persistence.Synchronization.Migrations
                     b.Navigation("SyncPage");
                 });
 
-            modelBuilder.Entity("AOM.FIFA.ManagerPlayer.Application.Synchronization.Entities.SyncPage", b =>
+            modelBuilder.Entity("AOM.FIFA.ManagerPlayer.Application.Sync.Entities.SyncPage", b =>
                 {
-                    b.HasOne("AOM.FIFA.ManagerPlayer.Application.Synchronization.Entities.Sync", "Sync")
+                    b.HasOne("AOM.FIFA.ManagerPlayer.Application.Sync.Entities.Sync", "Sync")
                         .WithMany("SyncPages")
                         .HasForeignKey("SyncId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -147,12 +156,12 @@ namespace AOM.FIFA.ManagerPlayer.Persistence.Synchronization.Migrations
                     b.Navigation("Sync");
                 });
 
-            modelBuilder.Entity("AOM.FIFA.ManagerPlayer.Application.Synchronization.Entities.Sync", b =>
+            modelBuilder.Entity("AOM.FIFA.ManagerPlayer.Application.Sync.Entities.Sync", b =>
                 {
                     b.Navigation("SyncPages");
                 });
 
-            modelBuilder.Entity("AOM.FIFA.ManagerPlayer.Application.Synchronization.Entities.SyncPage", b =>
+            modelBuilder.Entity("AOM.FIFA.ManagerPlayer.Application.Sync.Entities.SyncPage", b =>
                 {
                     b.Navigation("SourcesWithoutSync");
                 });

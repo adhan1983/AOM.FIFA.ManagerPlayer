@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using AOM.FIFA.ManagerPlayer.Persistence.Context;
 using AOM.FIFA.ManagerPlayer.Application.Base.Interfaces;
+using System.Linq.Expressions;
 
 namespace AOM.FIFA.ManagerPlayer.Persistence.Base
 {
@@ -19,7 +20,7 @@ namespace AOM.FIFA.ManagerPlayer.Persistence.Base
             await _fifaManagerPlayerDbContext.Set<T>().AddAsync(entity);
             await _fifaManagerPlayerDbContext.SaveChangesAsync();
             return entity;
-        }
+        }        
         public async Task<bool> InsertManyAsync(List<T> entities)
         {            
             await _fifaManagerPlayerDbContext.Set<T>().AddRangeAsync(entities);            
@@ -39,9 +40,24 @@ namespace AOM.FIFA.ManagerPlayer.Persistence.Base
         {
             return await _fifaManagerPlayerDbContext.Set<T>().FindAsync(id);
         }
-        public Task UpdateAsync(T entity)
+
+        //TO DO: Testar
+        public async Task<T> GetByExpressionAsync(Expression<Func<T, bool>> expression)
         {
-            throw new NotImplementedException();
+            return await _fifaManagerPlayerDbContext.Set<T>().FindAsync(expression);
+        }
+
+        //TO DO: Testar
+        public async Task<IReadOnlyList<T>> GetAllByExpressionAsync(Expression<Func<T, bool>> expression)
+        {
+            return (IReadOnlyList<T>)await _fifaManagerPlayerDbContext.Set<T>().FindAsync(expression);
+        }
+        
+        public async Task<bool> UpdateAsync(T entity)
+        {
+            _fifaManagerPlayerDbContext.Set<T>().Update(entity);
+
+            return Convert.ToBoolean(await _fifaManagerPlayerDbContext.SaveChangesAsync());
         }
     }
 }

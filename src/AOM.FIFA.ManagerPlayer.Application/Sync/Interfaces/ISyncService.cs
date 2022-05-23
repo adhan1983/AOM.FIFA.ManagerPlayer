@@ -1,15 +1,14 @@
-﻿using AOM.FIFA.ManagerPlayer.Application.Sync.Responses;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
+using AOM.FIFA.ManagerPlayer.Application.Sync.Responses;
 using s = AOM.FIFA.ManagerPlayer.Application.Sync.Entities;
+
 
 namespace AOM.FIFA.ManagerPlayer.Application.Synchronization.Interfaces
 {
     public interface ISyncService
-    {
-        Task<s.Sync> GetSyncByNameAsync(string name);
+    {       
+        Task<SyncResponse> SyncByNameAsync(s.Sync sync);
 
-        Task<bool> UpdateAsync(s.Sync sync);
-
-        Task<SyncResponse> SyncByNameAsync(string name);
+        Task PublishingFifaJobs();
     }
 }
