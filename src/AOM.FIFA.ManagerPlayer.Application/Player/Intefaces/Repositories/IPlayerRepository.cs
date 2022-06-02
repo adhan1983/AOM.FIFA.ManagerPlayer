@@ -16,7 +16,8 @@ namespace AOM.FIFA.ManagerPlayer.Application.Player.Intefaces.Repositories
         Task<PagedList<domain.Player>> GetPagedListPlayersAsync(PlayerParameterRequest leagueParameters);
 
         Task<List<domain.Player>> GetPlayersByExpression(Expression<Func<domain.Player, bool>> expression);
-
+        
+        Task<int> InsertAndUpdatePlayerAsync(domain.Player playerInsert, List<domain.Player> playerUpdate);
 
     }
 }

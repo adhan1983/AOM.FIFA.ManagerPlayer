@@ -42,7 +42,7 @@ namespace AOM.FIFA.ManagerPlayer.gRPCServer.Services
                 Foot = request.Foot,
                 Height = request.Height,
                 LastName = request.LastName,
-                NationId = request.SourceNationId,
+                //NationId = request.SourceNationId,
                 Pace = request.Pace,
                 Passing = request.Passing,
                 Physicality = request.Physicality,

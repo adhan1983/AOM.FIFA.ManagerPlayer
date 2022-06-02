@@ -50,6 +50,18 @@ namespace AOM.FIFA.ManagerPlayer.Persistence.Player.Repository
                                OrderBy(x => x.Name).
                                ToListAsync();
             return models;
-        } 
+        }
+
+        public async Task<int> InsertAndUpdatePlayerAsync(domain.Player playerInsert, List<domain.Player> playerUpdate)
+        {   
+            
+            _fifaManagerPlayerDbContext.Set<domain.Player>().UpdateRange(playerUpdate);
+            
+            await _fifaManagerPlayerDbContext.Set<domain.Player>().AddAsync(playerInsert);
+
+            Convert.ToBoolean(await _fifaManagerPlayerDbContext.SaveChangesAsync());
+
+            return playerInsert.Id;
+        }
     }
 }

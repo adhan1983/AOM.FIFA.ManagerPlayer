@@ -13,6 +13,8 @@ namespace AOM.FIFA.ManagerPlayer.Application.Player.Intefaces.Services
 
         Task<PlayerListResponse> GetPlayersByClubAsync(PlayerClubParameterRequest request);
 
+        Task<PlayerListFUT22ICONResponse> GetPlayerByFUT22ICONSAsync();
+
         Task<int> InsertPlayerAsync(PlayerDto playerDto);
 
     }

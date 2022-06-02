@@ -43,8 +43,7 @@ namespace AOM.FIFA.ManagerPlayer.Application.Player.Services
 
         public async Task<PlayerListResponse> GetPlayersByClubAsync(PlayerClubParameterRequest request)
         {
-            Expression<Func<domain.Player, bool>> expression = x => x.ClubId == request.ClubId;
-            
+            Expression<Func<domain.Player, bool>> expression = x => x.ClubId == request.ClubId;            
 
             var players = await _playerRepository.GetPlayersByExpression(expression);
 
@@ -70,17 +69,71 @@ namespace AOM.FIFA.ManagerPlayer.Application.Player.Services
             };
         }
 
-        public async Task<int> InsertPlayerAsync(PlayerDto playerDto)
+        public async Task<PlayerListFUT22ICONResponse> GetPlayerByFUT22ICONSAsync()
         {
+            Expression<Func<domain.Player, bool>> expression = x => x.ClubId == 587 && x.IsActive;
+
+            var players = await _playerRepository.GetPlayersByExpression(expression);
+
+            var response = new PlayerListFUT22ICONResponse();
+
+            if (players != null)
+            {
+                response.Total = players.Count;
+                response.Players = 
+                    players.Select(model => new PlayerFUT22IconDto() 
+                    { 
+                        Name = model.Name, 
+                        Nation = model.Nation.Name ?? string.Empty, 
+                        Position = model.Position 
+                    }).ToList();
+            }
+
+            return response;
+        }
+
+        public async Task<int> InsertPlayerAsync(PlayerDto playerDto)
+        {           
             var nation = await _nationService.GetNationBySourceId(playerDto.SourceNationId);
 
-            var club = await _clubService.GetClubBySourceId(playerDto.SourceClubId.Value);            
-            
-            var model = MapperDtoToModelPlayer(playerDto, club.Id, nation.Id);
-            
-            var result = await _playerRepository.InsertAsync(model);
+            var club = await _clubService.GetClubBySourceId(playerDto.SourceClubId.Value);
 
-            return result.Id;
+            var model = MapperDtoToModelPlayer(playerDto, club.Id, nation.Id);
+
+            var playersInserted = await _playerRepository.GetPlayersByExpression(a => a.Nation.SourceId == playerDto.SourceNationId && a.Name == playerDto.Name);
+
+            if (playersInserted.Any())
+            {
+                var theGreatestSourceId = playersInserted.Max(a => a.SourceId);
+
+                if (model.SourceId > theGreatestSourceId)
+                {
+                    foreach (var playerInserted in playersInserted)
+                    {
+                        playerInserted.IsActive = false;
+                    }                   
+                }
+                else 
+                {
+                    model.IsActive = false;
+                    foreach (var playerInserted in playersInserted)
+                    {
+                        if (playerInserted.SourceId == theGreatestSourceId) 
+                        {
+                            playerInserted.IsActive = true;
+                            continue;
+                        }
+                        playerInserted.IsActive = false;
+                    }                    
+                }
+                await _playerRepository.InsertAndUpdatePlayerAsync(model, playersInserted);
+            }
+            else 
+            {
+                await _playerRepository.InsertAsync(model);
+            }
+
+            return model.Id;
         }
 
         private static PlayerDto MapperModelToDtoPlayer(domain.Player model)
@@ -139,7 +192,7 @@ namespace AOM.FIFA.ManagerPlayer.Application.Player.Services
                 Rarity = player.Rarity,
                 Rating = player.Rating,
                 Shooting = player.Shooting,
-                SourceId = player.Id,
+                SourceId = player.SourceId,
                 TotalStats = player.TotalStats,
                 Weight = player.Weight,
                 IsActive = true,                

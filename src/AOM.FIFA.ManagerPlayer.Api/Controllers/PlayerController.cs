@@ -46,5 +46,15 @@ namespace AOM.FIFA.ManagerPlayer.Api.Controllers
 
             return Ok(result);
         }
+
+        [HttpGet("/byfut22icon")]
+        [ProducesResponseType(typeof(PlayerListFUT22ICONResponse), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(string), StatusCodes.Status404NotFound)]
+        public async Task<IActionResult> Get()
+        {
+            var result = await _playerService.GetPlayerByFUT22ICONSAsync();
+
+            return Ok(result);
+        }
     }
 }
