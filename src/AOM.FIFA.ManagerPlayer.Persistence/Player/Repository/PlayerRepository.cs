@@ -54,7 +54,6 @@ namespace AOM.FIFA.ManagerPlayer.Persistence.Player.Repository
 
         public async Task<int> InsertAndUpdatePlayerAsync(domain.Player playerInsert, List<domain.Player> playerUpdate)
         {   
-            
             _fifaManagerPlayerDbContext.Set<domain.Player>().UpdateRange(playerUpdate);
             
             await _fifaManagerPlayerDbContext.Set<domain.Player>().AddAsync(playerInsert);
