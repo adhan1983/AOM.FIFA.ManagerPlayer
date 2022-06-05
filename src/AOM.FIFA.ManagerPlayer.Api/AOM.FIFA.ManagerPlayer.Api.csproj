@@ -6,6 +6,7 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+		<PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="5.0.1" />
 		<PackageReference Include="NSwag.Annotations" Version="13.15.10" />
 		<PackageReference Include="Swashbuckle.AspNetCore" Version="5.6.3" />
 		<PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="5.0.0" />
@@ -18,10 +19,8 @@
 
 	<ItemGroup>
 		<ProjectReference Include="..\AOM.FIFA.ManagerPlayer.Application\AOM.FIFA.ManagerPlayer.Application.csproj" />
-		<ProjectReference Include="..\AOM.FIFA.ManagerPlayer.Gateway\AOM.FIFA.ManagerPlayer.Gateway.csproj" />
 		<ProjectReference Include="..\AOM.FIFA.ManagerPlayer.gRPCServer\AOM.FIFA.ManagerPlayer.gRPCServer.csproj" />
 		<ProjectReference Include="..\AOM.FIFA.ManagerPlayer.Logging\AOM.FIFA.ManagerPlayer.Logging.csproj" />
-		<ProjectReference Include="..\AOM.FIFA.ManagerPlayer.Persistence.Synchronization\AOM.FIFA.ManagerPlayer.Persistence.Synchronization.csproj" />
 		<ProjectReference Include="..\AOM.FIFA.ManagerPlayer.Persistence\AOM.FIFA.ManagerPlayer.Persistence.csproj" />
 	</ItemGroup>
 

@@ -24,3 +24,8 @@
 /src/AOM.FIFA.ManagerPlayer.Persistence.Synchronization/obj
 /src/AOM.FIFA.ManagerPlayer.gRPCServer/bin/Debug/net5.0
 /src/AOM.FIFA.ManagerPlayer.gRPCServer/obj
+/src/AOM.FIFA.ManagerPlayer.Api/bin/Release/net5.0
+/src/AOM.FIFA.ManagerPlayer.Application/bin/Release/net5.0
+/src/AOM.FIFA.ManagerPlayer.gRPCServer/bin/Release/net5.0
+/src/AOM.FIFA.ManagerPlayer.Logging/bin/Release/net5.0
+/src/AOM.FIFA.ManagerPlayer.Persistence/bin/Release/net5.0
