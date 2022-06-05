@@ -8,15 +8,7 @@
       "sslPort": 44369
     }
   },
-  "profiles": {
-    "IIS Express": {
-      "commandName": "IISExpress",
-      "launchBrowser": true,
-      "launchUrl": "swagger",
-      "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
-      }
-    },
+  "profiles": {    
     "AOM.FIFA.ManagerPlayer.Api": {
       "commandName": "Project",
       "dotnetRunMessages": "true",
