@@ -7,5 +7,6 @@
     <ActiveDebugProfile>AOM.FIFA.ManagerPlayer.Api</ActiveDebugProfile>
     <Controller_SelectedScaffolderID>ApiControllerEmptyScaffolder</Controller_SelectedScaffolderID>
     <Controller_SelectedScaffolderCategoryPath>root/Common/Api</Controller_SelectedScaffolderCategoryPath>
+    <NameOfLastUsedPublishProfile>C:\Projects\Studies\git\AOM.FIFA.ManagerPlayer\src\AOM.FIFA.ManagerPlayer.Api\Properties\PublishProfiles\AOMFIFAManagerPlayerApi20220605134118 - Web Deploy.pubxml</NameOfLastUsedPublishProfile>
   </PropertyGroup>
 </Project>

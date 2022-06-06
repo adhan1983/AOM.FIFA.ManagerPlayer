@@ -5,5 +5,7 @@
         string FIFAApiKey { get; set; }
 
         string FIFAApiToken { get; set; }
+
+        string FIFAClient { get; set; }
     }
 }

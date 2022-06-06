@@ -6,29 +6,21 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="SyncLeague\Repositories\**" />
-    <EmbeddedResource Remove="SyncLeague\Repositories\**" />
-    <None Remove="SyncLeague\Repositories\**" />
-  </ItemGroup>
+    <Compile Remove="Club\Mappers\**" />
+    <EmbeddedResource Remove="Club\Mappers\**" />
+    <None Remove="Club\Mappers\**" />
+  </ItemGroup>  
 
   <ItemGroup>
-    <Folder Include="Club\Mappers\" />
-    <Folder Include="League\Mappers\" />
-    <Folder Include="SyncClub\Dto\" />
-    <Folder Include="SyncClub\Entities\" />
-    <Folder Include="SyncClub\Mappers\" />
-    <Folder Include="SyncLeague\Dto\" />
-    <Folder Include="SyncLeague\Entities\" />
-    <Folder Include="SyncLeague\Mappers\" />
-    <Folder Include="Utils\" />
+    <Folder Include="Nation\Responses\" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" Version="5.0.0" />
+	<PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.0" />	
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\AOM.FIFA.ManagerPlayer.Gateway\AOM.FIFA.ManagerPlayer.Gateway.csproj" />
     <ProjectReference Include="..\AOM.FIFA.ManagerPlayer.Logging\AOM.FIFA.ManagerPlayer.Logging.csproj" />
   </ItemGroup>
 

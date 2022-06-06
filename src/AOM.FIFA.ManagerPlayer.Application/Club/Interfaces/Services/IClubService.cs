@@ -11,5 +11,9 @@ namespace AOM.FIFA.ManagerPlayer.Application.Club.Interfaces.Services
         Task<ClubResponse> GetClubsResponseAsync();
 
         Task<ClubLeagueResponse> GetClubsByLeagueIdAsync(int leagueId);
+
+        Task<int> InsertClubAsync(ClubDto clubDto);
+
+        Task<ClubDto> GetClubBySourceId(int sourceId);
     }
 }

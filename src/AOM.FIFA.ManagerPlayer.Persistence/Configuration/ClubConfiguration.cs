@@ -22,6 +22,10 @@ namespace AOM.FIFA.ManagerPlayer.Persistence.Configuration
             builder.
                 Property(x => x.LeagueId).                
                 IsRequired();
+            builder.
+                HasMany(x=> x.Player).
+                WithOne(x => x.Club).
+                HasForeignKey(x => x.ClubId);
 
         }
     }

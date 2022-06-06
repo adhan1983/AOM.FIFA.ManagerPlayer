@@ -6,5 +6,6 @@ namespace AOM.FIFA.ManagerPlayer.Gateway.Utils
     {
         public string FIFAApiKey { get; set; }
         public string FIFAApiToken { get; set; }
+        public string FIFAClient { get; set; }
     }
 }

@@ -1,8 +1,8 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
-using AOM.FIFA.ManagerPlayer.Api.Constants;
-using Microsoft.Extensions.DependencyInjection;
+﻿using AOM.FIFA.ManagerPlayer.Api.Constants;
 using AOM.FIFA.ManagerPlayer.Persistence.Context;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace AOM.FIFA.ManagerPlayer.Api.Extensions
 {
@@ -12,7 +12,8 @@ namespace AOM.FIFA.ManagerPlayer.Api.Extensions
         {
             services.AddDbContext<FIFAManagerPlayerDbContext>(options =>
                      options.
-                     UseSqlServer(configuration.GetConnectionString(ApiConstants.SqlConnectionString)));
+                     UseSqlServer(configuration.GetConnectionString(ApiConstants.PlayerSqlConnectionString)));            
+            
 
             return services;
         }

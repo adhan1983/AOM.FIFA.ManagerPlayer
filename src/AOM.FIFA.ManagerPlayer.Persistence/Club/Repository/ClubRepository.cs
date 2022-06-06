@@ -11,22 +11,28 @@ namespace AOM.FIFA.ManagerPlayer.Persistence.Club.Repository
 {
     public class ClubRepository : repo.Repository<domain.Club>, IClubRepository
     {
-        
-        protected FIFAManagerPlayerDbContext _dbContext;
-        public ClubRepository(FIFAManagerPlayerDbContext dbContext) : base(dbContext)
+        public ClubRepository(FIFAManagerPlayerDbContext fifaManagerPlayerDbContext) : base(fifaManagerPlayerDbContext)
         {
-            _dbContext = dbContext;
         }
 
         public async Task<List<domain.Club>> GetClubsByLeagueIdAsync(int leagueId)
         {
-            var clubs = await _dbContext.
+            var clubs = await _fifaManagerPlayerDbContext.
                               Clubs.
                                 Include(x => x.League).
                                 Where(a => a.LeagueId == leagueId).
                                 ToListAsync();
 
             return clubs;
+        }
+
+        public async Task<domain.Club> GetClubBySourceId(int sourceId)
+        {
+            var models = await this._fifaManagerPlayerDbContext.
+                                    Clubs.
+                                    FirstOrDefaultAsync(x => x.SourceId == sourceId);
+
+            return models;
         }
     }
 }
