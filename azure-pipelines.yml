@@ -22,7 +22,7 @@ stages:
         - task: DotNetCoreCLI@2
           inputs:
             command: 'build'
-            projects: '$(Build.SourcesDirectory)/src/AOM.FIFA.ManagerPlayer.Api.csproj'
+            projects: '$(Build.SourcesDirectory)/src/AOM.FIFA.ManagerPlayer.Api/AOM.FIFA.ManagerPlayer.Api.csproj'
           displayName: 'Build backend service'
 
         - task: DotNetCoreCLI@2
