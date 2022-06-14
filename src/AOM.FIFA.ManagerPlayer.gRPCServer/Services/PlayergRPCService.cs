@@ -1,6 +1,7 @@
 using Grpc.Core;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
+using Microsoft.AspNetCore.Authorization;
 using AOM.FIFA.ManagerPlayer.Application.Player.Dtos;
 using AOM.FIFA.ManagerPlayer.gRPCServer.Services.Interfaces;
 using AOM.FIFA.ManagerPlayer.Application.Player.Intefaces.Services;
@@ -18,6 +19,8 @@ namespace AOM.FIFA.ManagerPlayer.gRPCServer.Services
             _logger = logger;
             _playerService = playerService;
         }
+        
+        [Authorize]
         public override async Task<PlayerReply> InsertPlayer(PlayerRequest request, ServerCallContext context)
         {
             PlayerDto dto = MapToPlayerDto(request);
