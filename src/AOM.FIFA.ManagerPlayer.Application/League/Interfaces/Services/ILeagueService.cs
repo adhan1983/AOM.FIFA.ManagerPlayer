@@ -11,5 +11,6 @@ namespace AOM.FIFA.ManagerPlayer.Application.League.Interfaces.Services
         Task<LeagueDto> GetLeagueByIdAsync(int id);
         Task<int> InsertLeagueAsync(LeagueDto leagueDto);
         Task<LeagueDto> GetLeagueBySourceId(int sourceId);
+        Task<TotalClubsByLeagueResponse> GetTotalClubsByLeagueResponse();
     }
 }

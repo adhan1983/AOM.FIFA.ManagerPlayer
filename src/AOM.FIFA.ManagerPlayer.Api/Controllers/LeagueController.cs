@@ -15,10 +15,7 @@ namespace AOM.FIFA.ManagerPlayer.Api.Controllers
     public class LeagueController : ControllerBase
     {
         private readonly ILeagueService _leagueService;
-
-        public LeagueController(ILeagueService leagueService) => this._leagueService = leagueService;
-
-        //TO DO https://docs.microsoft.com/en-us/aspnet/core/tutorials/getting-started-with-swashbuckle?view=aspnetcore-6.0&tabs=visual-studio
+        public LeagueController(ILeagueService leagueService) => this._leagueService = leagueService;        
 
         [HttpGet]
         [ProducesResponseType(typeof(List<LeagueDto>), StatusCodes.Status200OK)]
@@ -27,6 +24,16 @@ namespace AOM.FIFA.ManagerPlayer.Api.Controllers
         {
             var result = await _leagueService.GetLeaguesResponseAsync(leagueParameters);
             
+            return Ok(result);
+        }
+
+        [HttpGet("/TotalClubsByLeague")]
+        [ProducesResponseType(typeof(List<LeagueDto>), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(string), StatusCodes.Status404NotFound)]
+        public async Task<IActionResult> GetTotalClubsByLeague()
+        {
+            var result = await _leagueService.GetTotalClubsByLeagueResponse();
+
             return Ok(result);
         }
 

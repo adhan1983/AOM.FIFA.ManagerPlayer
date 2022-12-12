@@ -26,6 +26,27 @@ namespace AOM.FIFA.ManagerPlayer.Application.Player.Services
             this._nationService = nationService;
         }
 
+        public async Task<PlayerByNationByLeagueResponse> GetPlayersByNationByLeague(int nation, int league) 
+        {
+            var models = await _playerRepository.GetPlayersByExpression(a => a.NationId == nation && a.Club.LeagueId == league);
+
+            var response = new PlayerByNationByLeagueResponse() { Total = models.Count };
+
+            for (int i = 0, ii = models.Count; i < ii; i++)
+            {
+                response.PlayersByNationByLeague.Add(new PlayerByNationByLeagueDto
+                {
+                    Nome = models[i].Name,
+                    Age = models[i].Age,
+                    Club = models[i]?.Club.Name,
+                    Nation = models[i]?.Nation?.Name
+                });
+            }
+
+            return response;
+        }
+
+
         public async Task<PlayerResponse> GetPlayerByIdAsync(int id)
         {
             var player = await _playerRepository.GetPlayerByExpression(x => x.Id == id) ;

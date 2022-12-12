@@ -9,6 +9,8 @@ namespace AOM.FIFA.ManagerPlayer.Application.Club.Interfaces.Repositories
     {
         Task<List<domain.Club>> GetClubsByLeagueIdAsync(int leagueId);
 
+        Task<List<domain.Club>> GetClubsByLeagueAsync();
+
         Task<domain.Club> GetClubBySourceId(int sourceId);
     }
 }

@@ -56,5 +56,17 @@ namespace AOM.FIFA.ManagerPlayer.Api.Controllers
 
             return Ok(result);
         }
+
+
+        [HttpGet("/GetPlayersByNationByLeague")]
+        [ProducesResponseType(typeof(PlayerListFUT22ICONResponse), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(string), StatusCodes.Status404NotFound)]
+        public async Task<IActionResult> GetPlayersByNationByLeague(int nationId, int leagueId)
+        {
+            var result = await _playerService.GetPlayersByNationByLeague(nationId, leagueId);
+
+            return Ok(result);
+        }
+        
     }
 }

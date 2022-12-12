@@ -5,6 +5,7 @@ using AOM.FIFA.ManagerPlayer.Application.League.Responses;
 using AOM.FIFA.ManagerPlayer.Application.League.Interfaces.Repositories;
 using AOM.FIFA.ManagerPlayer.Application.League.Interfaces.Services;
 using AOM.FIFA.ManagerPlayer.Application.League.Requests;
+using System.Collections.Generic;
 
 namespace AOM.FIFA.ManagerPlayer.Application.League.Services
 {
@@ -13,6 +14,27 @@ namespace AOM.FIFA.ManagerPlayer.Application.League.Services
         private readonly ILeagueRepository _leagueRepository;
         public LeagueService(ILeagueRepository leagueRepository) => this._leagueRepository = leagueRepository;
 
+
+        public async Task<TotalClubsByLeagueResponse> GetTotalClubsByLeagueResponse() 
+        {
+            var models = await _leagueRepository.GetLeaguesAsync();
+
+            var response = new TotalClubsByLeagueResponse();            
+
+            for (int i = 0, ii = models.Count; i < ii; i++)
+            {
+                var clubByLeagueDto = new ClubByLeagueDto
+                {
+                    Name = models[i].Name,
+                    Total = models[i].Clubs.Count           
+                };
+                response.ClubsByLeague.Add(clubByLeagueDto);
+            }
+            response.ClubsByLeague = response.ClubsByLeague.OrderByDescending(a => a.Total).ToList();
+            
+            return response;            
+        }
+        
         public async Task<LeagueDto> GetLeagueByIdAsync(int id)
         {
             var league = await _leagueRepository.GetByIdAsync(id);

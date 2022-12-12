@@ -17,5 +17,7 @@ namespace AOM.FIFA.ManagerPlayer.Application.Player.Intefaces.Services
 
         Task<int> InsertPlayerAsync(PlayerDto playerDto);
 
+        Task<PlayerByNationByLeagueResponse> GetPlayersByNationByLeague(int nation, int league);
+
     }
 }

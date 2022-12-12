@@ -11,16 +11,26 @@ namespace AOM.FIFA.ManagerPlayer.Persistence.Club.Repository
 {
     public class ClubRepository : repo.Repository<domain.Club>, IClubRepository
     {
-        public ClubRepository(FIFAManagerPlayerDbContext fifaManagerPlayerDbContext) : base(fifaManagerPlayerDbContext)
-        {
-        }
-
+        public ClubRepository(FIFAManagerPlayerDbContext fifaManagerPlayerDbContext) : base(fifaManagerPlayerDbContext) { }        
+        
         public async Task<List<domain.Club>> GetClubsByLeagueIdAsync(int leagueId)
         {
             var clubs = await _fifaManagerPlayerDbContext.
                               Clubs.
                                 Include(x => x.League).
                                 Where(a => a.LeagueId == leagueId).
+                                ToListAsync();
+           
+
+            return clubs;
+        }
+
+
+        public async Task<List<domain.Club>> GetClubsByLeagueAsync()
+        {
+            var clubs = await _fifaManagerPlayerDbContext.
+                              Clubs.
+                                Include(x => x.League).                                
                                 ToListAsync();
 
             return clubs;
@@ -35,4 +45,5 @@ namespace AOM.FIFA.ManagerPlayer.Persistence.Club.Repository
             return models;
         }
     }
+    
 }
