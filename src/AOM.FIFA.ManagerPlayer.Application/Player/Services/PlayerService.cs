@@ -1,4 +1,5 @@
 ﻿using AOM.FIFA.ManagerPlayer.Application.Club.Interfaces.Services;
+using AOM.FIFA.ManagerPlayer.Application.League.Interfaces.Services;
 using AOM.FIFA.ManagerPlayer.Application.Nation.Interfaces.Services;
 using AOM.FIFA.ManagerPlayer.Application.Player.Dtos;
 using AOM.FIFA.ManagerPlayer.Application.Player.Intefaces.Repositories;
@@ -6,6 +7,7 @@ using AOM.FIFA.ManagerPlayer.Application.Player.Intefaces.Services;
 using AOM.FIFA.ManagerPlayer.Application.Player.Requests;
 using AOM.FIFA.ManagerPlayer.Application.Player.Responses;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
@@ -18,15 +20,17 @@ namespace AOM.FIFA.ManagerPlayer.Application.Player.Services
         private readonly IPlayerRepository _playerRepository;
         private readonly IClubService _clubService;
         private readonly INationService _nationService;
+        private readonly ILeagueService _leagueService;
 
-        public PlayerService(IPlayerRepository playerRepository, IClubService clubService, INationService nationService) 
-        { 
+        public PlayerService(ILeagueService leagueService, IPlayerRepository playerRepository, IClubService clubService, INationService nationService)
+        {
             this._playerRepository = playerRepository;
             this._clubService = clubService;
             this._nationService = nationService;
+            this._leagueService = leagueService;
         }
 
-        public async Task<PlayerByNationByLeagueResponse> GetPlayersByNationByLeague(int nation, int league) 
+        public async Task<PlayerByNationByLeagueResponse> GetPlayersByNationByLeague(int nation, int league)
         {
             var models = await _playerRepository.GetPlayersByExpression(a => a.NationId == nation && a.Club.LeagueId == league);
 
@@ -49,11 +53,11 @@ namespace AOM.FIFA.ManagerPlayer.Application.Player.Services
 
         public async Task<PlayerResponse> GetPlayerByIdAsync(int id)
         {
-            var player = await _playerRepository.GetPlayerByExpression(x => x.Id == id) ;
-            
+            var player = await _playerRepository.GetPlayerByExpression(x => x.Id == id);
+
             var response = new PlayerResponse();
 
-            if (player != null) 
+            if (player != null)
             {
                 response.Player = MapperModelToDtoPlayer(player);
             }
@@ -64,20 +68,20 @@ namespace AOM.FIFA.ManagerPlayer.Application.Player.Services
 
         public async Task<PlayerListResponse> GetPlayersByClubAsync(PlayerClubParameterRequest request)
         {
-            Expression<Func<domain.Player, bool>> expression = x => x.ClubId == request.ClubId;            
+            Expression<Func<domain.Player, bool>> expression = x => x.ClubId == request.ClubId;
 
             var players = await _playerRepository.GetPlayersByExpression(expression);
 
             var response = new PlayerListResponse();
-            
+
             if (players != null)
             {
                 response.Total = players.Count;
-                response.PlayersDto = players.Select(model => MapperModelToDtoPlayer(model)).ToList();                
+                response.PlayersDto = players.Select(model => MapperModelToDtoPlayer(model)).ToList();
             }
 
             return response;
-        }        
+        }
 
         public async Task<PlayerListResponse> GetPlayersAsync(PlayerParameterRequest request)
         {
@@ -101,20 +105,64 @@ namespace AOM.FIFA.ManagerPlayer.Application.Player.Services
             if (players != null)
             {
                 response.Total = players.Count;
-                response.Players = 
-                    players.Select(model => new PlayerFUT22IconDto() 
-                    { 
-                        Name = model.Name, 
-                        Nation = model.Nation.Name ?? string.Empty, 
-                        Position = model.Position 
+                response.Players =
+                    players.Select(model => new PlayerFUT22IconDto()
+                    {
+                        Name = model.Name,
+                        Nation = model.Nation.Name ?? string.Empty,
+                        Position = model.Position
                     }).ToList();
             }
 
             return response;
         }
 
+        public async Task<TotalPlayersByLeagueByNationResponse> GetTotalNationalityPlayerByNation()
+        {
+            var players = await _playerRepository.GetPlayersByExpression(a => a.ClubId != null && a.Rarity != null);
+
+            var leagues = await _leagueService.GetLeaguesAsync();
+
+            var response = new TotalPlayersByLeagueByNationResponse();
+            
+            for (int i = 0, ii = leagues.Count; i < ii; i++)
+            {
+                var dto = new TotalPlayersByLeagueByNationDto();
+
+                dto.LeagueName = leagues[i].Name;
+
+                var nationsDistinct = players.
+                                            Where(a => a.Club.LeagueId == leagues[i].Id).
+                                            Select(a => a.Nation).
+                                            Distinct().
+                                            ToList();
+
+                if (nationsDistinct.Count == 0)
+                    continue;
+
+                response.Total++;
+                
+                for (int y = 0, yy = nationsDistinct.Count; y < yy; y++)
+                {
+                    var playerByNationByLeague = new PlayerByNationByLeague();
+
+                    playerByNationByLeague.NationName = nationsDistinct[y].Name;
+
+                    playerByNationByLeague.TotalPlayer = players.
+                                            Count(a => a.Club.LeagueId == leagues[i].Id && a.NationId == nationsDistinct[y].Id);
+
+                    dto.PlayerByNationByLeague.Add(playerByNationByLeague);
+                }
+
+                response.TotalPlayersByLeagueByNationDto.Add(dto);
+            }
+
+
+            return response;
+        }
+
         public async Task<int> InsertPlayerAsync(PlayerDto playerDto)
-        {           
+        {
             var nation = await _nationService.GetNationBySourceId(playerDto.SourceNationId);
 
             var club = await _clubService.GetClubBySourceId(playerDto.SourceClubId.Value);
@@ -132,24 +180,24 @@ namespace AOM.FIFA.ManagerPlayer.Application.Player.Services
                     foreach (var playerInserted in playersInserted)
                     {
                         playerInserted.IsActive = false;
-                    }                   
+                    }
                 }
-                else 
+                else
                 {
                     model.IsActive = false;
                     foreach (var playerInserted in playersInserted)
                     {
-                        if (playerInserted.SourceId == theGreatestSourceId) 
+                        if (playerInserted.SourceId == theGreatestSourceId)
                         {
                             playerInserted.IsActive = true;
                             continue;
                         }
                         playerInserted.IsActive = false;
-                    }                    
+                    }
                 }
                 await _playerRepository.InsertAndUpdatePlayerAsync(model, playersInserted);
             }
-            else 
+            else
             {
                 await _playerRepository.InsertAsync(model);
             }
@@ -216,11 +264,39 @@ namespace AOM.FIFA.ManagerPlayer.Application.Player.Services
                 SourceId = player.SourceId,
                 TotalStats = player.TotalStats,
                 Weight = player.Weight,
-                IsActive = true,                
+                IsActive = true,
             };
 
             return model;
         }
-        
+
+    }
+
+    public class TotalPlayersByLeagueByNationResponse 
+    {
+        public TotalPlayersByLeagueByNationResponse()
+        {
+            TotalPlayersByLeagueByNationDto = new List<TotalPlayersByLeagueByNationDto>();
+        }
+        public int Total { get; set; }
+
+        public List<TotalPlayersByLeagueByNationDto> TotalPlayersByLeagueByNationDto { get; set; }
+    }
+
+    public class TotalPlayersByLeagueByNationDto
+    {
+        public TotalPlayersByLeagueByNationDto()
+        {
+            PlayerByNationByLeague = new List<PlayerByNationByLeague>();
+        }
+        public string LeagueName { get; set; }
+
+        public List<PlayerByNationByLeague> PlayerByNationByLeague { get; set; }
+    }
+
+    public class PlayerByNationByLeague 
+    {
+        public string NationName { get; set; }
+        public int TotalPlayer { get; set; }
     }
 }

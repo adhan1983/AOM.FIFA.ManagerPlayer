@@ -2,6 +2,7 @@
 using AOM.FIFA.ManagerPlayer.Application.Player.Dtos;
 using AOM.FIFA.ManagerPlayer.Application.Player.Requests;
 using AOM.FIFA.ManagerPlayer.Application.Player.Responses;
+using AOM.FIFA.ManagerPlayer.Application.Player.Services;
 
 namespace AOM.FIFA.ManagerPlayer.Application.Player.Intefaces.Services
 {
@@ -18,6 +19,8 @@ namespace AOM.FIFA.ManagerPlayer.Application.Player.Intefaces.Services
         Task<int> InsertPlayerAsync(PlayerDto playerDto);
 
         Task<PlayerByNationByLeagueResponse> GetPlayersByNationByLeague(int nation, int league);
+
+        Task<TotalPlayersByLeagueByNationResponse> GetTotalNationalityPlayerByNation();
 
     }
 }

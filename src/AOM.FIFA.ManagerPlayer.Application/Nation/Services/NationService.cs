@@ -1,7 +1,9 @@
-﻿using System.Threading.Tasks;
+﻿using System.Linq;
+using System.Threading.Tasks;
 using AOM.FIFA.ManagerPlayer.Application.Nation.Dtos;
 using AOM.FIFA.ManagerPlayer.Application.Nation.Interfaces.Repositories;
 using AOM.FIFA.ManagerPlayer.Application.Nation.Interfaces.Services;
+using AOM.FIFA.ManagerPlayer.Application.Nation.Responses;
 using entity = AOM.FIFA.ManagerPlayer.Application.Nation.Entities;
 
 namespace AOM.FIFA.ManagerPlayer.Application.Nation.Services
@@ -31,6 +33,19 @@ namespace AOM.FIFA.ManagerPlayer.Application.Nation.Services
             var clubDto = new NationDto { Id = model.Id, Name = model.Name, SourceId = model.SourceId };
             
             return clubDto;
+        }
+
+        public async Task<NationResponse> GetNationResponseAsync()
+        {
+            var models = await _nationRepository.GetAllAsync();
+            
+            var response = new NationResponse();
+
+            response.Nations.AddRange(models.Select(model => new NationDto { Id = model.Id, Name = model.Name, SourceId = model.SourceId }).ToList());
+
+            response.Total = models.Count;
+
+            return response;
         }
     }
 }

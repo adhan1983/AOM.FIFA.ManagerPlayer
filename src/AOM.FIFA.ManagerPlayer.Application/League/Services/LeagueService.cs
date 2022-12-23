@@ -88,5 +88,13 @@ namespace AOM.FIFA.ManagerPlayer.Application.League.Services
             return new LeagueDto { Id = model.Id, Name = model.Name, SourceId = model.SourceId };
         }
 
+        public async Task<List<LeagueDto>> GetLeaguesAsync()
+        {
+            var models = await _leagueRepository.GetAllAsync();
+
+            return models.Select(l => new LeagueDto { Id = l.Id, Name = l.Name }).ToList();
+
+        }
+
     }
 }

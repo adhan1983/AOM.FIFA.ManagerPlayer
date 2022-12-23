@@ -1,6 +1,8 @@
 ﻿using AOM.FIFA.ManagerPlayer.Application.Player.Intefaces.Services;
 using AOM.FIFA.ManagerPlayer.Application.Player.Requests;
 using AOM.FIFA.ManagerPlayer.Application.Player.Responses;
+using AOM.FIFA.ManagerPlayer.Application.Player.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using NSwag.Annotations;
@@ -20,6 +22,7 @@ namespace AOM.FIFA.ManagerPlayer.Api.Controllers
         [HttpGet]
         [ProducesResponseType(typeof(PlayerListResponse), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(string), StatusCodes.Status404NotFound)]
+        [Authorize]
         public async Task<IActionResult> Get([FromQuery] PlayerParameterRequest playerParameters)
         {
             var result = await _playerService.GetPlayersAsync(playerParameters);
@@ -67,6 +70,20 @@ namespace AOM.FIFA.ManagerPlayer.Api.Controllers
 
             return Ok(result);
         }
+
+
+        [HttpGet("/GetTotalNationalityPlayerByNation")]
+        [ProducesResponseType(typeof(TotalPlayersByLeagueByNationResponse), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(string), StatusCodes.Status404NotFound)]
+        public async Task<IActionResult> GetTotalNationalityPlayerByNation()
+        {
+            var result = await _playerService.GetTotalNationalityPlayerByNation();
+
+            return Ok(result);
+        }
+
+
         
+
     }
 }
