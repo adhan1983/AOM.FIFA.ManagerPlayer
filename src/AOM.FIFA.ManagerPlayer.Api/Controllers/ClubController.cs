@@ -5,11 +5,13 @@ using System.Collections.Generic;
 using AOM.FIFA.ManagerPlayer.Application.Club.Dtos;
 using AOM.FIFA.ManagerPlayer.Application.Club.Interfaces.Services;
 using AOM.FIFA.ManagerPlayer.Application.Club.Responses;
+using Microsoft.AspNetCore.Authorization;
 
 namespace AOM.FIFA.ManagerPlayer.Api.Controllers
 {
     [Route("api/clubs")]
     [ApiController]
+    [Authorize]
     public class ClubController : ControllerBase
     {
         private readonly IClubService _clubService;

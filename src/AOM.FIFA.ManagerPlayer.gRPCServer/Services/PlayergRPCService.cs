@@ -20,7 +20,7 @@ namespace AOM.FIFA.ManagerPlayer.gRPCServer.Services
             _playerService = playerService;
         }
         
-        //[Authorize]
+        [Authorize]
         public override async Task<PlayerReply> InsertPlayer(PlayerRequest request, ServerCallContext context)
         {
             PlayerDto dto = MapToPlayerDto(request);

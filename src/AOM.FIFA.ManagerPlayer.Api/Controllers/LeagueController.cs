@@ -1,6 +1,7 @@
 ﻿using AOM.FIFA.ManagerPlayer.Application.League.Dtos;
 using AOM.FIFA.ManagerPlayer.Application.League.Interfaces.Services;
 using AOM.FIFA.ManagerPlayer.Application.League.Requests;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using NSwag.Annotations;
@@ -11,6 +12,7 @@ namespace AOM.FIFA.ManagerPlayer.Api.Controllers
 {
     [Route("api/leagues")]
     [ApiController]
+    [Authorize]
     [OpenApiTag("League", Description = "End point responsable for Leagues")]
     public class LeagueController : ControllerBase
     {

@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using AOM.FIFA.ManagerPlayer.Application.Club.Dtos;
 using AOM.FIFA.ManagerPlayer.gRPCServer.Services.Interfaces;
 using AOM.FIFA.ManagerPlayer.Application.Club.Interfaces.Services;
+using Microsoft.AspNetCore.Authorization;
 
 namespace AOM.FIFA.ManagerPlayer.gRPCServer.Services
 {
@@ -10,6 +11,8 @@ namespace AOM.FIFA.ManagerPlayer.gRPCServer.Services
     {
         private readonly IClubService _clubService;
         public ClubgRPCService(IClubService clubService) => this._clubService = clubService;
+        
+        [Authorize]
         public override async Task<ClubReply> InsertClub(ClubRequest request, ServerCallContext context)
         {
             var clubDto = new ClubDto 

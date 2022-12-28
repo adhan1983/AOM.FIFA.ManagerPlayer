@@ -4,6 +4,7 @@ using Microsoft.Extensions.Logging;
 using AOM.FIFA.ManagerPlayer.Application.League.Dtos;
 using AOM.FIFA.ManagerPlayer.Application.League.Interfaces.Services;
 using AOM.FIFA.ManagerPlayer.gRPCServer.Services.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 
 namespace AOM.FIFA.ManagerPlayer.gRPCServer.Services
 {
@@ -18,6 +19,8 @@ namespace AOM.FIFA.ManagerPlayer.gRPCServer.Services
             _logger = logger;
             _leagueService = leagueService;
         }
+
+        [Authorize]
         public override async Task<LeagueReply> InsertLeague(LeagueRequest request, ServerCallContext context)
         {
             var result = await _leagueService.InsertLeagueAsync(new LeagueDto 

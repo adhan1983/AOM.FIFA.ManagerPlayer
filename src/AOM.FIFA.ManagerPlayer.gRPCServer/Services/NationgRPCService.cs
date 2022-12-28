@@ -2,6 +2,7 @@
 using AOM.FIFA.ManagerPlayer.Application.Nation.Interfaces.Services;
 using AOM.FIFA.ManagerPlayer.gRPCServer.Services.Interfaces;
 using Grpc.Core;
+using Microsoft.AspNetCore.Authorization;
 using System.Threading.Tasks;
 
 namespace AOM.FIFA.ManagerPlayer.gRPCServer.Services
@@ -11,6 +12,7 @@ namespace AOM.FIFA.ManagerPlayer.gRPCServer.Services
         private readonly INationService _nationService;
         public NationgRPCService(INationService nationService) => this._nationService = nationService;
 
+        [Authorize]
         public override async Task<NationReply> InsertNation(NationRequest request, ServerCallContext context)
         {
             var result = await _nationService.InsertNationAsync(new NationDto

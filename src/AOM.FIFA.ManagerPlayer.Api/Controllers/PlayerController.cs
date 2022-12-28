@@ -13,6 +13,7 @@ namespace AOM.FIFA.ManagerPlayer.Api.Controllers
     [Route("api/players")]
     [ApiController]
     [OpenApiTag("Player", Description = "End point responsable for Players")]
+    [Authorize]
     public class PlayerController : ControllerBase
     {
         private readonly IPlayerService _playerService;
@@ -22,7 +23,7 @@ namespace AOM.FIFA.ManagerPlayer.Api.Controllers
         [HttpGet]
         [ProducesResponseType(typeof(PlayerListResponse), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(string), StatusCodes.Status404NotFound)]
-        [Authorize]
+        
         public async Task<IActionResult> Get([FromQuery] PlayerParameterRequest playerParameters)
         {
             var result = await _playerService.GetPlayersAsync(playerParameters);

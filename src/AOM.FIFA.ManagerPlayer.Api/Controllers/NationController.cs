@@ -1,5 +1,6 @@
 ﻿using AOM.FIFA.ManagerPlayer.Application.Nation.Interfaces.Services;
 using AOM.FIFA.ManagerPlayer.Application.Nation.Responses;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
@@ -8,6 +9,7 @@ namespace AOM.FIFA.ManagerPlayer.Api.Controllers
 {
     [Route("api/nation")]
     [ApiController]
+    [Authorize]
     public class NationController : ControllerBase
     {
         private readonly INationService _nationService;
