@@ -1,4 +1,5 @@
-﻿using AOM.FIFA.ManagerPlayer.Application.League.Dtos;
+﻿using AOM.FIFA.ManagerPlayer.Application.Base.Response;
+using AOM.FIFA.ManagerPlayer.Application.League.Dtos;
 using AOM.FIFA.ManagerPlayer.Application.League.Interfaces.Services;
 using AOM.FIFA.ManagerPlayer.Application.League.Requests;
 using Microsoft.AspNetCore.Authorization;
@@ -10,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace AOM.FIFA.ManagerPlayer.Api.Controllers
 {
-    [Route("api/leagues")]
+    [Route("/league")]
     [ApiController]
     [Authorize]
     [OpenApiTag("League", Description = "End point responsable for Leagues")]
@@ -48,6 +49,18 @@ namespace AOM.FIFA.ManagerPlayer.Api.Controllers
             
             return Ok(result);
         }
+
+        [HttpPost]
+        [ProducesResponseType(typeof(LeagueDto), StatusCodes.Status201Created)]        
+        public async Task<IActionResult> Post([FromBody]LeagueDto leagueDto) 
+        {
+            var response = new FIFAManagerResponse();
+
+            response.Id = await _leagueService.InsertLeagueAsync(leagueDto);
+
+            return Ok(response);
+        }
+
 
     }
 }

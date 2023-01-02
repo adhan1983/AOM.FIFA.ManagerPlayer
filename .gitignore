@@ -29,3 +29,10 @@
 /src/AOM.FIFA.ManagerPlayer.gRPCServer/bin/Release/net5.0
 /src/AOM.FIFA.ManagerPlayer.Logging/bin/Release/net5.0
 /src/AOM.FIFA.ManagerPlayer.Persistence/bin/Release/net5.0
+/src/AOM.FIFA.ManagerPlayer.Api/bin
+/src/AOM.FIFA.ManagerPlayer.Application/bin
+/src/AOM.FIFA.ManagerPlayer.gRPCServer/bin
+/src/AOM.FIFA.ManagerPlayer.Logging/bin
+/src/AOM.FIFA.ManagerPlayer.Persistence/bin
+/src/AOM.FIFA.ManagerPlayer.Api/Properties/PublishProfiles
+/src/AOM.FIFA.ManagerPlayer.Api/Properties/ServiceDependencies/AOMFIFAManagerPlayerApi - Zip Deploy

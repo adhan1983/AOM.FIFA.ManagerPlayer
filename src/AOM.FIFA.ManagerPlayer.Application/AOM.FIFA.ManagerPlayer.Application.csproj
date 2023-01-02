@@ -1,8 +1,8 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net5.0</TargetFramework>
-    <UserSecretsId>9dc1ee94-9607-4f89-ac72-06a879f6dfbb</UserSecretsId>
+    <TargetFramework>net6.0</TargetFramework>
+    <!--<UserSecretsId>9dc1ee94-9607-4f89-ac72-06a879f6dfbb</UserSecretsId>-->
   </PropertyGroup>
 
   <ItemGroup>
@@ -16,8 +16,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" Version="5.0.0" />
-	<PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.0" />	
+    <PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" Version="6.0.1" />
+	<PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.12" />	
   </ItemGroup>
 
   <ItemGroup>

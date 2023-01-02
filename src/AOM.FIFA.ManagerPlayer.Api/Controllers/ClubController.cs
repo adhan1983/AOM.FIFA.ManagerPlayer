@@ -1,15 +1,15 @@
 ﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Http;
-using System.Collections.Generic;
-using AOM.FIFA.ManagerPlayer.Application.Club.Dtos;
-using AOM.FIFA.ManagerPlayer.Application.Club.Interfaces.Services;
-using AOM.FIFA.ManagerPlayer.Application.Club.Responses;
 using Microsoft.AspNetCore.Authorization;
+using AOM.FIFA.ManagerPlayer.Application.Club.Dtos;
+using AOM.FIFA.ManagerPlayer.Application.Club.Responses;
+using AOM.FIFA.ManagerPlayer.Application.Club.Interfaces.Services;
+using AOM.FIFA.ManagerPlayer.Application.Base.Response;
 
 namespace AOM.FIFA.ManagerPlayer.Api.Controllers
 {
-    [Route("api/clubs")]
+    [Route("/club")]
     [ApiController]
     [Authorize]
     public class ClubController : ControllerBase
@@ -46,6 +46,17 @@ namespace AOM.FIFA.ManagerPlayer.Api.Controllers
             var result = await _clubService.GetClubsByLeagueIdAsync(leagueId);
 
             return Ok(result);
+        }
+
+        [HttpPost]
+        [ProducesResponseType(typeof(ClubDto), StatusCodes.Status201Created)]
+        public async Task<IActionResult> Post([FromBody] ClubDto clubDto)
+        {
+            var response = new FIFAManagerResponse();
+
+            response.Id = await _clubService.InsertClubAsync(clubDto);
+
+            return Ok(response);
         }
 
     }

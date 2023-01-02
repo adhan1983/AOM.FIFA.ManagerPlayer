@@ -14,8 +14,7 @@ using System.Linq.Expressions;
 namespace AOM.FIFA.ManagerPlayer.Persistence.League.Repository
 {
     public class LeagueRepository : repo.Repository<domain.League>, ILeagueRepository
-    {
-        
+    {       
         
         public LeagueRepository(FIFAManagerPlayerDbContext dbContext) : base(dbContext)
         { }

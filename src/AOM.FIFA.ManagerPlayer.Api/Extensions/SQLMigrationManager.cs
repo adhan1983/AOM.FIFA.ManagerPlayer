@@ -20,9 +20,7 @@ namespace AOM.FIFA.ManagerPlayer.Api.Extensions
                 if (applyMigrationFIFADbContext)
                 {
                     var fifaDbContext = scope.ServiceProvider.GetService<FIFAManagerPlayerDbContext>();
-                    fifaDbContext.Database.Migrate();
-                    //increase the timeout to run the migrations
-                    //dbContext.Database.SetCommandTimeout(TimeSpan.FromMinutes(5));                    
+                    fifaDbContext.Database.Migrate();                    
                 }
 
             }

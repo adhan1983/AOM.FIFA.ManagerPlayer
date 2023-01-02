@@ -1,4 +1,6 @@
-﻿using AOM.FIFA.ManagerPlayer.Application.Player.Intefaces.Services;
+﻿using AOM.FIFA.ManagerPlayer.Application.Base.Response;
+using AOM.FIFA.ManagerPlayer.Application.Player.Dtos;
+using AOM.FIFA.ManagerPlayer.Application.Player.Intefaces.Services;
 using AOM.FIFA.ManagerPlayer.Application.Player.Requests;
 using AOM.FIFA.ManagerPlayer.Application.Player.Responses;
 using AOM.FIFA.ManagerPlayer.Application.Player.Services;
@@ -10,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace AOM.FIFA.ManagerPlayer.Api.Controllers
 {
-    [Route("api/players")]
+    [Route("/player")]
     [ApiController]
     [OpenApiTag("Player", Description = "End point responsable for Players")]
     [Authorize]
@@ -83,8 +85,19 @@ namespace AOM.FIFA.ManagerPlayer.Api.Controllers
             return Ok(result);
         }
 
+        [HttpPost]
+        [ProducesResponseType(typeof(PlayerDto), StatusCodes.Status201Created)]
+        public async Task<IActionResult> Post([FromBody] PlayerDto playerDto)
+        {
+            var response = new FIFAManagerResponse();
 
-        
+            response.Id = await _playerService.InsertPlayerAsync(playerDto);
+
+            return Ok(response);
+        }
+
+
+
 
     }
 }
