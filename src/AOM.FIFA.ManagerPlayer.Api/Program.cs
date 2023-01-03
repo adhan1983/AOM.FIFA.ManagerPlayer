@@ -1,6 +1,10 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
 using Microsoft.AspNetCore.Server.Kestrel.Core;
+using Azure.Identity;
+using Azure.Security.KeyVault.Secrets;
+using Microsoft.Extensions.Configuration;
+using Azure.Extensions.AspNetCore.Configuration.Secrets;
 
 namespace AOM.FIFA.ManagerPlayer.Api
 {
@@ -18,25 +22,19 @@ namespace AOM.FIFA.ManagerPlayer.Api
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder.UseStartup<Startup>();
-                    webBuilder.ConfigureKestrel(options => 
-                    {
-                        //options.ListenAnyIP(5000);
-                        //options.ListenAnyIP(5001, listenOptions =>
-                        //{
-                        //    listenOptions.Protocols = HttpProtocols.Http2;
-                        //});
+                    webBuilder.ConfigureAppConfiguration((context, config) => {
 
-                        //options.ListenAnyIP(5000, listenOptions =>
-                        //{
-                        //    listenOptions.Protocols = HttpProtocols.Http1;
-                        //});
+                        var buildCofiguration = config.Build();
+                        string kvURL = buildCofiguration["FIFAMANAGERPLAYERKV:kvURL"];
+                        string tenantId = buildCofiguration["FIFAMANAGERPLAYERKV:TenantId"];
+                        string clientId = buildCofiguration["FIFAMANAGERPLAYERKV:ClientId"];
+                        string clientSecret = buildCofiguration["FIFAMANAGERPLAYERKV:ClientSecret"];
 
-                        //options.ListenAnyIP(5001, listenOptions =>
-                        //{
-                        //    listenOptions.Protocols = HttpProtocols.Http2;
-                        //});
+                        var credentials = new ClientSecretCredential(tenantId, clientId, clientSecret);
+                        var client = new SecretClient(new System.Uri(kvURL), credentials);
+                        config.AddAzureKeyVault(client, new AzureKeyVaultConfigurationOptions());
 
-                        //options.Limits.MaxRequestBodySize = null;
+
                     });
 
                 });

@@ -1,13 +1,18 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework>    
+    <TargetFramework>net6.0</TargetFramework>
+    <ApplicationInsightsResourceId>/subscriptions/7cd42bc1-1544-4877-9c2b-9022ea869580/resourceGroups/GroupResourceFIFAManager/providers/microsoft.insights/components/aomfifamanagerplayerapi</ApplicationInsightsResourceId>    
     <!--<UserSecretsId>306d4477-97d3-40ae-b236-9cf33ab42aeb</UserSecretsId>
     <UserSecretsId>cba1d408-c8eb-4683-8009-3a04baeb5d1c</UserSecretsId>-->
     
   </PropertyGroup>
 
 	<ItemGroup>
+		<PackageReference Include="Azure.Extensions.AspNetCore.Configuration.Secrets" Version="1.2.2" />
+		<PackageReference Include="Azure.Identity" Version="1.8.0" />
+		<PackageReference Include="Azure.Security.KeyVault.Secrets" Version="4.4.0" />
+		<PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.15.0" />
 		<PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.12" />		
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.12" />		
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="6.0.1">
