@@ -11,10 +11,7 @@ stages:
     variables:
     - group: azure
     - name: azureSubscription
-      value: $[azure.azureSubscription] # uses runtime expression
-    steps:
-    - script: echo $(myhello) # uses macro syntax
-    - script: echo $(my-passed-variable) 
+      value: $[azure.azureSubscription] # uses runtime expression    
 
   - stage: build
     jobs:
