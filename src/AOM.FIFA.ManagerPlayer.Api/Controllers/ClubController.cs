@@ -18,15 +18,15 @@ namespace AOM.FIFA.ManagerPlayer.Api.Controllers
 
         public ClubController(IClubService clubService) => this._clubService = clubService;
 
-        //[HttpGet]
-        //[ProducesResponseType(typeof(ClubResponse), StatusCodes.Status200OK)]
-        //[ProducesResponseType(typeof(string), StatusCodes.Status404NotFound)]
-        //public async Task<IActionResult> Get()
-        //{
-        //    var result = await _clubService.GetClubsResponseAsync();
+        [HttpGet]
+        [ProducesResponseType(typeof(ClubResponse), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(string), StatusCodes.Status404NotFound)]
+        public async Task<IActionResult> Get()
+        {
+            var result = await _clubService.GetClubsResponseAsync();
 
-        //    return Ok(result);
-        //}
+            return Ok(result);
+        }
 
         [HttpGet("{id}")]
         [ProducesResponseType(typeof(ClubDto), StatusCodes.Status200OK)]
