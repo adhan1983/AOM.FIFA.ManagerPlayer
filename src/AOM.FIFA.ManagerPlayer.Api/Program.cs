@@ -25,7 +25,6 @@ namespace AOM.FIFA.ManagerPlayer.Api
                     webBuilder.ConfigureAppConfiguration((context, config) => {
 
                         var buildCofiguration = config.Build();
-
                         string kvURL = buildCofiguration["FIFAMANAGERPLAYERKV:kvURL"];
                         string tenantId = buildCofiguration["FIFAMANAGERPLAYERKV:TenantId"];
                         string clientId = buildCofiguration["FIFAMANAGERPLAYERKV:ClientId"];
