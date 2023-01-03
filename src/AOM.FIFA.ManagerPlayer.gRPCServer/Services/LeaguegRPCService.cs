@@ -29,7 +29,7 @@ namespace AOM.FIFA.ManagerPlayer.gRPCServer.Services
                 SourceId = request.SourceId
             });
 
-            return new LeagueReply { Id = result };
+            return new LeagueReply { Id = result.Id };
         }
     }
 }

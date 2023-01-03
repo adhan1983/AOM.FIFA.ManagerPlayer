@@ -6,6 +6,7 @@ using AOM.FIFA.ManagerPlayer.Application.League.Interfaces.Repositories;
 using AOM.FIFA.ManagerPlayer.Application.League.Interfaces.Services;
 using AOM.FIFA.ManagerPlayer.Application.League.Requests;
 using System.Collections.Generic;
+using AOM.FIFA.ManagerPlayer.Application.Base.Response;
 
 namespace AOM.FIFA.ManagerPlayer.Application.League.Services
 {
@@ -61,12 +62,19 @@ namespace AOM.FIFA.ManagerPlayer.Application.League.Services
 
         }
 
-        public async Task<int> InsertLeagueAsync(LeagueDto leagueDto)
+        public async Task<FIFAManagerResponse> InsertLeagueAsync(LeagueDto leagueDto)
         {
+            var modelLeague = await _leagueRepository.GetByExpressionAsync(a => a.SourceId == leagueDto.SourceId);
+            
+            if(modelLeague == null) 
+            {   
+                return new FIFAManagerResponse() { Id = 0, Status = false,Message = "This league has been included" };
+            }
+            
             var result = await _leagueRepository.
                                 InsertAsync(new Entities.League { Name = leagueDto.Name, SourceId = leagueDto.SourceId });
 
-            return result.Id;
+            return new FIFAManagerResponse { Id= result.Id, Status = true, Message = "Success" };
 
         }
 
