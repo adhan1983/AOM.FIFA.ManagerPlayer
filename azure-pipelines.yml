@@ -3,15 +3,19 @@ trigger:
   branches:
     include:
     - develop    
-    - main
-variables:
-- group: azure
-- name: azureSubscription
-  value: '$[azure.azureSubscription]'
-  
+    - main  
 pool:
   vmImage: 'ubuntu-18.04'  
 stages:
+  - stage: MyStage
+    variables:
+    - group: azure
+    - name: azureSubscription
+      value: $[azure.azureSubscription] # uses runtime expression
+    steps:
+    - script: echo $(myhello) # uses macro syntax
+    - script: echo $(my-passed-variable) 
+
   - stage: build
     jobs:
       - job: build
