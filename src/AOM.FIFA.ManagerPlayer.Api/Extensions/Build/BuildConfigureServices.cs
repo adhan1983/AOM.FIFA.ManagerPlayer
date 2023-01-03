@@ -10,9 +10,7 @@ namespace AOM.FIFA.ManagerPlayer.Api.Extensions.Build
     {
         public static void Build(this IServiceCollection services, IConfiguration configuration)
         {
-            services.AddControllers();
-
-            
+            services.AddControllers();            
             
             services.AddGrpc();
 

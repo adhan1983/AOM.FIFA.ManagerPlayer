@@ -14,7 +14,7 @@ namespace AOM.FIFA.ManagerPlayer.Api.Controllers
     [Route("/league")]
     [ApiController]
     [Authorize]
-    [OpenApiTag("League", Description = "End point responsable for Leagues")]
+    [OpenApiTag("League", Description = "FiFA Player Manager Leagues: Premier League, Budesliga, La Liga, Serie A, UEFA Champios League")]
     public class LeagueController : ControllerBase
     {
         private readonly ILeagueService _leagueService;

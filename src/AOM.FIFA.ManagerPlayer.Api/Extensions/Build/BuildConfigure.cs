@@ -2,7 +2,6 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
-using AOM.FIFA.ManagerPlayer.gRPCServer.Services;
 using AOM.FIFA.ManagerPlayer.Api.Extensions.ServicesCollectionDependencies;
 
 namespace AOM.FIFA.ManagerPlayer.Api.Extensions.Build
@@ -13,13 +12,11 @@ namespace AOM.FIFA.ManagerPlayer.Api.Extensions.Build
         {
             if (env.IsDevelopment())
             {
-                app.UseDeveloperExceptionPage();
-                //app.UseSwagger();
-                //app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "AOM.FIFA.ManagerPlayer.Api v1"));
+                app.UseDeveloperExceptionPage();                
             }
             
             app.UseSwagger();
-            app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "AOM.FIFA.ManagerPlayer.Api Deploy v1"));
+            app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "AOM.FIFA.ManagerPlayer.Api v1"));
 
             app.UseDefaultFiles();
             app.UseStaticFiles();
