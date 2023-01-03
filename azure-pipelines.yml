@@ -7,12 +7,6 @@ trigger:
 pool:
   vmImage: 'ubuntu-18.04'  
 stages:
-  - stage: MyStage
-    variables:
-    - group: azure
-    - name: azureSubscription
-      value: $[azure.azureSubscription] # uses runtime expression    
-
   - stage: build
     jobs:
       - job: build
