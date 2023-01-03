@@ -19,7 +19,7 @@ namespace AOM.FIFA.ManagerPlayer.Api.Extensions.Build
             }
             
             app.UseSwagger();
-            app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "AOM.FIFA.ManagerPlayer.Api v1"));
+            app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "AOM.FIFA.ManagerPlayer.Api Deploy v1"));
 
             app.UseDefaultFiles();
             app.UseStaticFiles();
