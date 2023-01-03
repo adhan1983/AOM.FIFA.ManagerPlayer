@@ -39,13 +39,7 @@ namespace AOM.FIFA.ManagerPlayer.Persistence.Base
         public async Task<T> GetByIdAsync(int id)
         {
             return await _fifaManagerPlayerDbContext.Set<T>().FindAsync(id);
-        }
-
-        //TO DO: Testar
-        public async Task<T> GetByExpressionAsync(Expression<Func<T, bool>> expression)
-        {
-            return await _fifaManagerPlayerDbContext.Set<T>().FindAsync(expression);
-        }
+        }       
 
         //TO DO: Testar
         public async Task<IReadOnlyList<T>> GetAllByExpressionAsync(Expression<Func<T, bool>> expression)

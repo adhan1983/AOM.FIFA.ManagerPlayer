@@ -64,9 +64,9 @@ namespace AOM.FIFA.ManagerPlayer.Application.League.Services
 
         public async Task<FIFAManagerResponse> InsertLeagueAsync(LeagueDto leagueDto)
         {
-            var modelLeague = await _leagueRepository.GetByExpressionAsync(a => a.SourceId == leagueDto.SourceId);
+            var modelLeague = await _leagueRepository.GetLeagueBySourceId(leagueDto.SourceId);
             
-            if(modelLeague == null) 
+            if(modelLeague != null) 
             {   
                 return new FIFAManagerResponse() { Id = 0, Status = false,Message = "This league has been included" };
             }

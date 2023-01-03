@@ -12,7 +12,6 @@ namespace AOM.FIFA.ManagerPlayer.Application.Base.Interfaces
         Task<T> GetByIdAsync(int id);
         Task<T> InsertAsync(T entity);
         Task<bool> UpdateAsync(T entity);
-        Task DeleteAsync(T entity);
-        Task<T> GetByExpressionAsync(Expression<Func<T, bool>> expression);
+        Task DeleteAsync(T entity);        
     }
 }
