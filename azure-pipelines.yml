@@ -4,9 +4,13 @@ trigger:
     include:
     - develop    
     - main
-
+variables:
+- group: azure
+- name: azureSubscription
+  value: 'azureSubscription'
+  
 pool:
-  vmImage: 'ubuntu-18.04'
+  vmImage: 'ubuntu-18.04'  
 stages:
   - stage: build
     jobs:
@@ -43,7 +47,7 @@ stages:
         - task: AzureRmWebAppDeployment@4
           inputs:
             ConnectionType: 'AzureRM'
-            azureSubscription: '$(azureSubscription)'
+            azureSubscription: '$[azure.azureSubscription]'
             appType: 'webAppLinux'
             WebAppName: 'AOMFIFAManagerPlayerApi'
             packageForLinux: '$(Build.ArtifactStagingDirectory)/**/*.zip'
