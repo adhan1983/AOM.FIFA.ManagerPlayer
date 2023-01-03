@@ -42,7 +42,7 @@ stages:
         - task: AzureRmWebAppDeployment@4
           inputs:
             ConnectionType: 'AzureRM'
-            azureSubscription: '$(azureSubscription)'
+            azureSubscription: 'Avaliação Gratuita(1)(7cd42bc1-1544-4877-9c2b-9022ea869580)'
             appType: 'webAppLinux'
             WebAppName: 'AOMFIFAManagerPlayerApi'
             packageForLinux: '$(Build.ArtifactStagingDirectory)/**/*.zip'
