@@ -3,10 +3,9 @@ trigger:
   branches:
     include:
     - develop    
-    - main
-
+    - main  
 pool:
-  vmImage: 'ubuntu-18.04'
+  vmImage: 'ubuntu-18.04'  
 stages:
   - stage: build
     jobs:
