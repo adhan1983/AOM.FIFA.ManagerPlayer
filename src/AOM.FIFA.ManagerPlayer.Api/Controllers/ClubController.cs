@@ -52,9 +52,7 @@ namespace AOM.FIFA.ManagerPlayer.Api.Controllers
         [ProducesResponseType(typeof(ClubDto), StatusCodes.Status201Created)]
         public async Task<IActionResult> Post([FromBody] ClubDto clubDto)
         {
-            var response = new FIFAManagerResponse();
-
-            response.Id = await _clubService.InsertClubAsync(clubDto);
+            var response = await _clubService.InsertClubAsync(clubDto);
 
             return Ok(response);
         }

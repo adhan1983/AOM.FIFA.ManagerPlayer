@@ -33,9 +33,7 @@ namespace AOM.FIFA.ManagerPlayer.Api.Controllers
         [ProducesResponseType(typeof(LeagueDto), StatusCodes.Status201Created)]
         public async Task<IActionResult> Post([FromBody] NationDto nationDto)
         {
-            var response = new FIFAManagerResponse();
-
-            response.Id = await _nationService.InsertNationAsync(nationDto);
+            var response = await _nationService.InsertNationAsync(nationDto);
 
             return Ok(response);
         }

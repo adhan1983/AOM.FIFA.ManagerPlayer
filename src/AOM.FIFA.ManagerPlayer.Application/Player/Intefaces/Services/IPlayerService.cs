@@ -1,4 +1,5 @@
 ﻿using System.Threading.Tasks;
+using AOM.FIFA.ManagerPlayer.Application.Base.Response;
 using AOM.FIFA.ManagerPlayer.Application.Player.Dtos;
 using AOM.FIFA.ManagerPlayer.Application.Player.Requests;
 using AOM.FIFA.ManagerPlayer.Application.Player.Responses;
@@ -16,7 +17,7 @@ namespace AOM.FIFA.ManagerPlayer.Application.Player.Intefaces.Services
 
         Task<PlayerListFUT22ICONResponse> GetPlayerByFUT22ICONSAsync();
 
-        Task<int> InsertPlayerAsync(PlayerDto playerDto);
+        Task<FIFAManagerResponse> InsertPlayerAsync(PlayerDto playerDto);
 
         Task<PlayerByNationByLeagueResponse> GetPlayersByNationByLeague(int nation, int league);
 

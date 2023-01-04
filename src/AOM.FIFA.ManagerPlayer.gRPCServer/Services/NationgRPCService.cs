@@ -21,7 +21,7 @@ namespace AOM.FIFA.ManagerPlayer.gRPCServer.Services
                 SourceId = request.SourceId
             });
 
-            return new NationReply { Id = result };
+            return new NationReply { Id = result.Id };
         }
 
     }

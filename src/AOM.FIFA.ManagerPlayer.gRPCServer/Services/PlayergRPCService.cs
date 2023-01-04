@@ -27,7 +27,7 @@ namespace AOM.FIFA.ManagerPlayer.gRPCServer.Services
 
             var result = await _playerService.InsertPlayerAsync(dto);
 
-            return new PlayerReply { Id = result };
+            return new PlayerReply { Id = result.Id };
         }
 
         private static PlayerDto MapToPlayerDto(PlayerRequest request)

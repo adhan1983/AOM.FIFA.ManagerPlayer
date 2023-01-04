@@ -24,7 +24,7 @@ namespace AOM.FIFA.ManagerPlayer.gRPCServer.Services
 
             var result = await _clubService.InsertClubAsync(clubDto);
 
-            return new ClubReply { Id = result };
+            return new ClubReply { Id = result.Id };
         }
 
     }

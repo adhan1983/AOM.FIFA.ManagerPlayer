@@ -7,6 +7,7 @@ using entities = AOM.FIFA.ManagerPlayer.Application.Club.Entities;
 using AOM.FIFA.ManagerPlayer.Application.Club.Interfaces.Services;
 using AOM.FIFA.ManagerPlayer.Application.Club.Interfaces.Repositories;
 using AOM.FIFA.ManagerPlayer.Application.League.Interfaces.Services;
+using AOM.FIFA.ManagerPlayer.Application.Base.Response;
 
 namespace AOM.FIFA.ManagerPlayer.Application.Club.Services
 {
@@ -74,25 +75,39 @@ namespace AOM.FIFA.ManagerPlayer.Application.Club.Services
             }
         }
 
-        public async Task<int> InsertClubAsync(ClubDto clubDto)
+        public async Task<FIFAManagerResponse> InsertClubAsync(ClubDto clubDto)
         {
-            var league = await _leagueService.GetLeagueBySourceId(clubDto.SourceLeagueId);
+            var modelLeague = await _leagueService.GetLeagueBySourceId(clubDto.SourceLeagueId);
+
+            if (modelLeague == null) 
+            {
+                return new FIFAManagerResponse { Id = 0, Message = "League is required", Status = false };
+            }
+
+            var modelClub = await _clubRepository.GetClubBySourceId(clubDto.SourceId);
+            if (modelClub != null) 
+            {
+                return new FIFAManagerResponse { Id = 0, Message = "Club existed", Status = false };
+            }
             
             var model = new entities.Club() 
             {
                 Name = clubDto.Name,
-                LeagueId = league.Id,
+                LeagueId = modelLeague.Id,
                 SourceId = clubDto.SourceId,                
             };
 
             var result = await _clubRepository.InsertAsync(model);
-            
-            return result.Id;
+
+            return new FIFAManagerResponse { Id = model.Id, Status = true, Message = "Success" };
         }
 
         public async Task<ClubDto> GetClubBySourceId(int sourceId)
         {
             var model = await _clubRepository.GetClubBySourceId(sourceId);
+
+            if (model == null)
+                return null;
 
             var clubDto = new ClubDto { Id = model.Id, Name = model.Name, SourceId = model.SourceId  };
 

@@ -1,4 +1,5 @@
 ﻿using System.Threading.Tasks;
+using AOM.FIFA.ManagerPlayer.Application.Base.Response;
 using AOM.FIFA.ManagerPlayer.Application.Club.Dtos;
 using AOM.FIFA.ManagerPlayer.Application.Club.Responses;
 
@@ -12,7 +13,7 @@ namespace AOM.FIFA.ManagerPlayer.Application.Club.Interfaces.Services
 
         Task<ClubLeagueResponse> GetClubsByLeagueIdAsync(int leagueId);
 
-        Task<int> InsertClubAsync(ClubDto clubDto);
+        Task<FIFAManagerResponse> InsertClubAsync(ClubDto clubDto);
 
         Task<ClubDto> GetClubBySourceId(int sourceId);        
     }

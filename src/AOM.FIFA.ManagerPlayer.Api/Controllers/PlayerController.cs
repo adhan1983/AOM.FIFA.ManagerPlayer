@@ -88,10 +88,8 @@ namespace AOM.FIFA.ManagerPlayer.Api.Controllers
         [HttpPost]
         [ProducesResponseType(typeof(PlayerDto), StatusCodes.Status201Created)]
         public async Task<IActionResult> Post([FromBody] PlayerDto playerDto)
-        {
-            var response = new FIFAManagerResponse();
-
-            response.Id = await _playerService.InsertPlayerAsync(playerDto);
+        {           
+            var response = await _playerService.InsertPlayerAsync(playerDto);
 
             return Ok(response);
         }

@@ -1,4 +1,5 @@
-﻿using AOM.FIFA.ManagerPlayer.Application.Club.Interfaces.Services;
+﻿using AOM.FIFA.ManagerPlayer.Application.Base.Response;
+using AOM.FIFA.ManagerPlayer.Application.Club.Interfaces.Services;
 using AOM.FIFA.ManagerPlayer.Application.League.Interfaces.Services;
 using AOM.FIFA.ManagerPlayer.Application.Nation.Interfaces.Services;
 using AOM.FIFA.ManagerPlayer.Application.Player.Dtos;
@@ -161,13 +162,30 @@ namespace AOM.FIFA.ManagerPlayer.Application.Player.Services
             return response;
         }
 
-        public async Task<int> InsertPlayerAsync(PlayerDto playerDto)
+        public async Task<FIFAManagerResponse> InsertPlayerAsync(PlayerDto playerDto)
         {
             var nation = await _nationService.GetNationBySourceId(playerDto.SourceNationId);
 
+            if (nation == null) 
+            {
+                return new FIFAManagerResponse() { Id = 0, Status = false, Message = "Nation not found" };
+            }
+
             var club = await _clubService.GetClubBySourceId(playerDto.SourceClubId.Value);
 
-            var model = MapperDtoToModelPlayer(playerDto, club.Id, nation.Id);
+            if (club == null)
+            {
+                return new FIFAManagerResponse() { Id = 0, Message = "Club not found", Status = false };
+            }
+
+            var modelPlayer = _playerRepository.GetPlayersByExpression(a => a.SourceId == playerDto.SourceId);
+
+            if (modelPlayer != null) 
+            {
+                return new FIFAManagerResponse() { Id = 0, Message = "Player already exist", Status = false };
+            }
+
+            var model = MapperDtoToModelPlayer(playerDto, club.Id, nation.Id);            
 
             var playersInserted = await _playerRepository.GetPlayersByExpression(a => a.Nation.SourceId == playerDto.SourceNationId && a.Name == playerDto.Name);
 
@@ -195,14 +213,18 @@ namespace AOM.FIFA.ManagerPlayer.Application.Player.Services
                         playerInserted.IsActive = false;
                     }
                 }
-                await _playerRepository.InsertAndUpdatePlayerAsync(model, playersInserted);
+                var playerId = await _playerRepository.InsertAndUpdatePlayerAsync(model, playersInserted);
+
+                return new FIFAManagerResponse { Id = playerId, Status = true, Message = "Success" };
             }
             else
             {
                 await _playerRepository.InsertAsync(model);
+
+                return new FIFAManagerResponse { Id = model.Id, Status = true, Message = "Success" };
             }
 
-            return model.Id;
+            
         }
 
         private static PlayerDto MapperModelToDtoPlayer(domain.Player model)
