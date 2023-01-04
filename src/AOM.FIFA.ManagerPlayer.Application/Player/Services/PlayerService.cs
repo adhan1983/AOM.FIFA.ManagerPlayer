@@ -213,9 +213,11 @@ namespace AOM.FIFA.ManagerPlayer.Application.Player.Services
                         playerInserted.IsActive = false;
                     }
                 }
+
                 var playerId = await _playerRepository.InsertAndUpdatePlayerAsync(model, playersInserted);
 
                 return new FIFAManagerResponse { Id = playerId, Status = true, Message = "Success" };
+
             }
             else
             {
