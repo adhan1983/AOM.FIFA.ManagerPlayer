@@ -178,7 +178,7 @@ namespace AOM.FIFA.ManagerPlayer.Application.Player.Services
                 return new FIFAManagerResponse() { Id = 0, Message = "Club not found", Status = false };
             }
 
-            var modelPlayer = _playerRepository.GetPlayersByExpression(a => a.SourceId == playerDto.SourceId);
+            var modelPlayer = await _playerRepository.GetPlayerByExpression(a => a.SourceId == playerDto.SourceId);
 
             if (modelPlayer != null) 
             {
